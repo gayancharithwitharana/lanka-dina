@@ -1,0 +1,41 @@
+# Lankadina — Sri Lankan calendar app
+
+Android-first calendar of Sri Lankan public, bank, mercantile holidays and Poya days.
+Reference mockups: the `design/*.dc.html` files (HTML mockups, 390×844). Match layout, spacing and colors; do not copy their markup.
+
+## Stack
+- Expo (default template, TypeScript, Expo Router), development build (not Expo Go)
+- expo-sqlite: holidays + user notes/reminders stored on device
+- expo-notifications: local reminders
+- react-native-google-mobile-ads: AdMob banner. Use Google's TEST ad unit IDs only until release
+- i18n: English (default), Sinhala, Tamil. Store all UI strings in `locales/{en,si,ta}.json`
+- No backend. Holiday data ships as bundled JSON; later fetched from a remote JSON file for updates
+
+## Design tokens
+- Background #FFFFFF, surface #F9FAFB, subtle #F3F4F6, border #E5E7EB
+- Text #111827, secondary #4B5563, muted #6B7280
+- Accent (public holiday) #1D4ED8, Poya #B45309
+- Today: #111827 filled circle, white number
+- Font: Inter; Noto Sans Sinhala and Noto Sans Tamil for those languages (load via expo-font)
+- Radius: cards 14, pills 999, buttons 14. Touch targets ≥ 44
+- Section labels: 13px, 600, uppercase, letter-spacing 0.06em, muted
+
+## Navigation
+Bottom tabs: Calendar, Upcoming, Reminders, Settings. Day detail is a stack screen pushed from Calendar/Upcoming.
+
+## Screens
+1. Calendar (month view): month/year header with prev/next; 7-column grid, week starts Sunday (setting); dots under holiday (accent) and Poya (amber) dates; legend; "This month" list of holiday cards. AdMob banner above tab bar.
+2. Day detail: large date, holiday name (Poya in amber), type pills (Public/Bank/Mercantile), Poya timing card (begins/ends), About text, My note. Buttons: Set reminder, Add note. No ad.
+3. Upcoming: filter chips (All / Poya / Holidays), list grouped by month with "In N days" countdown. AdMob banner above tab bar.
+4. Reminders: automatic toggles (Every Poya day — evening before 7:00 PM; Long weekends — 2 weeks ahead), scheduled reminders list, + button to add. No ad.
+5. Settings: language segmented control (English / සිංහල / தமிழ்), week starts on (Sunday/Monday), Notifications, Remove ads (coming soon), Holiday data updated date, Privacy policy. No ad.
+
+## Data model (SQLite)
+- holidays(id, date TEXT ISO, name_en, name_si, name_ta, type: 'poya'|'public', is_public, is_bank, is_mercantile, poya_start, poya_end, about_en, about_si, about_ta)
+- notes(id, date, text, updated_at)
+- reminders(id, holiday_id NULL, date, time, kind: 'auto'|'custom', enabled)
+
+## Rules
+- Holiday data must come from the official gazette; never invent dates
+- Keep the app fully usable offline
+- Android package: com.yourname.lankadina (decide before first build; permanent after publishing)

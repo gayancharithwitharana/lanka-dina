@@ -1,23 +1,12 @@
+const colors = require('./src/constants/colors');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   presets: [require('nativewind/preset')],
   theme: {
     extend: {
-      colors: {
-        background: '#FFFFFF',
-        surface: '#F9FAFB',
-        subtle: '#F3F4F6',
-        border: '#E5E7EB',
-        text: {
-          DEFAULT: '#111827',
-          secondary: '#4B5563',
-          muted: '#6B7280',
-        },
-        holiday: '#1D4ED8',
-        poya: '#B45309',
-        today: '#111827',
-      },
+      colors,
       fontFamily: {
         sans: ['Inter'],
         sinhala: ['NotoSansSinhala'],

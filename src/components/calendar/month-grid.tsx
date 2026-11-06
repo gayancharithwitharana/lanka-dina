@@ -1,5 +1,7 @@
 import { Text, View } from 'react-native';
 
+import { HolidayDot } from '@/components/calendar/holiday-dot';
+import { getDayOfMonth, type Holiday, type HolidayType } from '@/data/holidays';
 import {
   getMonthGridWeeks,
   getWeekdayLabels,
@@ -12,12 +14,16 @@ type MonthGridProps = {
   yearMonth: YearMonth;
   weekStartsOn: WeekStart;
   today: Date;
+  holidays: Holiday[];
   locale: string;
 };
 
-export function MonthGrid({ yearMonth, weekStartsOn, today, locale }: MonthGridProps) {
+export function MonthGrid({ yearMonth, weekStartsOn, today, holidays, locale }: MonthGridProps) {
   const weekdayLabels = getWeekdayLabels(weekStartsOn, locale);
   const weeks = getMonthGridWeeks(yearMonth, weekStartsOn);
+  const holidayTypeByDay = new Map(
+    holidays.map((holiday) => [getDayOfMonth(holiday), holiday.type]),
+  );
 
   return (
     <View className="px-3">
@@ -40,6 +46,7 @@ export function MonthGrid({ yearMonth, weekStartsOn, today, locale }: MonthGridP
                 key={dayPosition}
                 day={day}
                 isToday={day !== null && isSameDay(today, yearMonth, day)}
+                holidayType={day === null ? undefined : holidayTypeByDay.get(day)}
               />
             ))}
           </View>
@@ -49,12 +56,24 @@ export function MonthGrid({ yearMonth, weekStartsOn, today, locale }: MonthGridP
   );
 }
 
+const dayTextColorByHolidayType: Record<HolidayType, string> = {
+  public: 'font-bold text-holiday',
+  poya: 'font-bold text-poya',
+};
+
 type DayCellProps = {
   day: number | null;
   isToday: boolean;
+  holidayType?: HolidayType;
 };
 
-function DayCell({ day, isToday }: DayCellProps) {
+function DayCell({ day, isToday, holidayType }: DayCellProps) {
+  const dayTextStyle = isToday
+    ? 'font-bold text-white'
+    : holidayType
+      ? dayTextColorByHolidayType[holidayType]
+      : 'font-medium text-text';
+
   return (
     <View className="h-12 flex-1 items-center justify-center gap-[3px]">
       {day !== null && (
@@ -62,13 +81,13 @@ function DayCell({ day, isToday }: DayCellProps) {
           <View
             className={`h-[34px] w-[34px] items-center justify-center rounded-full ${isToday ? 'bg-today' : ''}`}
           >
-            <Text
-              className={`text-[15px] ${isToday ? 'font-bold text-white' : 'font-medium text-text'}`}
-            >
-              {day}
-            </Text>
+            <Text className={`text-[15px] ${dayTextStyle}`}>{day}</Text>
           </View>
-          <View className="h-[5px] w-[5px] rounded-full" />
+          {holidayType ? (
+            <HolidayDot type={holidayType} size="small" />
+          ) : (
+            <View className="h-[5px] w-[5px]" />
+          )}
         </>
       )}
     </View>

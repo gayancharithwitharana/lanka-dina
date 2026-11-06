@@ -26,7 +26,14 @@ export function getWeekdayLabels(weekStartsOn: WeekStart, locale: string): strin
   });
 }
 
-export function getMonthGridDays(
+export function getMonthGridWeeks(yearMonth: YearMonth, weekStartsOn: WeekStart): (number | null)[][] {
+  const days = getMonthGridDays(yearMonth, weekStartsOn);
+  return Array.from({ length: days.length / DAYS_PER_WEEK }, (_, weekIndex) =>
+    days.slice(weekIndex * DAYS_PER_WEEK, (weekIndex + 1) * DAYS_PER_WEEK),
+  );
+}
+
+function getMonthGridDays(
   { year, monthIndex }: YearMonth,
   weekStartsOn: WeekStart,
 ): (number | null)[] {

@@ -1,7 +1,7 @@
 import { Text, View } from 'react-native';
 
 import {
-  getMonthGridDays,
+  getMonthGridWeeks,
   getWeekdayLabels,
   isSameDay,
   type WeekStart,
@@ -17,7 +17,7 @@ type MonthGridProps = {
 
 export function MonthGrid({ yearMonth, weekStartsOn, today, locale }: MonthGridProps) {
   const weekdayLabels = getWeekdayLabels(weekStartsOn, locale);
-  const days = getMonthGridDays(yearMonth, weekStartsOn);
+  const weeks = getMonthGridWeeks(yearMonth, weekStartsOn);
 
   return (
     <View className="px-3">
@@ -32,13 +32,17 @@ export function MonthGrid({ yearMonth, weekStartsOn, today, locale }: MonthGridP
         ))}
       </View>
 
-      <View className="flex-row flex-wrap gap-y-1">
-        {days.map((day, position) => (
-          <DayCell
-            key={position}
-            day={day}
-            isToday={day !== null && isSameDay(today, yearMonth, day)}
-          />
+      <View className="gap-1">
+        {weeks.map((week, weekPosition) => (
+          <View key={weekPosition} className="flex-row">
+            {week.map((day, dayPosition) => (
+              <DayCell
+                key={dayPosition}
+                day={day}
+                isToday={day !== null && isSameDay(today, yearMonth, day)}
+              />
+            ))}
+          </View>
         ))}
       </View>
     </View>
@@ -52,7 +56,7 @@ type DayCellProps = {
 
 function DayCell({ day, isToday }: DayCellProps) {
   return (
-    <View className="h-12 w-[14.2857%] items-center justify-center gap-[3px]">
+    <View className="h-12 flex-1 items-center justify-center gap-[3px]">
       {day !== null && (
         <>
           <View

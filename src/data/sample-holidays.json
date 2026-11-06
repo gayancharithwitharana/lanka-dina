@@ -1,0 +1,56 @@
+[
+  {
+    "id": "sample-2026-11-08",
+    "date": "2026-11-08",
+    "name": "Deepavali",
+    "type": "public",
+    "isPublic": true,
+    "isBank": true,
+    "isMercantile": false
+  },
+  {
+    "id": "sample-2026-11-24",
+    "date": "2026-11-24",
+    "name": "Il Full Moon Poya",
+    "type": "poya",
+    "isPublic": true,
+    "isBank": true,
+    "isMercantile": true
+  },
+  {
+    "id": "sample-2026-12-23",
+    "date": "2026-12-23",
+    "name": "Unduvap Full Moon Poya",
+    "type": "poya",
+    "isPublic": true,
+    "isBank": true,
+    "isMercantile": true
+  },
+  {
+    "id": "sample-2026-12-25",
+    "date": "2026-12-25",
+    "name": "Christmas Day",
+    "type": "public",
+    "isPublic": true,
+    "isBank": true,
+    "isMercantile": true
+  },
+  {
+    "id": "sample-2027-01-15",
+    "date": "2027-01-15",
+    "name": "Tamil Thai Pongal Day",
+    "type": "public",
+    "isPublic": true,
+    "isBank": true,
+    "isMercantile": true
+  },
+  {
+    "id": "sample-2027-01-22",
+    "date": "2027-01-22",
+    "name": "Duruthu Full Moon Poya",
+    "type": "poya",
+    "isPublic": true,
+    "isBank": true,
+    "isMercantile": true
+  }
+]

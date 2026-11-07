@@ -53,3 +53,8 @@ function getMonthGridDays(
 export function isSameDay(date: Date, { year, monthIndex }: YearMonth, day: number): boolean {
   return date.getFullYear() === year && date.getMonth() === monthIndex && date.getDate() === day;
 }
+
+export function parseIsoDate(isoDate: string): Date {
+  const [year, month, day] = isoDate.split('-').map(Number);
+  return new Date(year, month - 1, day);
+}

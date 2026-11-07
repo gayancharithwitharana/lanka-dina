@@ -1,9 +1,9 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import { SymbolView } from 'expo-symbols';
 import { useTranslation } from 'react-i18next';
-import { Pressable, ScrollView, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Pressable, Text, View } from 'react-native';
 
+import { ScreenScrollView } from '@/components/screen-scroll-view';
 import { getHolidaysByDate, type Holiday } from '@/data/holidays';
 import { useThemeColors } from '@/hooks/use-theme-colors';
 import { isValidIsoDate, parseIsoDate } from '@/utils/calendar';
@@ -13,22 +13,16 @@ export default function DayDetailScreen() {
   const { t } = useTranslation();
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
-      <ScrollView contentContainerClassName="pb-8">
-        <View className="w-full max-w-[600px] self-center">
-          {isValidIsoDate(date) ? (
-            <DayDetail isoDate={date} />
-          ) : (
-            <>
-              <BackHeader title="" />
-              <Text className="px-6 pt-4 text-[15px] text-text-secondary">
-                {t('day.invalidDate')}
-              </Text>
-            </>
-          )}
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <ScreenScrollView>
+      {isValidIsoDate(date) ? (
+        <DayDetail isoDate={date} />
+      ) : (
+        <>
+          <BackHeader title="" />
+          <Text className="px-6 pt-4 text-[15px] text-text-secondary">{t('day.invalidDate')}</Text>
+        </>
+      )}
+    </ScreenScrollView>
   );
 }
 

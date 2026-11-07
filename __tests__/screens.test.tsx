@@ -48,6 +48,16 @@ describe('Calendar screen', () => {
 });
 
 describe('Day detail screen', () => {
+  it('goes to the calendar when opened directly from a link', async () => {
+    const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+    const router = await renderRouter(APP_DIRECTORY, { initialUrl: '/day/2026-11-24' });
+
+    await user.press(screen.getByRole('button', { name: 'Back to calendar' }));
+
+    expect(router.getPathname()).toBe('/');
+    expect(screen.getByText('This month')).toBeOnTheScreen();
+  });
+
   it('lists every holiday on a shared date', async () => {
     await renderRouter(APP_DIRECTORY, { initialUrl: '/day/2026-12-23' });
 

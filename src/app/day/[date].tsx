@@ -71,6 +71,14 @@ function DayDetail({ isoDate }: { isoDate: string }) {
   );
 }
 
+function goBackToCalendar() {
+  if (router.canGoBack()) {
+    router.back();
+  } else {
+    router.replace('/');
+  }
+}
+
 function BackHeader({ title }: { title: string }) {
   const { t } = useTranslation();
   const colors = useThemeColors();
@@ -80,7 +88,7 @@ function BackHeader({ title }: { title: string }) {
       <Pressable
         accessibilityRole="button"
         accessibilityLabel={t('day.backToCalendar')}
-        onPress={() => router.back()}
+        onPress={goBackToCalendar}
         className="h-11 w-11 items-center justify-center rounded-full active:bg-subtle"
       >
         <SymbolView

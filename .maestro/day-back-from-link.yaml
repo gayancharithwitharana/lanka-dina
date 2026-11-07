@@ -1,0 +1,15 @@
+appId: host.exp.Exponent
+name: Day detail opened from a link goes back to the calendar
+---
+- runFlow:
+    file: subflows/open-route.yaml
+    env:
+      ROUTE: day/2026-11-24
+- extendedWaitUntil:
+    visible: Il Full Moon Poya
+    timeout: 30000
+- tapOn: Back to calendar
+- extendedWaitUntil:
+    visible: This month
+    timeout: 10000
+- runFlow: subflows/assert-no-errors.yaml

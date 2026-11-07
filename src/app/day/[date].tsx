@@ -4,16 +4,38 @@ import { useTranslation } from 'react-i18next';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { useThemeColors } from '@/hooks/use-theme-colors';
 import { getHolidayByDate, type Holiday } from '@/data/holidays';
-import { parseIsoDate } from '@/utils/calendar';
+import { useThemeColors } from '@/hooks/use-theme-colors';
+import { isValidIsoDate, parseIsoDate } from '@/utils/calendar';
 
 export default function DayDetailScreen() {
-  const { date } = useLocalSearchParams<{ date: string }>();
+  const { date } = useLocalSearchParams();
+  const { t } = useTranslation();
+
+  return (
+    <SafeAreaView className="flex-1 bg-background">
+      <ScrollView contentContainerClassName="pb-8">
+        <View className="w-full max-w-[600px] self-center">
+          {isValidIsoDate(date) ? (
+            <DayDetail isoDate={date} />
+          ) : (
+            <>
+              <BackHeader title="" />
+              <Text className="px-6 pt-4 text-[15px] text-text-secondary">
+                {t('day.invalidDate')}
+              </Text>
+            </>
+          )}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
+
+function DayDetail({ isoDate }: { isoDate: string }) {
   const { t, i18n } = useTranslation();
-  const colors = useThemeColors();
-  const day = parseIsoDate(date);
-  const holiday = getHolidayByDate(date);
+  const day = parseIsoDate(isoDate);
+  const holiday = getHolidayByDate(isoDate);
 
   const monthAndYear = new Intl.DateTimeFormat(i18n.language, {
     month: 'long',
@@ -22,44 +44,49 @@ export default function DayDetailScreen() {
   const weekdayName = new Intl.DateTimeFormat(i18n.language, { weekday: 'long' }).format(day);
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
-      <ScrollView contentContainerClassName="pb-8">
-        <View className="w-full max-w-[600px] self-center">
-          <View className="flex-row items-center px-2 pb-2 pt-5">
-            <Pressable
-              accessibilityRole="button"
-              accessibilityLabel={t('day.backToCalendar')}
-              onPress={() => router.back()}
-              className="h-11 w-11 items-center justify-center rounded-full active:bg-subtle"
-            >
-              <SymbolView
-                name={{ ios: 'chevron.left', android: 'chevron_left' }}
-                size={22}
-                tintColor={colors['text-secondary']}
-              />
-            </Pressable>
-            <Text className="text-[15px] font-semibold text-text-secondary">{monthAndYear}</Text>
-          </View>
+    <>
+      <BackHeader title={monthAndYear} />
 
-          <View className="gap-3.5 px-6 pt-4">
-            <View className="flex-row items-baseline gap-3">
-              <Text className="text-[64px] font-bold leading-[64px] tracking-[-2.5px] text-text">
-                {day.getDate()}
-              </Text>
-              <Text className="text-[17px] font-medium text-text-secondary">{weekdayName}</Text>
-            </View>
-            {holiday && <HolidaySummary holiday={holiday} />}
-          </View>
-
-          {holiday?.about && (
-            <View className="gap-2 px-6 pt-6">
-              <Text className="text-label uppercase text-text-muted">{t('day.about')}</Text>
-              <Text className="text-[15px] leading-6 text-text-secondary">{holiday.about}</Text>
-            </View>
-          )}
+      <View className="gap-3.5 px-6 pt-4">
+        <View className="flex-row items-baseline gap-3">
+          <Text className="text-[64px] font-bold leading-[64px] tracking-[-2.5px] text-text">
+            {day.getDate()}
+          </Text>
+          <Text className="text-[17px] font-medium text-text-secondary">{weekdayName}</Text>
         </View>
-      </ScrollView>
-    </SafeAreaView>
+        {holiday && <HolidaySummary holiday={holiday} />}
+      </View>
+
+      {holiday?.about && (
+        <View className="gap-2 px-6 pt-6">
+          <Text className="text-label uppercase text-text-muted">{t('day.about')}</Text>
+          <Text className="text-[15px] leading-6 text-text-secondary">{holiday.about}</Text>
+        </View>
+      )}
+    </>
+  );
+}
+
+function BackHeader({ title }: { title: string }) {
+  const { t } = useTranslation();
+  const colors = useThemeColors();
+
+  return (
+    <View className="flex-row items-center px-2 pb-2 pt-5">
+      <Pressable
+        accessibilityRole="button"
+        accessibilityLabel={t('day.backToCalendar')}
+        onPress={() => router.back()}
+        className="h-11 w-11 items-center justify-center rounded-full active:bg-subtle"
+      >
+        <SymbolView
+          name={{ ios: 'chevron.left', android: 'chevron_left' }}
+          size={22}
+          tintColor={colors['text-secondary']}
+        />
+      </Pressable>
+      <Text className="text-[15px] font-semibold text-text-secondary">{title}</Text>
+    </View>
   );
 }
 

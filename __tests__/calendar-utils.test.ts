@@ -5,6 +5,7 @@ import {
   getWeekdayLabels,
   getWeekdayName,
   isSameDay,
+  isValidIsoDate,
   parseIsoDate,
   shiftMonth,
   toIsoDate,
@@ -97,5 +98,24 @@ describe('getDaysBetween', () => {
 
   it('counts across a year boundary', () => {
     expect(getDaysBetween(parseIsoDate('2026-12-31'), parseIsoDate('2027-01-01'))).toBe(1);
+  });
+});
+
+describe('isValidIsoDate', () => {
+  it('accepts real dates in YYYY-MM-DD format', () => {
+    expect(isValidIsoDate('2026-11-24')).toBe(true);
+    expect(isValidIsoDate('2028-02-29')).toBe(true);
+  });
+
+  it.each([
+    ['foo'],
+    ['2026-13-01'],
+    ['2026-02-30'],
+    ['2026-1-5'],
+    [''],
+    [undefined],
+    [['2026-11-24']],
+  ])('rejects %p', (value) => {
+    expect(isValidIsoDate(value)).toBe(false);
   });
 });

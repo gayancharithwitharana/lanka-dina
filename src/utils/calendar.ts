@@ -78,3 +78,13 @@ export function getDaysBetween(from: Date, to: Date): number {
   const toMidnight = new Date(to.getFullYear(), to.getMonth(), to.getDate());
   return Math.round((toMidnight.getTime() - fromMidnight.getTime()) / MILLISECONDS_PER_DAY);
 }
+
+const ISO_DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
+
+export function isValidIsoDate(value: unknown): value is string {
+  return (
+    typeof value === 'string' &&
+    ISO_DATE_PATTERN.test(value) &&
+    toIsoDate(parseIsoDate(value)) === value
+  );
+}

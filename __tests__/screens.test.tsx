@@ -47,6 +47,18 @@ describe('Calendar screen', () => {
   });
 });
 
+describe('Day detail screen', () => {
+  it.each([['/day/foo'], ['/day/2026-13-45']])(
+    'shows a fallback for the invalid date %s',
+    async (url) => {
+      await renderRouter(APP_DIRECTORY, { initialUrl: url });
+
+      expect(screen.getByText("This date doesn't exist")).toBeOnTheScreen();
+      expect(screen.getByRole('button', { name: 'Back to calendar' })).toBeOnTheScreen();
+    },
+  );
+});
+
 describe('Upcoming screen', () => {
   it('counts down to upcoming holidays and filters by type', async () => {
     const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });

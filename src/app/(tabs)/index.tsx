@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ScrollView, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { HolidayLegend } from '@/components/calendar/holiday-legend';
 import { MonthGrid } from '@/components/calendar/month-grid';
 import { MonthHeader } from '@/components/calendar/month-header';
 import { MonthHolidayList } from '@/components/calendar/month-holiday-list';
+import { ScreenScrollView } from '@/components/screen-scroll-view';
 import { getHolidaysInMonth } from '@/data/holidays';
 import { useToday } from '@/hooks/use-today';
 import { useSettings } from '@/settings/settings-context';
@@ -24,26 +23,22 @@ export default function CalendarScreen() {
   const holidaysInMonth = getHolidaysInMonth(visibleMonth);
 
   return (
-    <SafeAreaView edges={['top']} className="flex-1 bg-background">
-      <ScrollView contentContainerClassName="pb-6">
-        <View className="w-full max-w-[600px] self-center">
-          <MonthHeader
-            year={visibleMonth.year}
-            monthName={getMonthName(visibleMonth, locale)}
-            onPreviousMonth={() => setVisibleMonth((month) => shiftMonth(month, -1))}
-            onNextMonth={() => setVisibleMonth((month) => shiftMonth(month, 1))}
-          />
-          <MonthGrid
-            yearMonth={visibleMonth}
-            weekStartsOn={weekStartsOn}
-            today={today}
-            holidays={holidaysInMonth}
-            locale={locale}
-          />
-          <HolidayLegend />
-          <MonthHolidayList holidays={holidaysInMonth} />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <ScreenScrollView>
+      <MonthHeader
+        year={visibleMonth.year}
+        monthName={getMonthName(visibleMonth, locale)}
+        onPreviousMonth={() => setVisibleMonth((month) => shiftMonth(month, -1))}
+        onNextMonth={() => setVisibleMonth((month) => shiftMonth(month, 1))}
+      />
+      <MonthGrid
+        yearMonth={visibleMonth}
+        weekStartsOn={weekStartsOn}
+        today={today}
+        holidays={holidaysInMonth}
+        locale={locale}
+      />
+      <HolidayLegend />
+      <MonthHolidayList holidays={holidaysInMonth} />
+    </ScreenScrollView>
   );
 }

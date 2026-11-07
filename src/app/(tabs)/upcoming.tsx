@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ScrollView, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Text, View } from 'react-native';
 
 import { HolidayCard } from '@/components/holiday-card';
+import { ScreenScrollView } from '@/components/screen-scroll-view';
 import { HolidayFilterChips, type HolidayFilter } from '@/components/upcoming/holiday-filter-chips';
 import { getHolidaysFrom, type Holiday } from '@/data/holidays';
 import { useToday } from '@/hooks/use-today';
@@ -25,43 +25,36 @@ export default function UpcomingScreen() {
   const monthGroups = groupByMonth(upcomingHolidays, today, i18n.language);
 
   return (
-    <SafeAreaView edges={['top']} className="flex-1 bg-background">
-      <ScrollView contentContainerClassName="pb-6">
-        <View className="w-full max-w-[600px] self-center">
-          <View className="gap-3.5 px-5 pb-3 pt-7">
-            <Text className="text-[30px] font-bold tracking-[-0.6px] text-text">
-              {t('tabs.upcoming')}
-            </Text>
-            <HolidayFilterChips
-              selectedFilter={selectedFilter}
-              onSelectFilter={setSelectedFilter}
-            />
-          </View>
+    <ScreenScrollView>
+      <View className="gap-3.5 px-5 pb-3 pt-7">
+        <Text className="text-[30px] font-bold tracking-[-0.6px] text-text">
+          {t('tabs.upcoming')}
+        </Text>
+        <HolidayFilterChips selectedFilter={selectedFilter} onSelectFilter={setSelectedFilter} />
+      </View>
 
-          <View className="gap-2 px-5 pt-1">
-            {monthGroups.length === 0 && (
-              <Text className="text-[13px] text-text-secondary">
-                {t('upcoming.noUpcomingHolidays')}
-              </Text>
-            )}
-            {monthGroups.map((group) => (
-              <View key={group.title} className="gap-2">
-                <Text className="mb-0.5 mt-2.5 text-label uppercase text-text-muted">
-                  {group.title}
-                </Text>
-                {group.holidays.map((holiday) => (
-                  <HolidayCard
-                    key={holiday.id}
-                    holiday={holiday}
-                    trailing={<Countdown holiday={holiday} today={today} />}
-                  />
-                ))}
-              </View>
+      <View className="gap-2 px-5 pt-1">
+        {monthGroups.length === 0 && (
+          <Text className="text-[13px] text-text-secondary">
+            {t('upcoming.noUpcomingHolidays')}
+          </Text>
+        )}
+        {monthGroups.map((group) => (
+          <View key={group.title} className="gap-2">
+            <Text className="mb-0.5 mt-2.5 text-label uppercase text-text-muted">
+              {group.title}
+            </Text>
+            {group.holidays.map((holiday) => (
+              <HolidayCard
+                key={holiday.id}
+                holiday={holiday}
+                trailing={<Countdown holiday={holiday} today={today} />}
+              />
             ))}
           </View>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+        ))}
+      </View>
+    </ScreenScrollView>
   );
 }
 

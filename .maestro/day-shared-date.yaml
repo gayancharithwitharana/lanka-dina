@@ -1,0 +1,13 @@
+appId: host.exp.Exponent
+name: Day detail lists every holiday on a shared date
+---
+- runFlow:
+    file: subflows/open-route.yaml
+    env:
+      ROUTE: day/2026-12-23
+- extendedWaitUntil:
+    visible: Unduvap Full Moon Poya
+    timeout: 30000
+- assertVisible: Sample Bank Holiday
+- takeScreenshot: day-shared-date
+- runFlow: subflows/assert-no-errors.yaml

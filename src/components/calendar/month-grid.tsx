@@ -1,7 +1,7 @@
 import { Text, View } from 'react-native';
 
 import { HolidayDot } from '@/components/calendar/holiday-dot';
-import { getDayOfMonth, type Holiday, type HolidayType } from '@/data/holidays';
+import { getDotTypeByDay, type Holiday, type HolidayType } from '@/data/holidays';
 import {
   getMonthGridWeeks,
   getWeekdayLabels,
@@ -21,9 +21,7 @@ type MonthGridProps = {
 export function MonthGrid({ yearMonth, weekStartsOn, today, holidays, locale }: MonthGridProps) {
   const weekdayLabels = getWeekdayLabels(weekStartsOn, locale);
   const weeks = getMonthGridWeeks(yearMonth, weekStartsOn);
-  const holidayTypeByDay = new Map(
-    holidays.map((holiday) => [getDayOfMonth(holiday), holiday.type]),
-  );
+  const holidayTypeByDay = getDotTypeByDay(holidays);
 
   return (
     <View className="px-3">

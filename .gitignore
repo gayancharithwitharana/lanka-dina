@@ -41,3 +41,9 @@ example
 # generated native folders
 /ios
 /android
+
+# Maestro run output
+.maestro/output/
+
+# Personal Claude Code settings
+.claude/settings.local.json

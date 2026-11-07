@@ -1,7 +1,8 @@
 import sampleHolidays from '@/data/sample-holidays.json';
 import {
   getDayOfMonth,
-  getHolidayByDate,
+  getDotTypeByDay,
+  getHolidaysByDate,
   getHolidaysFrom,
   getHolidaysInMonth,
   type HolidayType,
@@ -64,12 +65,31 @@ describe('getHolidaysFrom', () => {
 });
 
 describe('single holiday lookups', () => {
-  it('finds a holiday by date', () => {
-    expect(getHolidayByDate('2026-11-24')?.name).toBe('Il Full Moon Poya');
-    expect(getHolidayByDate('2026-11-25')).toBeUndefined();
+  it('finds every holiday on a date', () => {
+    expect(getHolidaysByDate('2026-11-24').map((holiday) => holiday.name)).toEqual([
+      'Il Full Moon Poya',
+    ]);
+    expect(getHolidaysByDate('2026-12-23').map((holiday) => holiday.name)).toEqual([
+      'Unduvap Full Moon Poya',
+      'Sample Bank Holiday',
+    ]);
+    expect(getHolidaysByDate('2026-11-25')).toEqual([]);
   });
 
   it('reads the day of month from the ISO date', () => {
-    expect(getDayOfMonth(getHolidayByDate('2026-11-08')!)).toBe(8);
+    expect(getDayOfMonth(getHolidaysByDate('2026-11-08')[0])).toBe(8);
+  });
+});
+
+describe('getDotTypeByDay', () => {
+  it('shows the Poya color when a Poya shares its date with another holiday', () => {
+    const dotTypes = getDotTypeByDay(getHolidaysInMonth({ year: 2026, monthIndex: 11 }));
+    expect(dotTypes.get(23)).toBe('poya');
+    expect(dotTypes.get(25)).toBe('public');
+  });
+
+  it('does the same whichever holiday comes first', () => {
+    const december = getHolidaysInMonth({ year: 2026, monthIndex: 11 });
+    expect(getDotTypeByDay([...december].reverse()).get(23)).toBe('poya');
   });
 });

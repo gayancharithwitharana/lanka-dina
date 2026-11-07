@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { getHolidayByDate, type Holiday } from '@/data/holidays';
+import { getHolidaysByDate, type Holiday } from '@/data/holidays';
 import { useThemeColors } from '@/hooks/use-theme-colors';
 import { isValidIsoDate, parseIsoDate } from '@/utils/calendar';
 
@@ -35,7 +35,7 @@ export default function DayDetailScreen() {
 function DayDetail({ isoDate }: { isoDate: string }) {
   const { t, i18n } = useTranslation();
   const day = parseIsoDate(isoDate);
-  const holiday = getHolidayByDate(isoDate);
+  const holidays = getHolidaysByDate(isoDate);
 
   const monthAndYear = new Intl.DateTimeFormat(i18n.language, {
     month: 'long',
@@ -54,15 +54,19 @@ function DayDetail({ isoDate }: { isoDate: string }) {
           </Text>
           <Text className="text-[17px] font-medium text-text-secondary">{weekdayName}</Text>
         </View>
-        {holiday && <HolidaySummary holiday={holiday} />}
       </View>
 
-      {holiday?.about && (
-        <View className="gap-2 px-6 pt-6">
-          <Text className="text-label uppercase text-text-muted">{t('day.about')}</Text>
-          <Text className="text-[15px] leading-6 text-text-secondary">{holiday.about}</Text>
+      {holidays.map((holiday) => (
+        <View key={holiday.id} className="gap-3.5 px-6 pt-4">
+          <HolidaySummary holiday={holiday} />
+          {holiday.about && (
+            <View className="gap-2 pt-2">
+              <Text className="text-label uppercase text-text-muted">{t('day.about')}</Text>
+              <Text className="text-[15px] leading-6 text-text-secondary">{holiday.about}</Text>
+            </View>
+          )}
         </View>
-      )}
+      ))}
     </>
   );
 }

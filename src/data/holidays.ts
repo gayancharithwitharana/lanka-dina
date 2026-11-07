@@ -25,8 +25,19 @@ export function getDayOfMonth(holiday: Holiday): number {
   return Number(holiday.date.slice(8, 10));
 }
 
-export function getHolidayByDate(isoDate: string): Holiday | undefined {
-  return holidays.find((holiday) => holiday.date === isoDate);
+export function getHolidaysByDate(isoDate: string): Holiday[] {
+  return holidays.filter((holiday) => holiday.date === isoDate);
+}
+
+export function getDotTypeByDay(holidaysInMonth: Holiday[]): Map<number, HolidayType> {
+  const dotTypeByDay = new Map<number, HolidayType>();
+  for (const holiday of holidaysInMonth) {
+    const day = getDayOfMonth(holiday);
+    if (dotTypeByDay.get(day) !== 'poya') {
+      dotTypeByDay.set(day, holiday.type);
+    }
+  }
+  return dotTypeByDay;
 }
 
 export function getHolidaysFrom(isoDate: string): Holiday[] {

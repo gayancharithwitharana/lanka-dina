@@ -55,7 +55,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "typecheck": "tsc --noEmit",
-    "check": "npm run typecheck && npm run lint && npm test"
+    "check": "npm run typecheck && npm run lint && npm test",
+    "e2e": "maestro test .maestro --test-output-dir .maestro/output"
   },
   "private": true,
   "jest": {

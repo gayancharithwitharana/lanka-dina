@@ -14,7 +14,7 @@ Reference mockups: the `design/*.dc.html` files (HTML mockups, 390×844). Match 
 - State: React state/context first; add Zustand only if shared state gets painful
 - expo-notifications: local reminders
 - react-native-google-mobile-ads: AdMob banner. Use Google's TEST ad unit IDs only until release
-- i18n: English (default), Sinhala, Tamil. Store all UI strings in `locales/{en,si,ta}.json`
+- i18n: English (default), Sinhala, Tamil. Store all UI strings in `src/locales/{en,si,ta}.json`; missing Sinhala/Tamil keys fall back to English
 - No backend. Holiday data ships as bundled JSON; later fetched from a remote JSON file for updates
 
 ## Design tokens

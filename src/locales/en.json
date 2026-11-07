@@ -1,0 +1,21 @@
+{
+  "tabs": {
+    "calendar": "Calendar",
+    "upcoming": "Upcoming",
+    "reminders": "Reminders",
+    "settings": "Settings"
+  },
+  "calendar": {
+    "previousMonth": "Previous month",
+    "nextMonth": "Next month",
+    "publicHoliday": "Public holiday",
+    "poyaDay": "Poya day",
+    "thisMonth": "This month",
+    "noHolidaysThisMonth": "No holidays this month"
+  },
+  "holidayKinds": {
+    "public": "Public",
+    "bank": "Bank",
+    "mercantile": "Mercantile"
+  }
+}

@@ -17,5 +17,14 @@
     "public": "Public",
     "bank": "Bank",
     "mercantile": "Mercantile"
+  },
+  "day": {
+    "backToCalendar": "Back to calendar",
+    "about": "About"
+  },
+  "holidayTypes": {
+    "public": "Public holiday",
+    "bank": "Bank holiday",
+    "mercantile": "Mercantile holiday"
   }
 }

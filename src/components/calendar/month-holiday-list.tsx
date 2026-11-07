@@ -1,6 +1,7 @@
 import type { TFunction } from 'i18next';
 import { useTranslation } from 'react-i18next';
-import { Text, View } from 'react-native';
+import { Link } from 'expo-router';
+import { Pressable, Text, View } from 'react-native';
 
 import { HolidayDot } from '@/components/calendar/holiday-dot';
 import { getDayOfMonth, type Holiday } from '@/data/holidays';
@@ -43,17 +44,19 @@ function HolidayCard({ yearMonth, holiday, locale }: HolidayCardProps) {
   );
 
   return (
-    <View className="flex-row items-center gap-3.5 rounded-card border border-border px-3.5 py-3">
-      <View className="w-11 items-center">
-        <Text className="text-[11px] font-semibold uppercase text-text-muted">{weekdayName}</Text>
-        <Text className="text-xl font-bold text-text">{dayOfMonth}</Text>
-      </View>
-      <View className="flex-1 gap-0.5">
-        <Text className="text-[15px] font-semibold text-text">{holiday.name}</Text>
-        <Text className="text-[13px] text-text-secondary">{getHolidayKinds(holiday, t)}</Text>
-      </View>
-      <HolidayDot type={holiday.type} size="medium" />
-    </View>
+    <Link href={{ pathname: '/day/[date]', params: { date: holiday.date } }} asChild>
+      <Pressable className="flex-row items-center gap-3.5 rounded-card border border-border px-3.5 py-3 active:bg-surface">
+        <View className="w-11 items-center">
+          <Text className="text-[11px] font-semibold uppercase text-text-muted">{weekdayName}</Text>
+          <Text className="text-xl font-bold text-text">{dayOfMonth}</Text>
+        </View>
+        <View className="flex-1 gap-0.5">
+          <Text className="text-[15px] font-semibold text-text">{holiday.name}</Text>
+          <Text className="text-[13px] text-text-secondary">{getHolidayKinds(holiday, t)}</Text>
+        </View>
+        <HolidayDot type={holiday.type} size="medium" />
+      </Pressable>
+    </Link>
   );
 }
 

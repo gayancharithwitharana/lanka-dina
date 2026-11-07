@@ -1,6 +1,7 @@
 import '@/global.css';
 import '@/i18n';
 
+import { colorScheme } from 'nativewind';
 import { DarkTheme, DefaultTheme, Stack, ThemeProvider, type Theme } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as SystemUI from 'expo-system-ui';
@@ -9,6 +10,9 @@ import { useColorScheme } from 'react-native';
 
 import { useThemeColors } from '@/hooks/use-theme-colors';
 import { SettingsProvider } from '@/settings/settings-context';
+import { loadSettings } from '@/settings/settings-storage';
+
+colorScheme.set(loadSettings().appearance);
 
 export default function RootLayout() {
   return (

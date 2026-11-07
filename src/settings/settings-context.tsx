@@ -1,3 +1,4 @@
+import { colorScheme } from 'nativewind';
 import { createContext, useContext, useState, type ReactNode } from 'react';
 
 import i18n from '@/i18n';
@@ -18,6 +19,9 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     saveSettings(updatedSettings);
     if (changes.language) {
       i18n.changeLanguage(changes.language);
+    }
+    if (changes.appearance) {
+      colorScheme.set(changes.appearance);
     }
   }
 

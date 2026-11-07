@@ -1,7 +1,7 @@
 import { Slot } from 'expo-router';
 import Storage from 'expo-sqlite/kv-store';
 import { renderRouter, screen } from 'expo-router/testing-library';
-import { userEvent } from '@testing-library/react-native';
+import { act, userEvent } from '@testing-library/react-native';
 
 const APP_DIRECTORY = {
   appDir: 'src/app',
@@ -88,6 +88,21 @@ describe('Upcoming screen', () => {
 
     expect(screen.queryByText('Deepavali')).not.toBeOnTheScreen();
     expect(screen.getByText('Il Full Moon Poya')).toBeOnTheScreen();
+  });
+});
+
+describe('Upcoming screen at midnight', () => {
+  it('updates the countdown when the day changes', async () => {
+    jest.setSystemTime(new Date(2026, 10, 7, 23, 59, 30));
+    await renderRouter(APP_DIRECTORY, { initialUrl: '/upcoming' });
+    expect(screen.getByText('Tomorrow')).toBeOnTheScreen();
+
+    await act(async () => {
+      jest.advanceTimersByTime(60 * 1000);
+    });
+
+    expect(screen.getByText('Today')).toBeOnTheScreen();
+    expect(screen.getByText('In 16 days')).toBeOnTheScreen();
   });
 });
 

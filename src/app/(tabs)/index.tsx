@@ -8,6 +8,7 @@ import { MonthGrid } from '@/components/calendar/month-grid';
 import { MonthHeader } from '@/components/calendar/month-header';
 import { MonthHolidayList } from '@/components/calendar/month-holiday-list';
 import { getHolidaysInMonth } from '@/data/holidays';
+import { useToday } from '@/hooks/use-today';
 import { useSettings } from '@/settings/settings-context';
 import { getMonthName, shiftMonth, type YearMonth } from '@/utils/calendar';
 
@@ -15,7 +16,7 @@ export default function CalendarScreen() {
   const { i18n } = useTranslation();
   const locale = i18n.language;
   const { weekStartsOn } = useSettings();
-  const today = new Date();
+  const today = useToday();
   const [visibleMonth, setVisibleMonth] = useState<YearMonth>({
     year: today.getFullYear(),
     monthIndex: today.getMonth(),

@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 
 import { HolidayCard } from '@/components/holiday-card';
 import { ScreenScrollView } from '@/components/screen-scroll-view';
+import { Text } from '@/components/text';
 import { HolidayFilterChips, type HolidayFilter } from '@/components/upcoming/holiday-filter-chips';
 import { getHolidaysFrom, type Holiday } from '@/data/holidays';
 import { useToday } from '@/hooks/use-today';

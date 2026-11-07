@@ -1,6 +1,7 @@
 const plugin = require('tailwindcss/plugin');
 
 const { light, dark } = require('./src/constants/colors');
+const { fontFamilies } = require('./src/constants/fonts');
 
 const colorNames = Object.keys(light);
 
@@ -24,11 +25,9 @@ module.exports = {
       colors: Object.fromEntries(
         colorNames.map((name) => [name, `rgb(var(--color-${name}) / <alpha-value>)`]),
       ),
-      fontFamily: {
-        sans: ['Inter'],
-        sinhala: ['NotoSansSinhala'],
-        tamil: ['NotoSansTamil'],
-      },
+      fontFamily: Object.fromEntries(
+        Object.entries(fontFamilies).map(([name, family]) => [name, [family]]),
+      ),
       borderRadius: {
         card: '14px',
         button: '14px',

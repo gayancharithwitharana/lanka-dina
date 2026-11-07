@@ -1,9 +1,10 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import { SymbolView } from 'expo-symbols';
 import { useTranslation } from 'react-i18next';
-import { Pressable, Text, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 
 import { ScreenScrollView } from '@/components/screen-scroll-view';
+import { Text } from '@/components/text';
 import { getHolidaysByDate, type Holiday } from '@/data/holidays';
 import { useThemeColors } from '@/hooks/use-theme-colors';
 import { isValidIsoDate, parseIsoDate } from '@/utils/calendar';

@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
-import { Pressable, Text, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 
+import { Text } from '@/components/text';
 import type { HolidayType } from '@/data/holidays';
 
 export type HolidayFilter = 'all' | HolidayType;

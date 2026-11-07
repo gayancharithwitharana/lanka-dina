@@ -88,4 +88,14 @@ describe('source code', () => {
     );
     expect(offenders.map((file) => path.relative(sourceDirectory, file))).toEqual([]);
   });
+
+  it('uses the language-aware Text component', () => {
+    const textFromReactNative = /import \{[^}]*\bText\b[^}]*\} from 'react-native'/;
+    const offenders = componentFiles.filter(
+      (file) =>
+        !file.endsWith(path.join('components', 'text.tsx')) &&
+        textFromReactNative.test(fs.readFileSync(file, 'utf8')),
+    );
+    expect(offenders.map((file) => path.relative(sourceDirectory, file))).toEqual([]);
+  });
 });

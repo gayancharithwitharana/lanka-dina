@@ -1,7 +1,8 @@
 import { SymbolView } from 'expo-symbols';
 import { useTranslation } from 'react-i18next';
-import { Pressable, Text, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 
+import { Text } from '@/components/text';
 import { useThemeColors } from '@/hooks/use-theme-colors';
 
 type MonthHeaderProps = {

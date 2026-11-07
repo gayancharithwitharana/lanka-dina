@@ -17,6 +17,12 @@ export function getMonthName({ year, monthIndex }: YearMonth, locale: string): s
   return new Intl.DateTimeFormat(locale, { month: 'long' }).format(new Date(year, monthIndex, 1));
 }
 
+export function getWeekdayName(weekday: WeekStart, locale: string): string {
+  const date = new Date(KNOWN_SUNDAY);
+  date.setDate(KNOWN_SUNDAY.getDate() + weekday);
+  return new Intl.DateTimeFormat(locale, { weekday: 'long' }).format(date);
+}
+
 export function getWeekdayLabels(weekStartsOn: WeekStart, locale: string): string[] {
   const formatWeekday = new Intl.DateTimeFormat(locale, { weekday: 'narrow' });
   return Array.from({ length: DAYS_PER_WEEK }, (_, position) => {

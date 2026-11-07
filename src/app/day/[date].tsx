@@ -3,6 +3,7 @@ import { SymbolView } from 'expo-symbols';
 import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
 
+import { DayNakathCards } from '@/components/nakath/day-nakath-cards';
 import { ScreenScrollView } from '@/components/screen-scroll-view';
 import { Text } from '@/components/text';
 import { getHolidaysByDate, type Holiday } from '@/data/holidays';
@@ -54,14 +55,20 @@ function DayDetail({ isoDate }: { isoDate: string }) {
       {holidays.map((holiday) => (
         <View key={holiday.id} className="gap-3.5 px-6 pt-4">
           <HolidaySummary holiday={holiday} />
-          {holiday.about && (
-            <View className="gap-2 pt-2">
+        </View>
+      ))}
+
+      <DayNakathCards weekday={day.getDay()} />
+
+      {holidays.map(
+        (holiday) =>
+          holiday.about && (
+            <View key={holiday.id} className="gap-2 px-6 pt-6">
               <Text className="text-label uppercase text-text-muted">{t('day.about')}</Text>
               <Text className="text-[15px] leading-6 text-text-secondary">{holiday.about}</Text>
             </View>
-          )}
-        </View>
-      ))}
+          ),
+      )}
     </>
   );
 }

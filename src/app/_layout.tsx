@@ -77,6 +77,7 @@ function ThemedNavigation() {
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="day/[date]" />
+        <Stack.Screen name="lagna" options={{ presentation: 'modal' }} />
       </Stack>
     </ThemeProvider>
   );

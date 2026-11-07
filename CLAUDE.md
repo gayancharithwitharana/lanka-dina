@@ -48,5 +48,6 @@ Bottom tabs: Calendar, Upcoming, Reminders, Settings. Day detail is a stack scre
 ## Rules
 
 - Holiday data must come from the official gazette; never invent dates
+- Until the gazette source is decided, the app uses sample holidays from a file named `sample-holidays`. Replace it before release
 - Keep the app fully usable offline
 - Android package: com.yourname.lankadina (decide before first build; permanent after publishing)

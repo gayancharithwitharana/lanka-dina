@@ -6,6 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { HolidayCard } from '@/components/holiday-card';
 import { HolidayFilterChips, type HolidayFilter } from '@/components/upcoming/holiday-filter-chips';
 import { getHolidaysFrom, type Holiday } from '@/data/holidays';
+import { useToday } from '@/hooks/use-today';
 import { getDaysBetween, parseIsoDate, toIsoDate } from '@/utils/calendar';
 
 type MonthGroup = {
@@ -16,7 +17,7 @@ type MonthGroup = {
 export default function UpcomingScreen() {
   const { t, i18n } = useTranslation();
   const [selectedFilter, setSelectedFilter] = useState<HolidayFilter>('all');
-  const today = new Date();
+  const today = useToday();
 
   const upcomingHolidays = getHolidaysFrom(toIsoDate(today)).filter(
     (holiday) => selectedFilter === 'all' || holiday.type === selectedFilter,

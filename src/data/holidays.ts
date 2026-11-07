@@ -1,5 +1,6 @@
 import { and, asc, eq, gte, like } from 'drizzle-orm';
 
+import { pickTranslation } from '@/data/translations';
 import { db } from '@/db/client';
 import { holidays as holidaysTable, type HolidayRow } from '@/db/schema';
 import type { YearMonth } from '@/utils/calendar';
@@ -53,14 +54,6 @@ function toHoliday(row: HolidayRow, language: string): Holiday {
     isMercantile: row.isMercantile,
     ...(about ? { about } : {}),
   };
-}
-
-type Translations = { en: string | null; si: string | null; ta: string | null };
-
-function pickTranslation(language: string, translations: Translations): string {
-  const translation =
-    language in translations ? translations[language as keyof Translations] : null;
-  return translation ?? translations.en ?? '';
 }
 
 export function getDayOfMonth(holiday: Holiday): number {

@@ -1,0 +1,16 @@
+appId: host.exp.Exponent
+name: Nakath shows Avurudu times and today's Rahu kalaya
+---
+- runFlow:
+    file: subflows/open-route.yaml
+    env:
+      ROUTE: nakath
+- extendedWaitUntil:
+    visible: Lighting the hearth
+    timeout: 30000
+- takeScreenshot: nakath-avurudu
+- tapOn: Today
+- assertVisible: Kala horawa now
+- takeScreenshot: nakath-today
+- tapOn: Avurudu
+- runFlow: subflows/assert-no-errors.yaml

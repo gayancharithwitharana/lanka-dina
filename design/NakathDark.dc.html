@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lankadina nakath (dark)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0F1115}
+a{color:#60A5FA;text-decoration:none}a:hover{color:#93C5FD}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; display: flex; flex-direction: column; background: #0F1115; color: #F3F4F6; font-family: Inter, system-ui, sans-serif; overflow: hidden">
+  <header style="padding: 28px 20px 12px 20px; display: flex; flex-direction: column; gap: 14px">
+    <h1 style="margin: 0; font-size: 30px; font-weight: 700; letter-spacing: -0.02em">Nakath</h1>
+    <div role="group" aria-label="View" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; padding: 4px; background: #1F232B; border-radius: 14px">
+      <sc-for list="{{tabs}}" as="t" hint-placeholder-count="2">
+        <button aria-pressed="{{t.pressed}}" onClick="{{t.pick}}" style="{{t.style}}">{{t.label}}</button>
+      </sc-for>
+    </div>
+  </header>
+
+  <div style="flex-grow: 1; min-height: 0; overflow-y: auto; padding: 4px 20px 16px 20px; display: flex; flex-direction: column; gap: 12px">
+    <sc-if value="{{showAvurudu}}" hint-placeholder-val="{{ true }}">
+      <section style="padding: 18px; border-radius: 16px; background: #3A2A0A; border: 1px solid #78350F; display: flex; flex-direction: column; gap: 6px">
+        <span style="font-size: 13px; font-weight: 600; color: #F59E0B">Sinhala &amp; Tamil New Year 2027</span>
+        <span style="font-size: 15px; color: #D1D5DB">Dawn of the New Year in</span>
+        <div style="display: flex; align-items: flex-end; justify-content: space-between">
+          <span style="font-size: 34px; font-weight: 700; letter-spacing: -0.02em">[N] days</span>
+          <button style="height: 40px; padding: 0 14px; border-radius: 12px; border: 1px solid #3A404C; background: #0F1115; color: #F3F4F6; font-family: inherit; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 6px; cursor: pointer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13"></path></svg>
+            Share
+          </button>
+        </div>
+        <span style="font-size: 12px; color: #9CA3AF">Official times · Department of Cultural Affairs</span>
+      </section>
+
+      <sc-for list="{{items}}" as="it" hint-placeholder-count="8">
+        <div style="display: flex; align-items: center; gap: 14px; padding: 12px 12px 12px 14px; border: 1px solid #2A2F3A; border-radius: 14px">
+          <div style="width: 56px; flex-shrink: 0; display: flex; flex-direction: column; gap: 2px">
+            <span style="font-size: 12px; font-weight: 600; color: #9CA3AF">{{it.date}}</span>
+            <span style="font-size: 14px; font-weight: 700">{{it.time}}</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 2px; flex-grow: 1; min-width: 0">
+            <span style="font-size: 15px; font-weight: 600">{{it.name}}</span>
+            <span style="font-size: 13px; color: #C4C9D4">{{it.detail}}</span>
+          </div>
+          <button aria-label="{{it.bellLabel}}" aria-pressed="{{it.pressed}}" onClick="{{it.toggle}}" style="{{it.bellStyle}}">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>
+          </button>
+        </div>
+      </sc-for>
+    </sc-if>
+
+    <sc-if value="{{showToday}}" hint-placeholder-val="{{ false }}">
+      <section style="padding: 18px; border: 1px solid #2A2F3A; border-radius: 16px; display: flex; flex-direction: column; gap: 8px">
+        <div style="display: flex; align-items: center; justify-content: space-between">
+          <h2 style="margin: 0; font-size: 13px; font-weight: 600; color: #9CA3AF; text-transform: uppercase; letter-spacing: 0.06em">Rahu kalaya · Friday</h2>
+          <span style="font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; background: #1F232B; color: #D1D5DB">Not now</span>
+        </div>
+        <span style="font-size: 26px; font-weight: 700; letter-spacing: -0.01em">10:30 AM – 12:00 PM</span>
+        <span style="font-size: 13px; color: #C4C9D4">Avoid starting new work during this time</span>
+      </section>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+        <section style="padding: 16px; border: 1px solid #2A2F3A; border-radius: 16px; display: flex; flex-direction: column; gap: 6px">
+          <span style="font-size: 13px; color: #C4C9D4">Maru direction</span>
+          <span style="font-size: 18px; font-weight: 700">South-east</span>
+        </section>
+        <section style="padding: 16px; border: 1px solid #2A2F3A; border-radius: 16px; display: flex; flex-direction: column; gap: 6px">
+          <span style="font-size: 13px; color: #C4C9D4">Kala horawa now</span>
+          <span style="font-size: 18px; font-weight: 700">[PLANET]</span>
+        </section>
+      </div>
+      <section style="padding: 18px; border: 1px solid #2A2F3A; border-radius: 16px; display: flex; flex-direction: column; gap: 10px">
+        <h2 style="margin: 0; font-size: 13px; font-weight: 600; color: #9CA3AF; text-transform: uppercase; letter-spacing: 0.06em">Your year · Aya-waya</h2>
+        <span style="font-size: 15px; color: #D1D5DB; line-height: 1.5">Set your lagna to see your income and expenses for the year.</span>
+        <button style="align-self: flex-start; height: 44px; padding: 0 18px; border-radius: 12px; border: none; background: #F3F4F6; color: #0F1115; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer">Set lagna</button>
+      </section>
+    </sc-if>
+  </div>
+
+  <div style="display: flex; justify-content: center; padding: 8px 0; background: #171A21; border-top: 1px solid #2A2F3A">
+    <div style="width: 320px; height: 50px; border: 1px dashed #8B93A1; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #9CA3AF">AdMob banner · 320×50</div>
+  </div>
+
+  <nav aria-label="Main" style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: 1px solid #2A2F3A; padding: 6px 8px 22px 8px; background: #0F1115">
+    <a href="MainDark.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 0; min-height: 44px; font-size: 11px; font-weight: 500; color: #9CA3AF">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>
+      Calendar
+    </a>
+    <a href="UpcomingDark.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 0; min-height: 44px; font-size: 11px; font-weight: 500; color: #9CA3AF">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01"></path></svg>
+      Upcoming
+    </a>
+    <a href="NakathDark.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 0; min-height: 44px; font-size: 11px; font-weight: 600; color: #60A5FA">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"></path><path d="M19 17v4M17 19h4"></path></svg>
+      Nakath
+    </a>
+    <a href="RemindersDark.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 0; min-height: 44px; font-size: 11px; font-weight: 500; color: #9CA3AF">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>
+      Reminders
+    </a>
+    <a href="SettingsDark.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 0; min-height: 44px; font-size: 11px; font-weight: 500; color: #9CA3AF">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"></path></svg>
+      Settings
+    </a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { view: 'avurudu', on: { 2: true, 4: true } };
+  }
+  renderVals() {
+    const view = this.state.view;
+    const seg = (on) => 'height: 40px; border: none; border-radius: 10px; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer; ' + (on ? 'background: #3A404C; color: #F3F4F6; box-shadow: 0 1px 3px rgba(0,0,0,0.12)' : 'background: transparent; color: #C4C9D4');
+    const tabs = [['avurudu', 'Avurudu'], ['today', 'Today']].map(([id, label]) => ({
+      label, pressed: view === id ? 'true' : 'false', pick: () => this.setState({ view: id }), style: seg(view === id)
+    }));
+    const raw = [
+      ['[DATE]', 'Evening', 'New moon sighting', 'Look toward the [DIRECTION]'],
+      ['[DATE]', 'All day', 'Bath for the old year', 'Herbal bath with nanu'],
+      ['Apr [DATE]', '[TIME]', 'Dawn of the New Year', 'Sinhala and Tamil New Year begins'],
+      ['Apr [DATE]', '[TIME]', 'Punya kalaya', 'Until [TIME] · Religious observances'],
+      ['Apr [DATE]', '[TIME]', 'Lighting the hearth', 'Face [DIRECTION] · Wear [COLOR]'],
+      ['Apr [DATE]', '[TIME]', 'Work, transactions, first meal', 'Face [DIRECTION] · Wear [COLOR]'],
+      ['Apr [DATE]', '[TIME]', 'Anointing oil', 'Face [DIRECTION]'],
+      ['Apr [DATE]', '[TIME]', 'Leaving for work', 'Face [DIRECTION]']
+    ];
+    const items = raw.map(([date, time, name, detail], i) => {
+      const on = !!this.state.on[i];
+      return {
+        date, time, name, detail,
+        pressed: on ? 'true' : 'false',
+        bellLabel: 'Remind me: ' + name,
+        toggle: () => this.setState({ on: { ...this.state.on, [i]: !on } }),
+        bellStyle: 'flex-shrink: 0; width: 44px; height: 44px; border-radius: 22px; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; ' + (on ? 'background: #F59E0B; color: #0F1115' : 'background: #1F232B; color: #9CA3AF')
+      };
+    });
+    return { tabs, items, showAvurudu: view === 'avurudu', showToday: view === 'today' };
+  }
+}
+</script>
+</body>
+</html>

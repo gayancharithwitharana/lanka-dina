@@ -7,7 +7,7 @@ import { Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { SegmentedControl } from '@/components/segmented-control';
-import colors from '@/constants/colors';
+import { useThemeColors } from '@/hooks/use-theme-colors';
 import { useSettings } from '@/settings/settings-context';
 import type { Language } from '@/settings/settings-storage';
 import { getWeekdayName, type WeekStart } from '@/utils/calendar';
@@ -92,6 +92,8 @@ type SettingsRowProps = {
 };
 
 function SettingsRow({ label, value, onPress }: SettingsRowProps) {
+  const colors = useThemeColors();
+
   return (
     <Pressable
       disabled={!onPress}
@@ -105,7 +107,7 @@ function SettingsRow({ label, value, onPress }: SettingsRowProps) {
         <SymbolView
           name={{ ios: 'chevron.right', android: 'chevron_right' }}
           size={18}
-          tintColor={colors.text.muted}
+          tintColor={colors['text-muted']}
         />
       )}
     </Pressable>

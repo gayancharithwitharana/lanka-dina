@@ -1,18 +1,19 @@
 import { NativeTabs } from 'expo-router/native-tabs';
 import { useTranslation } from 'react-i18next';
 
-import colors from '@/constants/colors';
+import { useThemeColors } from '@/hooks/use-theme-colors';
 
 export default function AppTabs() {
   const { t } = useTranslation();
+  const colors = useThemeColors();
 
   return (
     <NativeTabs
       backgroundColor={colors.background}
       tintColor={colors.holiday}
-      iconColor={{ default: colors.text.secondary, selected: colors.holiday }}
+      iconColor={{ default: colors['text-secondary'], selected: colors.holiday }}
       labelStyle={{
-        default: { color: colors.text.secondary },
+        default: { color: colors['text-secondary'] },
         selected: { color: colors.holiday },
       }}
     >

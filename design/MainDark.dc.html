@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lankadina month view (dark)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0F1115}
+a{color:#60A5FA;text-decoration:none}a:hover{color:#93C5FD}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; display: flex; flex-direction: column; background: #0F1115; color: #F3F4F6; font-family: Inter, system-ui, sans-serif; overflow: hidden">
+  <header style="display: flex; align-items: flex-end; justify-content: space-between; padding: 28px 20px 12px 20px">
+    <div style="display: flex; flex-direction: column; gap: 2px">
+      <span style="font-size: 13px; font-weight: 500; color: #9CA3AF">2026</span>
+      <h1 style="margin: 0; font-size: 30px; font-weight: 700; letter-spacing: -0.02em">November</h1>
+    </div>
+    <div style="display: flex; align-items: center; gap: 4px">
+      <button aria-label="Previous month" style="width: 44px; height: 44px; border: none; background: transparent; border-radius: 22px; display: flex; align-items: center; justify-content: center; color: #D1D5DB; cursor: pointer">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>
+      </button>
+      <button aria-label="Next month" style="width: 44px; height: 44px; border: none; background: transparent; border-radius: 22px; display: flex; align-items: center; justify-content: center; color: #D1D5DB; cursor: pointer">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg>
+      </button>
+    </div>
+  </header>
+
+  <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); padding: 0 12px; gap: 0">
+    <sc-for list="{{weekdays}}" as="w" hint-placeholder-count="7">
+      <span style="text-align: center; font-size: 12px; font-weight: 600; color: #9CA3AF; padding: 8px 0">{{w}}</span>
+    </sc-for>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); padding: 0 12px; row-gap: 4px">
+    <sc-for list="{{days}}" as="d" hint-placeholder-count="35">
+      <div style="height: 48px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px">
+        <span style="{{d.numStyle}}">{{d.label}}</span>
+        <span style="{{d.dotStyle}}" aria-hidden="true"></span>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="display: flex; gap: 20px; padding: 12px 24px 4px 24px; font-size: 12px; color: #C4C9D4">
+    <span style="display: flex; align-items: center; gap: 6px"><span style="width: 8px; height: 8px; border-radius: 4px; background: {{accent}}" aria-hidden="true"></span>Public holiday</span>
+    <span style="display: flex; align-items: center; gap: 6px"><span style="width: 8px; height: 8px; border-radius: 4px; background: #F59E0B" aria-hidden="true"></span>Poya day</span>
+  </div>
+
+  <section style="padding: 20px 20px 0 20px; display: flex; flex-direction: column; gap: 10px">
+    <h2 style="margin: 0; font-size: 13px; font-weight: 600; color: #9CA3AF; text-transform: uppercase; letter-spacing: 0.06em">This month</h2>
+    <a href="DayDark.dc.html" style="display: flex; align-items: center; gap: 14px; padding: 12px 14px; border: 1px solid #2A2F3A; border-radius: 14px; color: #F3F4F6">
+      <div style="width: 44px; display: flex; flex-direction: column; align-items: center">
+        <span style="font-size: 11px; font-weight: 600; color: #9CA3AF">SUN</span>
+        <span style="font-size: 20px; font-weight: 700">8</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 2px; flex-grow: 1">
+        <span style="font-size: 15px; font-weight: 600">Deepavali</span>
+        <span style="font-size: 13px; color: #C4C9D4">Public · Bank holiday</span>
+      </div>
+      <span style="width: 8px; height: 8px; border-radius: 4px; background: {{accent}}" aria-hidden="true"></span>
+    </a>
+    <a href="DayDark.dc.html" style="display: flex; align-items: center; gap: 14px; padding: 12px 14px; border: 1px solid #2A2F3A; border-radius: 14px; color: #F3F4F6">
+      <div style="width: 44px; display: flex; flex-direction: column; align-items: center">
+        <span style="font-size: 11px; font-weight: 600; color: #9CA3AF">TUE</span>
+        <span style="font-size: 20px; font-weight: 700">24</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 2px; flex-grow: 1">
+        <span style="font-size: 15px; font-weight: 600">Il Full Moon Poya</span>
+        <span style="font-size: 13px; color: #C4C9D4">Public · Bank · Mercantile</span>
+      </div>
+      <span style="width: 8px; height: 8px; border-radius: 4px; background: #F59E0B" aria-hidden="true"></span>
+    </a>
+  </section>
+
+  <div style="flex-grow: 1"></div>
+
+  <div style="display: flex; justify-content: center; padding: 8px 0; background: #171A21; border-top: 1px solid #2A2F3A">
+    <div style="width: 320px; height: 50px; border: 1px dashed #8B93A1; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #9CA3AF">AdMob banner · 320×50</div>
+  </div>
+
+  <nav aria-label="Main" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid #2A2F3A; padding: 6px 8px 22px 8px; background: #0F1115">
+    <a href="MainDark.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 0; min-height: 44px; font-size: 11px; font-weight: 600; color: {{accent}}">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>
+      Calendar
+    </a>
+    <a href="UpcomingDark.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 0; min-height: 44px; font-size: 11px; font-weight: 500; color: #9CA3AF">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01"></path></svg>
+      Upcoming
+    </a>
+    <a href="RemindersDark.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 0; min-height: 44px; font-size: 11px; font-weight: 500; color: #9CA3AF">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>
+      Reminders
+    </a>
+    <a href="SettingsDark.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 0; min-height: 44px; font-size: 11px; font-weight: 500; color: #9CA3AF">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"></path></svg>
+      Settings
+    </a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#60A5FA","options":["#60A5FA","#0F766E","#F3F4F6","#7C3AED"]},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const accent = this.props.accent ?? '#60A5FA';
+    const today = 6;
+    const holidays = { 8: 'public' };
+    const poya = { 24: true };
+    const days = [];
+    for (let i = 1; i <= 35; i++) {
+      const n = i <= 30 ? i : null;
+      let numStyle = 'width: 34px; height: 34px; border-radius: 17px; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 500; color: #F3F4F6';
+      let dotStyle = 'width: 5px; height: 5px; border-radius: 3px; background: transparent';
+      if (n === today) numStyle = 'width: 34px; height: 34px; border-radius: 17px; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; color: #0F1115; background: #F3F4F6';
+      if (n && holidays[n]) { numStyle += '; color: ' + accent + '; font-weight: 700'; dotStyle = 'width: 5px; height: 5px; border-radius: 3px; background: ' + accent; }
+      if (n && poya[n]) { numStyle += '; color: #F59E0B; font-weight: 700'; dotStyle = 'width: 5px; height: 5px; border-radius: 3px; background: #F59E0B'; }
+      days.push({ label: n ? String(n) : '', numStyle, dotStyle });
+    }
+    return { accent, weekdays: ['S', 'M', 'T', 'W', 'T', 'F', 'S'], days };
+  }
+}
+</script>
+</body>
+</html>

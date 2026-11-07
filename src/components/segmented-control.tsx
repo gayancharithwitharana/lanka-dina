@@ -32,7 +32,7 @@ export function SegmentedControl<Value extends string | number>({
             accessibilityRole="radio"
             accessibilityState={{ checked: isSelected }}
             onPress={() => onSelect(option.value)}
-            className={`h-11 flex-1 items-center justify-center rounded-[10px] ${isSelected ? 'bg-background shadow-sm' : ''}`}
+            className={`h-11 flex-1 items-center justify-center rounded-[10px] ${isSelected ? 'bg-elevated shadow-sm' : ''}`}
           >
             <Text
               className={`text-[15px] font-semibold ${isSelected ? 'text-text' : 'text-text-secondary'}`}

@@ -4,13 +4,14 @@ import { useTranslation } from 'react-i18next';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import colors from '@/constants/colors';
+import { useThemeColors } from '@/hooks/use-theme-colors';
 import { getHolidayByDate, type Holiday } from '@/data/holidays';
 import { parseIsoDate } from '@/utils/calendar';
 
 export default function DayDetailScreen() {
   const { date } = useLocalSearchParams<{ date: string }>();
   const { t, i18n } = useTranslation();
+  const colors = useThemeColors();
   const day = parseIsoDate(date);
   const holiday = getHolidayByDate(date);
 
@@ -34,7 +35,7 @@ export default function DayDetailScreen() {
               <SymbolView
                 name={{ ios: 'chevron.left', android: 'chevron_left' }}
                 size={22}
-                tintColor={colors.text.secondary}
+                tintColor={colors['text-secondary']}
               />
             </Pressable>
             <Text className="text-[15px] font-semibold text-text-secondary">{monthAndYear}</Text>

@@ -1,8 +1,9 @@
 import { useTranslation } from 'react-i18next';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 
 import { HolidayDot } from '@/components/calendar/holiday-dot';
 import { HolidayCard } from '@/components/holiday-card';
+import { Text } from '@/components/text';
 import type { Holiday } from '@/data/holidays';
 
 type MonthHolidayListProps = {

@@ -1,11 +1,13 @@
 import { NativeTabs } from 'expo-router/native-tabs';
 import { useTranslation } from 'react-i18next';
 
+import { getLanguageFont } from '@/fonts';
 import { useThemeColors } from '@/hooks/use-theme-colors';
 
 export default function AppTabs() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const colors = useThemeColors();
+  const { fontFamily } = getLanguageFont(i18n.language);
 
   return (
     <NativeTabs
@@ -13,8 +15,8 @@ export default function AppTabs() {
       tintColor={colors.holiday}
       iconColor={{ default: colors['text-secondary'], selected: colors.holiday }}
       labelStyle={{
-        default: { color: colors['text-secondary'] },
-        selected: { color: colors.holiday },
+        default: { fontFamily, color: colors['text-secondary'] },
+        selected: { fontFamily, color: colors.holiday },
       }}
     >
       <NativeTabs.Trigger name="index">

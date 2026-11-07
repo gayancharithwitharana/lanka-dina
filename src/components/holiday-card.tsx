@@ -1,8 +1,9 @@
 import { Link } from 'expo-router';
 import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Pressable, Text, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 
+import { Text } from '@/components/text';
 import type { Holiday } from '@/data/holidays';
 import { parseIsoDate } from '@/utils/calendar';
 

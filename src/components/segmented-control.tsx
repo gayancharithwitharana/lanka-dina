@@ -26,13 +26,16 @@ export function SegmentedControl<Value extends string | number>({
     >
       {options.map((option) => {
         const isSelected = option.value === selectedValue;
+        // shadow-none keeps NativeWind's shadow variables present from the first render;
+        // adding them later forces a remount that crashes in development.
+        const selectionStyle = isSelected ? 'bg-elevated shadow-sm' : 'shadow-none';
         return (
           <Pressable
             key={option.value}
             accessibilityRole="radio"
             accessibilityState={{ checked: isSelected }}
             onPress={() => onSelect(option.value)}
-            className={`h-11 flex-1 items-center justify-center rounded-[10px] ${isSelected ? 'bg-elevated shadow-sm' : ''}`}
+            className={`h-11 flex-1 items-center justify-center rounded-[10px] ${selectionStyle}`}
           >
             <Text
               className={`text-[15px] font-semibold ${isSelected ? 'text-text' : 'text-text-secondary'}`}

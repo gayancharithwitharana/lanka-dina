@@ -43,6 +43,12 @@
   "settings": {
     "language": "Language",
     "weekStartsOn": "Week starts on",
+    "appearance": "Appearance",
+    "appearanceOptions": {
+      "system": "System",
+      "light": "Light",
+      "dark": "Dark"
+    },
     "app": "App",
     "notifications": "Notifications",
     "removeAds": "Remove ads",

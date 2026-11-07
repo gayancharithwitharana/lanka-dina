@@ -9,7 +9,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { SegmentedControl } from '@/components/segmented-control';
 import { useThemeColors } from '@/hooks/use-theme-colors';
 import { useSettings } from '@/settings/settings-context';
-import type { Language } from '@/settings/settings-storage';
+import type { Appearance, Language } from '@/settings/settings-storage';
 import { getWeekdayName, type WeekStart } from '@/utils/calendar';
 
 const languageOptions: { value: Language; label: string }[] = [
@@ -20,13 +20,20 @@ const languageOptions: { value: Language; label: string }[] = [
 
 const weekStartValues: WeekStart[] = [0, 1];
 
+const appearanceValues: Appearance[] = ['system', 'light', 'dark'];
+
 export default function SettingsScreen() {
   const { t, i18n } = useTranslation();
-  const { language, weekStartsOn, updateSettings } = useSettings();
+  const { language, weekStartsOn, appearance, updateSettings } = useSettings();
 
   const weekStartOptions = weekStartValues.map((weekday) => ({
     value: weekday,
     label: getWeekdayName(weekday, i18n.language),
+  }));
+
+  const appearanceOptions = appearanceValues.map((value) => ({
+    value,
+    label: t(`settings.appearanceOptions.${value}`),
   }));
 
   return (
@@ -52,6 +59,15 @@ export default function SettingsScreen() {
               options={weekStartOptions}
               selectedValue={weekStartsOn}
               onSelect={(selectedWeekStart) => updateSettings({ weekStartsOn: selectedWeekStart })}
+            />
+          </SettingsSection>
+
+          <SettingsSection title={t('settings.appearance')}>
+            <SegmentedControl
+              accessibilityLabel={t('settings.appearance')}
+              options={appearanceOptions}
+              selectedValue={appearance}
+              onSelect={(selectedAppearance) => updateSettings({ appearance: selectedAppearance })}
             />
           </SettingsSection>
 

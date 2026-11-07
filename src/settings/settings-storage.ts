@@ -4,9 +4,12 @@ import type { WeekStart } from '@/utils/calendar';
 
 export type Language = 'en' | 'si' | 'ta';
 
+export type Appearance = 'system' | 'light' | 'dark';
+
 export type Settings = {
   language: Language;
   weekStartsOn: WeekStart;
+  appearance: Appearance;
 };
 
 const SETTINGS_KEY = 'settings';
@@ -14,6 +17,7 @@ const SETTINGS_KEY = 'settings';
 const defaultSettings: Settings = {
   language: 'en',
   weekStartsOn: 0,
+  appearance: 'system',
 };
 
 export function loadSettings(): Settings {

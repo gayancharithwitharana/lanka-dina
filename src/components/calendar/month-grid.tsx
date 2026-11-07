@@ -75,7 +75,7 @@ function DayCell({ day, isToday, holidayType }: DayCellProps) {
       : 'font-medium text-text';
 
   return (
-    <View className="h-12 flex-1 items-center justify-center gap-[3px]">
+    <View className="min-h-12 flex-1 items-center justify-center gap-[3px]">
       {day !== null && (
         <>
           <View

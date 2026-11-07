@@ -1,8 +1,11 @@
 import { NativeTabs } from 'expo-router/native-tabs';
+import { useTranslation } from 'react-i18next';
 
 import colors from '@/constants/colors';
 
 export default function AppTabs() {
+  const { t } = useTranslation();
+
   return (
     <NativeTabs
       backgroundColor={colors.background}
@@ -14,22 +17,22 @@ export default function AppTabs() {
       }}
     >
       <NativeTabs.Trigger name="index">
-        <NativeTabs.Trigger.Label>Calendar</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Label>{t('tabs.calendar')}</NativeTabs.Trigger.Label>
         <NativeTabs.Trigger.Icon sf="calendar" md="calendar_month" />
       </NativeTabs.Trigger>
 
       <NativeTabs.Trigger name="upcoming">
-        <NativeTabs.Trigger.Label>Upcoming</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Label>{t('tabs.upcoming')}</NativeTabs.Trigger.Label>
         <NativeTabs.Trigger.Icon sf="list.bullet" md="list" />
       </NativeTabs.Trigger>
 
       <NativeTabs.Trigger name="reminders">
-        <NativeTabs.Trigger.Label>Reminders</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Label>{t('tabs.reminders')}</NativeTabs.Trigger.Label>
         <NativeTabs.Trigger.Icon sf="bell" md="notifications" />
       </NativeTabs.Trigger>
 
       <NativeTabs.Trigger name="settings">
-        <NativeTabs.Trigger.Label>Settings</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Label>{t('tabs.settings')}</NativeTabs.Trigger.Label>
         <NativeTabs.Trigger.Icon sf="slider.horizontal.3" md="tune" />
       </NativeTabs.Trigger>
     </NativeTabs>

@@ -1,3 +1,5 @@
+import type { TFunction } from 'i18next';
+import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
 
 import { HolidayDot } from '@/components/calendar/holiday-dot';
@@ -11,11 +13,13 @@ type MonthHolidayListProps = {
 };
 
 export function MonthHolidayList({ yearMonth, holidays, locale }: MonthHolidayListProps) {
+  const { t } = useTranslation();
+
   return (
     <View className="gap-2.5 px-5 pt-5">
-      <Text className="text-label uppercase text-text-muted">This month</Text>
+      <Text className="text-label uppercase text-text-muted">{t('calendar.thisMonth')}</Text>
       {holidays.length === 0 ? (
-        <Text className="text-[13px] text-text-secondary">No holidays this month</Text>
+        <Text className="text-[13px] text-text-secondary">{t('calendar.noHolidaysThisMonth')}</Text>
       ) : (
         holidays.map((holiday) => (
           <HolidayCard key={holiday.id} yearMonth={yearMonth} holiday={holiday} locale={locale} />
@@ -32,6 +36,7 @@ type HolidayCardProps = {
 };
 
 function HolidayCard({ yearMonth, holiday, locale }: HolidayCardProps) {
+  const { t } = useTranslation();
   const dayOfMonth = getDayOfMonth(holiday);
   const weekdayName = new Intl.DateTimeFormat(locale, { weekday: 'short' }).format(
     new Date(yearMonth.year, yearMonth.monthIndex, dayOfMonth),
@@ -45,18 +50,18 @@ function HolidayCard({ yearMonth, holiday, locale }: HolidayCardProps) {
       </View>
       <View className="flex-1 gap-0.5">
         <Text className="text-[15px] font-semibold text-text">{holiday.name}</Text>
-        <Text className="text-[13px] text-text-secondary">{getHolidayKinds(holiday)}</Text>
+        <Text className="text-[13px] text-text-secondary">{getHolidayKinds(holiday, t)}</Text>
       </View>
       <HolidayDot type={holiday.type} size="medium" />
     </View>
   );
 }
 
-function getHolidayKinds(holiday: Holiday): string {
+function getHolidayKinds(holiday: Holiday, t: TFunction): string {
   const kinds = [
-    holiday.isPublic && 'Public',
-    holiday.isBank && 'Bank',
-    holiday.isMercantile && 'Mercantile',
+    holiday.isPublic && t('holidayKinds.public'),
+    holiday.isBank && t('holidayKinds.bank'),
+    holiday.isMercantile && t('holidayKinds.mercantile'),
   ];
   return kinds.filter(Boolean).join(' · ');
 }

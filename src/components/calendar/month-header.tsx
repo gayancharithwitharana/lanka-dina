@@ -2,7 +2,7 @@ import { SymbolView } from 'expo-symbols';
 import { useTranslation } from 'react-i18next';
 import { Pressable, Text, View } from 'react-native';
 
-import colors from '@/constants/colors';
+import { useThemeColors } from '@/hooks/use-theme-colors';
 
 type MonthHeaderProps = {
   year: number;
@@ -35,6 +35,8 @@ type MonthNavButtonProps = {
 };
 
 function MonthNavButton({ label, symbol, onPress }: MonthNavButtonProps) {
+  const colors = useThemeColors();
+
   return (
     <Pressable
       accessibilityRole="button"
@@ -45,7 +47,7 @@ function MonthNavButton({ label, symbol, onPress }: MonthNavButtonProps) {
       <SymbolView
         name={{ ios: `chevron.${symbol}`, android: `chevron_${symbol}` }}
         size={22}
-        tintColor={colors.text.secondary}
+        tintColor={colors['text-secondary']}
       />
     </Pressable>
   );

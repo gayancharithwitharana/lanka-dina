@@ -29,10 +29,10 @@ export function HolidayFilterChips({ selectedFilter, onSelectFilter }: HolidayFi
             accessibilityRole="radio"
             accessibilityState={{ checked: isSelected }}
             onPress={() => onSelectFilter(filter)}
-            className={`h-11 justify-center rounded-pill border px-4 ${isSelected ? 'border-today bg-today' : 'border-border bg-background'}`}
+            className={`h-11 justify-center rounded-pill border px-4 ${isSelected ? 'border-inverse bg-inverse' : 'border-border bg-background'}`}
           >
             <Text
-              className={`text-[13px] font-semibold ${isSelected ? 'text-white' : 'text-text-secondary'}`}
+              className={`text-[13px] font-semibold ${isSelected ? 'text-on-inverse' : 'text-text-secondary'}`}
             >
               {t(`upcoming.filters.${filter}`)}
             </Text>

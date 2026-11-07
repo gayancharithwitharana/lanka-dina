@@ -30,7 +30,7 @@ export default function DayDetailScreen() {
 function DayDetail({ isoDate }: { isoDate: string }) {
   const { t, i18n } = useTranslation();
   const day = parseIsoDate(isoDate);
-  const holidays = getHolidaysByDate(isoDate);
+  const holidays = getHolidaysByDate(isoDate, i18n.language);
 
   const monthAndYear = new Intl.DateTimeFormat(i18n.language, {
     month: 'long',

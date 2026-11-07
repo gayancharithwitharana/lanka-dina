@@ -17,7 +17,7 @@ describe('MonthGrid', () => {
         yearMonth={november2026}
         weekStartsOn={0}
         today={new Date(2026, 10, 7)}
-        holidays={getHolidaysInMonth(november2026)}
+        holidays={getHolidaysInMonth(november2026, 'en')}
         locale="en"
       />,
     );

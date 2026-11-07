@@ -7,9 +7,10 @@ import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import * as SystemUI from 'expo-system-ui';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useColorScheme } from 'react-native';
 
+import { prepareDatabase } from '@/db/prepare-database';
 import { fontFamilyDefinitions } from '@/fonts';
 import { useThemeColors } from '@/hooks/use-theme-colors';
 import { SettingsProvider } from '@/settings/settings-context';
@@ -21,18 +22,32 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const [fontsLoaded, fontError] = useFonts(fontFamilyDefinitions);
   const fontsSettled = fontsLoaded || fontError !== null;
+  const databaseReady = useDatabase();
+  const appReady = fontsSettled && databaseReady;
 
   useEffect(() => {
-    if (fontsSettled) SplashScreen.hideAsync();
-  }, [fontsSettled]);
+    if (appReady) SplashScreen.hideAsync();
+  }, [appReady]);
 
-  if (!fontsSettled) return null;
+  if (!appReady) return null;
 
   return (
     <SettingsProvider>
       <ThemedNavigation />
     </SettingsProvider>
   );
+}
+
+function useDatabase(): boolean {
+  const [ready, setReady] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    prepareDatabase().then(() => setReady(true), setError);
+  }, []);
+
+  if (error) throw error;
+  return ready;
 }
 
 function ThemedNavigation() {

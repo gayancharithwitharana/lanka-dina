@@ -48,6 +48,13 @@ describe('Calendar screen', () => {
 });
 
 describe('Day detail screen', () => {
+  it('lists every holiday on a shared date', async () => {
+    await renderRouter(APP_DIRECTORY, { initialUrl: '/day/2026-12-23' });
+
+    expect(screen.getByText('Unduvap Full Moon Poya')).toBeOnTheScreen();
+    expect(screen.getByText('Sample Bank Holiday')).toBeOnTheScreen();
+  });
+
   it.each([['/day/foo'], ['/day/2026-13-45']])(
     'shows a fallback for the invalid date %s',
     async (url) => {

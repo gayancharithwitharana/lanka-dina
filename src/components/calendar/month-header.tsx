@@ -1,7 +1,8 @@
 import { SymbolView } from 'expo-symbols';
+import { useTranslation } from 'react-i18next';
 import { Pressable, Text, View } from 'react-native';
 
-import colors from '@/constants/colors';
+import { useThemeColors } from '@/hooks/use-theme-colors';
 
 type MonthHeaderProps = {
   year: number;
@@ -11,6 +12,8 @@ type MonthHeaderProps = {
 };
 
 export function MonthHeader({ year, monthName, onPreviousMonth, onNextMonth }: MonthHeaderProps) {
+  const { t } = useTranslation();
+
   return (
     <View className="flex-row items-end justify-between px-5 pb-3 pt-7">
       <View className="gap-0.5">
@@ -18,8 +21,8 @@ export function MonthHeader({ year, monthName, onPreviousMonth, onNextMonth }: M
         <Text className="text-[30px] font-bold tracking-[-0.6px] text-text">{monthName}</Text>
       </View>
       <View className="flex-row items-center gap-1">
-        <MonthNavButton label="Previous month" symbol="left" onPress={onPreviousMonth} />
-        <MonthNavButton label="Next month" symbol="right" onPress={onNextMonth} />
+        <MonthNavButton label={t('calendar.previousMonth')} symbol="left" onPress={onPreviousMonth} />
+        <MonthNavButton label={t('calendar.nextMonth')} symbol="right" onPress={onNextMonth} />
       </View>
     </View>
   );
@@ -32,6 +35,8 @@ type MonthNavButtonProps = {
 };
 
 function MonthNavButton({ label, symbol, onPress }: MonthNavButtonProps) {
+  const colors = useThemeColors();
+
   return (
     <Pressable
       accessibilityRole="button"
@@ -42,7 +47,7 @@ function MonthNavButton({ label, symbol, onPress }: MonthNavButtonProps) {
       <SymbolView
         name={{ ios: `chevron.${symbol}`, android: `chevron_${symbol}` }}
         size={22}
-        tintColor={colors.text.secondary}
+        tintColor={colors['text-secondary']}
       />
     </Pressable>
   );

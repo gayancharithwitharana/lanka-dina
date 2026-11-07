@@ -1,4 +1,19 @@
-const colors = require('./src/constants/colors');
+const plugin = require('tailwindcss/plugin');
+
+const { light, dark } = require('./src/constants/colors');
+
+const colorNames = Object.keys(light);
+
+function hexToRgbChannels(hex) {
+  const value = parseInt(hex.slice(1), 16);
+  return `${(value >> 16) & 255} ${(value >> 8) & 255} ${value & 255}`;
+}
+
+function toCssVariables(palette) {
+  return Object.fromEntries(
+    colorNames.map((name) => [`--color-${name}`, hexToRgbChannels(palette[name])]),
+  );
+}
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -6,7 +21,9 @@ module.exports = {
   presets: [require('nativewind/preset')],
   theme: {
     extend: {
-      colors,
+      colors: Object.fromEntries(
+        colorNames.map((name) => [name, `rgb(var(--color-${name}) / <alpha-value>)`]),
+      ),
       fontFamily: {
         sans: ['Inter'],
         sinhala: ['NotoSansSinhala'],
@@ -28,5 +45,12 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(({ addBase }) => {
+      addBase({
+        ':root': toCssVariables(light),
+        '@media (prefers-color-scheme: dark)': { ':root': toCssVariables(dark) },
+      });
+    }),
+  ],
 };

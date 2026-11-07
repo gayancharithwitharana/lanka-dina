@@ -11,6 +11,7 @@ export type Holiday = {
   isPublic: boolean;
   isBank: boolean;
   isMercantile: boolean;
+  about?: string;
 };
 
 const holidays = sampleHolidays as Holiday[];
@@ -22,4 +23,14 @@ export function getHolidaysInMonth({ year, monthIndex }: YearMonth): Holiday[] {
 
 export function getDayOfMonth(holiday: Holiday): number {
   return Number(holiday.date.slice(8, 10));
+}
+
+export function getHolidayByDate(isoDate: string): Holiday | undefined {
+  return holidays.find((holiday) => holiday.date === isoDate);
+}
+
+export function getHolidaysFrom(isoDate: string): Holiday[] {
+  return holidays
+    .filter((holiday) => holiday.date >= isoDate)
+    .sort((first, second) => first.date.localeCompare(second.date));
 }

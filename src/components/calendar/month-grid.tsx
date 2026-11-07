@@ -69,17 +69,17 @@ type DayCellProps = {
 
 function DayCell({ day, isToday, holidayType }: DayCellProps) {
   const dayTextStyle = isToday
-    ? 'font-bold text-white'
+    ? 'font-bold text-on-inverse'
     : holidayType
       ? dayTextColorByHolidayType[holidayType]
       : 'font-medium text-text';
 
   return (
-    <View className="h-12 flex-1 items-center justify-center gap-[3px]">
+    <View className="min-h-12 flex-1 items-center justify-center gap-[3px]">
       {day !== null && (
         <>
           <View
-            className={`h-[34px] w-[34px] items-center justify-center rounded-full ${isToday ? 'bg-today' : ''}`}
+            className={`h-[34px] w-[34px] items-center justify-center rounded-full ${isToday ? 'bg-inverse' : ''}`}
           >
             <Text className={`text-[15px] ${dayTextStyle}`}>{day}</Text>
           </View>

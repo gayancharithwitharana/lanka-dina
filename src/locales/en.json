@@ -1,0 +1,60 @@
+{
+  "tabs": {
+    "calendar": "Calendar",
+    "upcoming": "Upcoming",
+    "reminders": "Reminders",
+    "settings": "Settings"
+  },
+  "calendar": {
+    "previousMonth": "Previous month",
+    "nextMonth": "Next month",
+    "publicHoliday": "Public holiday",
+    "poyaDay": "Poya day",
+    "thisMonth": "This month",
+    "noHolidaysThisMonth": "No holidays this month"
+  },
+  "holidayKinds": {
+    "public": "Public",
+    "bank": "Bank",
+    "mercantile": "Mercantile"
+  },
+  "day": {
+    "backToCalendar": "Back to calendar",
+    "about": "About"
+  },
+  "holidayTypes": {
+    "public": "Public holiday",
+    "bank": "Bank holiday",
+    "mercantile": "Mercantile holiday"
+  },
+  "upcoming": {
+    "filterLabel": "Filter",
+    "filters": {
+      "all": "All",
+      "poya": "Poya",
+      "public": "Holidays"
+    },
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "inDays_one": "In {{count}} day",
+    "inDays_other": "In {{count}} days",
+    "noUpcomingHolidays": "No upcoming holidays"
+  },
+  "settings": {
+    "language": "Language",
+    "weekStartsOn": "Week starts on",
+    "appearance": "Appearance",
+    "appearanceOptions": {
+      "system": "System",
+      "light": "Light",
+      "dark": "Dark"
+    },
+    "app": "App",
+    "notifications": "Notifications",
+    "removeAds": "Remove ads",
+    "comingSoon": "Coming soon",
+    "holidayData": "Holiday data",
+    "sampleData": "Sample data",
+    "version": "Lankadina · Version {{version}}"
+  }
+}

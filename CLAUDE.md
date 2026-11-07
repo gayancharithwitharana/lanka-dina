@@ -14,15 +14,15 @@ Reference mockups: the `design/*.dc.html` files (HTML mockups, 390×844). Match 
 - State: React state/context first; add Zustand only if shared state gets painful
 - expo-notifications: local reminders
 - react-native-google-mobile-ads: AdMob banner. Use Google's TEST ad unit IDs only until release
-- i18n: English (default), Sinhala, Tamil. Store all UI strings in `locales/{en,si,ta}.json`
+- i18n: English (default), Sinhala, Tamil. Store all UI strings in `src/locales/{en,si,ta}.json`; missing Sinhala/Tamil keys fall back to English
 - No backend. Holiday data ships as bundled JSON; later fetched from a remote JSON file for updates
 
 ## Design tokens
 
-- Background #FFFFFF, surface #F9FAFB, subtle #F3F4F6, border #E5E7EB
-- Text #111827, secondary #4B5563, muted #6B7280
-- Accent (public holiday) #1D4ED8, Poya #B45309
-- Today: #111827 filled circle, white number
+- Light and dark palettes live in `src/constants/colors.js`; mockups are `design/*.dc.html` (light) and `design/*Dark.dc.html` (dark)
+- Use semantic class names (`bg-background`, `text-text-muted`, `bg-inverse text-on-inverse`); never hardcode colors or `text-white` in components
+- Colors outside `className` (tab bar, icon tints, navigation theme) come from `useThemeColors()`
+- Today circle, selected chips and primary buttons: `bg-inverse` with `text-on-inverse`; selected segment: `bg-elevated`
 - Font: Inter; Noto Sans Sinhala and Noto Sans Tamil for those languages (load via expo-font)
 - Radius: cards 14, pills 999, buttons 14. Touch targets ≥ 44
 - Section labels: 13px, 600, uppercase, letter-spacing 0.06em, muted

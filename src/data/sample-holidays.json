@@ -15,7 +15,8 @@
     "type": "poya",
     "isPublic": true,
     "isBank": true,
-    "isMercantile": true
+    "isMercantile": true,
+    "about": "Marks the Buddha sending out the first sixty disciples to spread the Dhamma. Many people observe sil at temples."
   },
   {
     "id": "sample-2026-12-23",

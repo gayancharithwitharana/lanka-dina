@@ -39,5 +39,16 @@
     "inDays_one": "In {{count}} day",
     "inDays_other": "In {{count}} days",
     "noUpcomingHolidays": "No upcoming holidays"
+  },
+  "settings": {
+    "language": "Language",
+    "weekStartsOn": "Week starts on",
+    "app": "App",
+    "notifications": "Notifications",
+    "removeAds": "Remove ads",
+    "comingSoon": "Coming soon",
+    "holidayData": "Holiday data",
+    "sampleData": "Sample data",
+    "version": "Lankadina · Version {{version}}"
   }
 }

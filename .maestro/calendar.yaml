@@ -1,0 +1,22 @@
+appId: host.exp.Exponent
+name: Calendar and day detail render
+---
+- runFlow:
+    file: subflows/open-route.yaml
+    env:
+      ROUTE: ''
+- extendedWaitUntil:
+    visible: This month
+    timeout: 30000
+- assertVisible: Previous month
+- takeScreenshot: calendar
+- runFlow:
+    file: subflows/open-route.yaml
+    env:
+      ROUTE: day/2026-11-24
+- extendedWaitUntil:
+    visible: Il Full Moon Poya
+    timeout: 30000
+- assertVisible: Tuesday
+- takeScreenshot: day-detail
+- runFlow: subflows/assert-no-errors.yaml

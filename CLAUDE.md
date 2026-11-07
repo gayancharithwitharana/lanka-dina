@@ -45,6 +45,15 @@ Bottom tabs: Calendar, Upcoming, Reminders, Settings. Day detail is a stack scre
 - notes(id, date, text, updated_at)
 - reminders(id, holiday_id NULL, date, time, kind: 'auto'|'custom', enabled)
 
+## Testing
+
+- `npm run check` runs typecheck, lint and Jest; it must pass before any commit. CI runs the same on every PR
+- Tests live in `__tests__/` (never inside `src/app/`, where every file is a route). Jest config and mocks live in `jest/`
+- Test behavior through what users see: query by role, label or text, not by styles or test IDs
+- Screen tests use `renderRouter` from `expo-router/testing-library` with the real `src/app` routes; the tabs layout is swapped for `<Slot />` because native tabs render every tab at once
+- `__tests__/project-rules.test.ts` enforces: no hardcoded colors or English UI text in `src/`, matching light/dark tokens, and Sinhala/Tamil keys that exist in English
+- Every bug fix comes with a test that fails without the fix
+
 ## Rules
 
 - Holiday data must come from the official gazette; never invent dates

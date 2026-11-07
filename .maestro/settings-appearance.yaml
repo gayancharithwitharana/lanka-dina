@@ -1,0 +1,16 @@
+appId: host.exp.Exponent
+name: Settings switches between light and dark
+---
+- runFlow:
+    file: subflows/open-route.yaml
+    env:
+      ROUTE: settings
+- extendedWaitUntil:
+    visible: Appearance
+    timeout: 30000
+- tapOn: Light
+- takeScreenshot: settings-light
+- tapOn: Dark
+- takeScreenshot: settings-dark
+- tapOn: System
+- runFlow: subflows/assert-no-errors.yaml

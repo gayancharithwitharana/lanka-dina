@@ -20,7 +20,8 @@
   },
   "day": {
     "backToCalendar": "Back to calendar",
-    "about": "About"
+    "about": "About",
+    "invalidDate": "This date doesn't exist"
   },
   "holidayTypes": {
     "public": "Public holiday",

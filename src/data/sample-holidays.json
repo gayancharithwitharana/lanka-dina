@@ -28,6 +28,15 @@
     "isMercantile": true
   },
   {
+    "id": "sample-2026-12-23-bank",
+    "date": "2026-12-23",
+    "name": "Sample Bank Holiday",
+    "type": "public",
+    "isPublic": false,
+    "isBank": true,
+    "isMercantile": false
+  },
+  {
     "id": "sample-2026-12-25",
     "date": "2026-12-25",
     "name": "Christmas Day",

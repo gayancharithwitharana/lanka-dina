@@ -1,0 +1,13 @@
+appId: host.exp.Exponent
+name: Day detail shows a fallback for an invalid date
+---
+- runFlow:
+    file: subflows/open-route.yaml
+    env:
+      ROUTE: day/2026-13-45
+- extendedWaitUntil:
+    visible: This date doesn't exist
+    timeout: 30000
+- assertVisible: Back to calendar
+- takeScreenshot: day-invalid-date
+- runFlow: subflows/assert-no-errors.yaml

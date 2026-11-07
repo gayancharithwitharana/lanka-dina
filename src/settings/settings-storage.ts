@@ -20,9 +20,30 @@ const defaultSettings: Settings = {
   appearance: 'system',
 };
 
+const languages: Language[] = ['en', 'si', 'ta'];
+const weekStarts: WeekStart[] = [0, 1];
+const appearances: Appearance[] = ['system', 'light', 'dark'];
+
 export function loadSettings(): Settings {
-  const savedSettings = Storage.getItemSync(SETTINGS_KEY);
-  return savedSettings ? { ...defaultSettings, ...JSON.parse(savedSettings) } : defaultSettings;
+  const savedSettings = readSavedSettings();
+  return {
+    language: pickAllowed(savedSettings.language, languages, defaultSettings.language),
+    weekStartsOn: pickAllowed(savedSettings.weekStartsOn, weekStarts, defaultSettings.weekStartsOn),
+    appearance: pickAllowed(savedSettings.appearance, appearances, defaultSettings.appearance),
+  };
+}
+
+function readSavedSettings(): Record<string, unknown> {
+  try {
+    const parsed: unknown = JSON.parse(Storage.getItemSync(SETTINGS_KEY) ?? '{}');
+    return typeof parsed === 'object' && parsed !== null ? (parsed as Record<string, unknown>) : {};
+  } catch {
+    return {};
+  }
+}
+
+function pickAllowed<Value>(value: unknown, allowedValues: Value[], fallback: Value): Value {
+  return allowedValues.includes(value as Value) ? (value as Value) : fallback;
 }
 
 export function saveSettings(settings: Settings): void {

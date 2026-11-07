@@ -1,68 +1,43 @@
-import * as Device from "expo-device";
-import { Platform } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { useState } from 'react';
+import { ScrollView } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { AnimatedIcon } from "@/components/animated-icon";
-import { HintRow } from "@/components/hint-row";
-import { ThemedText } from "@/components/themed-text";
-import { ThemedView } from "@/components/themed-view";
-import { WebBadge } from "@/components/web-badge";
-import { BottomTabInset, Spacing } from "@/constants/theme";
+import { HolidayLegend } from '@/components/calendar/holiday-legend';
+import { MonthGrid } from '@/components/calendar/month-grid';
+import { MonthHeader } from '@/components/calendar/month-header';
+import { MonthHolidayList } from '@/components/calendar/month-holiday-list';
+import { getHolidaysInMonth } from '@/data/holidays';
+import { getMonthName, shiftMonth, type YearMonth } from '@/utils/calendar';
 
-function getDevMenuHint() {
-  if (Platform.OS === "web") {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
-  }
-  if (Device.isDevice) {
-    return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
-    );
-  }
-  const shortcut = Platform.OS === "android" ? "cmd+m (or ctrl+m)" : "cmd+d";
+const LOCALE = 'en';
+
+export default function CalendarScreen() {
+  const today = new Date();
+  const [visibleMonth, setVisibleMonth] = useState<YearMonth>({
+    year: today.getFullYear(),
+    monthIndex: today.getMonth(),
+  });
+  const holidaysInMonth = getHolidaysInMonth(visibleMonth);
+
   return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
-  );
-}
-
-export default function HomeScreen() {
-  return (
-    <ThemedView className="flex-1 flex-row justify-center">
-      <SafeAreaView
-        className="max-w-[800px] flex-1 items-center gap-4 px-6"
-        style={{ paddingBottom: BottomTabInset + Spacing.three }}
-      >
-        <ThemedView className="flex-1 items-center justify-center gap-6 px-6">
-          <AnimatedIcon />
-          <ThemedText type="title" className="text-center">
-            Welcome to&nbsp; LankaDina
-          </ThemedText>
-        </ThemedView>
-
-        <ThemedText type="code" className="uppercase">
-          get started
-        </ThemedText>
-
-        <ThemedView
-          type="backgroundElement"
-          className="gap-4 self-stretch rounded-3xl px-4 py-6"
-        >
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
-
-        {Platform.OS === "web" && <WebBadge />}
-      </SafeAreaView>
-    </ThemedView>
+    <SafeAreaView edges={['top']} className="flex-1 bg-background">
+      <ScrollView contentContainerClassName="pb-6">
+        <MonthHeader
+          year={visibleMonth.year}
+          monthName={getMonthName(visibleMonth, LOCALE)}
+          onPreviousMonth={() => setVisibleMonth((month) => shiftMonth(month, -1))}
+          onNextMonth={() => setVisibleMonth((month) => shiftMonth(month, 1))}
+        />
+        <MonthGrid
+          yearMonth={visibleMonth}
+          weekStartsOn={0}
+          today={today}
+          holidays={holidaysInMonth}
+          locale={LOCALE}
+        />
+        <HolidayLegend />
+        <MonthHolidayList yearMonth={visibleMonth} holidays={holidaysInMonth} locale={LOCALE} />
+      </ScrollView>
+    </SafeAreaView>
   );
 }

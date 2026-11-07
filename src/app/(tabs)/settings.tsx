@@ -3,10 +3,11 @@ import { router } from 'expo-router';
 import type { ReactNode } from 'react';
 import { SymbolView } from 'expo-symbols';
 import { useTranslation } from 'react-i18next';
-import { Pressable, Text, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 
 import { ScreenScrollView } from '@/components/screen-scroll-view';
 import { SegmentedControl } from '@/components/segmented-control';
+import { Text } from '@/components/text';
 import { useThemeColors } from '@/hooks/use-theme-colors';
 import { useSettings } from '@/settings/settings-context';
 import type { Appearance, Language } from '@/settings/settings-storage';

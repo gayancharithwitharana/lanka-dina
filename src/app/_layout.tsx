@@ -3,18 +3,31 @@ import '@/i18n';
 
 import { colorScheme } from 'nativewind';
 import { DarkTheme, DefaultTheme, Stack, ThemeProvider, type Theme } from 'expo-router';
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import * as SystemUI from 'expo-system-ui';
 import { useEffect } from 'react';
 import { useColorScheme } from 'react-native';
 
+import { fontFamilyDefinitions } from '@/fonts';
 import { useThemeColors } from '@/hooks/use-theme-colors';
 import { SettingsProvider } from '@/settings/settings-context';
 import { loadSettings } from '@/settings/settings-storage';
 
 colorScheme.set(loadSettings().appearance);
+SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+  const [fontsLoaded, fontError] = useFonts(fontFamilyDefinitions);
+  const fontsSettled = fontsLoaded || fontError !== null;
+
+  useEffect(() => {
+    if (fontsSettled) SplashScreen.hideAsync();
+  }, [fontsSettled]);
+
+  if (!fontsSettled) return null;
+
   return (
     <SettingsProvider>
       <ThemedNavigation />

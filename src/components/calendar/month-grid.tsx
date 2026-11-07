@@ -1,6 +1,7 @@
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 
 import { HolidayDot } from '@/components/calendar/holiday-dot';
+import { Text } from '@/components/text';
 import { getDotTypeByDay, type Holiday, type HolidayType } from '@/data/holidays';
 import {
   getMonthGridWeeks,

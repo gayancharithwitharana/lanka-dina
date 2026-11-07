@@ -38,7 +38,7 @@ export default function CalendarScreen() {
             locale={locale}
           />
           <HolidayLegend />
-          <MonthHolidayList yearMonth={visibleMonth} holidays={holidaysInMonth} locale={locale} />
+          <MonthHolidayList holidays={holidaysInMonth} />
         </View>
       </ScrollView>
     </SafeAreaView>

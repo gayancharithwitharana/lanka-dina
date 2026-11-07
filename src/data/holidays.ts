@@ -28,3 +28,9 @@ export function getDayOfMonth(holiday: Holiday): number {
 export function getHolidayByDate(isoDate: string): Holiday | undefined {
   return holidays.find((holiday) => holiday.date === isoDate);
 }
+
+export function getHolidaysFrom(isoDate: string): Holiday[] {
+  return holidays
+    .filter((holiday) => holiday.date >= isoDate)
+    .sort((first, second) => first.date.localeCompare(second.date));
+}

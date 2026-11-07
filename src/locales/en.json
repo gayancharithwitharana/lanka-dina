@@ -26,5 +26,18 @@
     "public": "Public holiday",
     "bank": "Bank holiday",
     "mercantile": "Mercantile holiday"
+  },
+  "upcoming": {
+    "filterLabel": "Filter",
+    "filters": {
+      "all": "All",
+      "poya": "Poya",
+      "public": "Holidays"
+    },
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "inDays_one": "In {{count}} day",
+    "inDays_other": "In {{count}} days",
+    "noUpcomingHolidays": "No upcoming holidays"
   }
 }

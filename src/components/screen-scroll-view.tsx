@@ -10,6 +10,7 @@ export function ScreenScrollView({ children }: { children: ReactNode }) {
   return (
     <View className="flex-1 bg-background">
       <ScrollView
+        keyboardShouldPersistTaps="handled"
         contentContainerClassName="flex-grow"
         contentContainerStyle={{
           paddingTop: insets.top,

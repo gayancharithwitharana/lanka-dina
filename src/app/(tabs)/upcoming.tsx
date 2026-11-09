@@ -20,7 +20,7 @@ export default function UpcomingScreen() {
   const [selectedFilter, setSelectedFilter] = useState<HolidayFilter>('all');
   const today = useToday();
 
-  const upcomingHolidays = getHolidaysFrom(toIsoDate(today)).filter(
+  const upcomingHolidays = getHolidaysFrom(toIsoDate(today), i18n.language).filter(
     (holiday) => selectedFilter === 'all' || holiday.type === selectedFilter,
   );
   const monthGroups = groupByMonth(upcomingHolidays, today, i18n.language);

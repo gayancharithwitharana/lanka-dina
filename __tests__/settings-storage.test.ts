@@ -8,34 +8,64 @@ beforeEach(() => {
 
 describe('settings storage', () => {
   it('returns defaults when nothing is saved', () => {
-    expect(loadSettings()).toEqual({ language: 'en', weekStartsOn: 0, appearance: 'system' });
+    expect(loadSettings()).toEqual({
+      language: 'en',
+      weekStartsOn: 0,
+      appearance: 'system',
+      lagna: null,
+    });
   });
 
   it('loads what was saved', () => {
-    saveSettings({ language: 'si', weekStartsOn: 1, appearance: 'dark' });
-    expect(loadSettings()).toEqual({ language: 'si', weekStartsOn: 1, appearance: 'dark' });
+    saveSettings({ language: 'si', weekStartsOn: 1, appearance: 'dark', lagna: 'simha' });
+    expect(loadSettings()).toEqual({
+      language: 'si',
+      weekStartsOn: 1,
+      appearance: 'dark',
+      lagna: 'simha',
+    });
   });
 
   it('fills in settings added after the user last saved', () => {
     Storage.setItemSync('settings', JSON.stringify({ language: 'ta' }));
-    expect(loadSettings()).toEqual({ language: 'ta', weekStartsOn: 0, appearance: 'system' });
+    expect(loadSettings()).toEqual({
+      language: 'ta',
+      weekStartsOn: 0,
+      appearance: 'system',
+      lagna: null,
+    });
   });
 
   it('falls back to defaults when the saved value is not valid JSON', () => {
     Storage.setItemSync('settings', '{"language": "si"');
-    expect(loadSettings()).toEqual({ language: 'en', weekStartsOn: 0, appearance: 'system' });
+    expect(loadSettings()).toEqual({
+      language: 'en',
+      weekStartsOn: 0,
+      appearance: 'system',
+      lagna: null,
+    });
   });
 
   it('ignores saved values that are not valid choices', () => {
     Storage.setItemSync(
       'settings',
-      JSON.stringify({ language: 'fr', weekStartsOn: 5, appearance: 'dark' }),
+      JSON.stringify({ language: 'fr', weekStartsOn: 5, appearance: 'dark', lagna: 'pluto' }),
     );
-    expect(loadSettings()).toEqual({ language: 'en', weekStartsOn: 0, appearance: 'dark' });
+    expect(loadSettings()).toEqual({
+      language: 'en',
+      weekStartsOn: 0,
+      appearance: 'dark',
+      lagna: null,
+    });
   });
 
   it('falls back to defaults when the saved value is not an object', () => {
     Storage.setItemSync('settings', 'null');
-    expect(loadSettings()).toEqual({ language: 'en', weekStartsOn: 0, appearance: 'system' });
+    expect(loadSettings()).toEqual({
+      language: 'en',
+      weekStartsOn: 0,
+      appearance: 'system',
+      lagna: null,
+    });
   });
 });

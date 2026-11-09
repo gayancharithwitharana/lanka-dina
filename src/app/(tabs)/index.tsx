@@ -20,7 +20,7 @@ export default function CalendarScreen() {
     year: today.getFullYear(),
     monthIndex: today.getMonth(),
   });
-  const holidaysInMonth = getHolidaysInMonth(visibleMonth);
+  const holidaysInMonth = getHolidaysInMonth(visibleMonth, locale);
 
   return (
     <ScreenScrollView>

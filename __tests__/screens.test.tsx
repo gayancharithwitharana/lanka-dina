@@ -2,6 +2,7 @@ import { Slot } from 'expo-router';
 import Storage from 'expo-sqlite/kv-store';
 import { renderRouter, screen } from 'expo-router/testing-library';
 import { act, userEvent } from '@testing-library/react-native';
+import { Share } from 'react-native';
 
 const APP_DIRECTORY = {
   appDir: 'src/app',
@@ -56,6 +57,49 @@ describe('Day detail screen', () => {
 
     expect(router.getPathname()).toBe('/');
     expect(screen.getByText('This month')).toBeOnTheScreen();
+  });
+
+  it('shows the Rahu kalaya and Maru direction for the weekday', async () => {
+    await renderRouter(APP_DIRECTORY, { initialUrl: '/day/2026-11-24' });
+
+    expect(screen.getByText('3:00 PM – 4:30 PM')).toBeOnTheScreen();
+    expect(screen.getByText('West')).toBeOnTheScreen();
+  });
+
+  it("opens today's nakath from the Rahu kalaya card", async () => {
+    const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+    const router = await renderRouter(APP_DIRECTORY, { initialUrl: '/day/2026-11-24' });
+
+    await user.press(screen.getByRole('button', { name: /Rahu kalaya/ }));
+
+    expect(router.getPathname()).toBe('/nakath');
+    expect(screen.getByText('Rahu kalaya · Saturday')).toBeOnTheScreen();
+  });
+
+  it('adds a note and shows it on the day', async () => {
+    const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+    await renderRouter(APP_DIRECTORY, { initialUrl: '/day/2026-11-08' });
+    expect(screen.getByText('No note yet')).toBeOnTheScreen();
+
+    await user.press(screen.getByRole('button', { name: 'Add note' }));
+    await user.type(screen.getByLabelText('Note'), 'Light the oil lamps');
+    await user.press(screen.getByRole('button', { name: 'Save' }));
+
+    expect(screen.getByText('Light the oil lamps')).toBeOnTheScreen();
+    expect(screen.getByRole('button', { name: 'Edit note' })).toBeOnTheScreen();
+  });
+
+  it('sets and removes a reminder for the day', async () => {
+    const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+    await renderRouter(APP_DIRECTORY, { initialUrl: '/day/2026-12-25' });
+    const reminder = () => screen.getByRole('switch', { name: 'Set reminder' });
+
+    await user.press(reminder());
+    expect(reminder()).toBeChecked();
+    expect(screen.getByText('Reminder set · 8:00 AM')).toBeOnTheScreen();
+
+    await user.press(reminder());
+    expect(reminder()).not.toBeChecked();
   });
 
   it('lists every holiday on a shared date', async () => {
@@ -115,5 +159,69 @@ describe('Settings screen', () => {
 
     expect(screen.getByRole('radio', { name: 'Monday' })).toBeChecked();
     expect(JSON.parse(Storage.getItemSync('settings')!)).toMatchObject({ weekStartsOn: 1 });
+  });
+});
+
+describe('Nakath screen', () => {
+  it('counts down to the dawn of the New Year and lists the nakath', async () => {
+    await renderRouter(APP_DIRECTORY, { initialUrl: '/nakath' });
+
+    expect(screen.getByText('Sinhala & Tamil New Year 2027')).toBeOnTheScreen();
+    expect(screen.getByText('158 days')).toBeOnTheScreen();
+    expect(screen.getByText('Lighting the hearth')).toBeOnTheScreen();
+    expect(screen.getAllByText('Face south · Wear red')).toHaveLength(2);
+    expect(screen.getByText('Sample times · not the official list')).toBeOnTheScreen();
+  });
+
+  it('turns a nakath reminder on and off with its bell', async () => {
+    const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+    await renderRouter(APP_DIRECTORY, { initialUrl: '/nakath' });
+    const bell = () => screen.getByRole('switch', { name: 'Remind me: Lighting the hearth' });
+
+    await user.press(bell());
+    expect(bell()).toBeChecked();
+
+    await user.press(bell());
+    expect(bell()).not.toBeChecked();
+  });
+
+  it('shares the nakath list as text', async () => {
+    const share = jest
+      .spyOn(Share, 'share')
+      .mockResolvedValue({ action: 'sharedAction', activityType: undefined });
+    const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+    await renderRouter(APP_DIRECTORY, { initialUrl: '/nakath' });
+
+    await user.press(screen.getByRole('button', { name: 'Share' }));
+
+    const { message } = share.mock.calls[0][0] as { message: string };
+    expect(message).toContain('Sinhala & Tamil New Year 2027');
+    expect(message).toContain('Apr 14 10:15 AM · Lighting the hearth · Face south · Wear red');
+    expect(message).toContain('Sample times · not the official list');
+  });
+
+  it("shows today's Rahu kalaya, Maru direction and kala horawa", async () => {
+    const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+    await renderRouter(APP_DIRECTORY, { initialUrl: '/nakath' });
+
+    await user.press(screen.getByRole('radio', { name: 'Today' }));
+
+    expect(screen.getByText('Rahu kalaya · Saturday')).toBeOnTheScreen();
+    expect(screen.getByText('9:00 AM – 10:30 AM')).toBeOnTheScreen();
+    expect(screen.getByText('Now')).toBeOnTheScreen();
+    expect(screen.getByText('Not available')).toBeOnTheScreen();
+    expect(screen.getByText('Sun')).toBeOnTheScreen();
+  });
+
+  it('shows aya-waya once a lagna is set', async () => {
+    const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+    await renderRouter(APP_DIRECTORY, { initialUrl: '/nakath?view=today' });
+
+    await user.press(screen.getByRole('button', { name: 'Set lagna' }));
+    await user.press(screen.getByRole('radio', { name: 'Simha' }));
+
+    expect(screen.getByText('Simha lagna · 2027')).toBeOnTheScreen();
+    expect(screen.getByText('Income (aya)')).toBeOnTheScreen();
+    expect(JSON.parse(Storage.getItemSync('settings')!)).toMatchObject({ lagna: 'simha' });
   });
 });

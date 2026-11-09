@@ -2,7 +2,9 @@
   {
     "id": "sample-2026-11-08",
     "date": "2026-11-08",
-    "name": "Deepavali",
+    "nameEn": "Deepavali",
+    "nameSi": "දීපවාලි",
+    "nameTa": "தீபாவளி",
     "type": "public",
     "isPublic": true,
     "isBank": true,
@@ -11,17 +13,17 @@
   {
     "id": "sample-2026-11-24",
     "date": "2026-11-24",
-    "name": "Il Full Moon Poya",
+    "nameEn": "Il Full Moon Poya",
     "type": "poya",
     "isPublic": true,
     "isBank": true,
     "isMercantile": true,
-    "about": "Marks the Buddha sending out the first sixty disciples to spread the Dhamma. Many people observe sil at temples."
+    "aboutEn": "Marks the Buddha sending out the first sixty disciples to spread the Dhamma. Many people observe sil at temples."
   },
   {
     "id": "sample-2026-12-23",
     "date": "2026-12-23",
-    "name": "Unduvap Full Moon Poya",
+    "nameEn": "Unduvap Full Moon Poya",
     "type": "poya",
     "isPublic": true,
     "isBank": true,
@@ -30,7 +32,7 @@
   {
     "id": "sample-2026-12-23-bank",
     "date": "2026-12-23",
-    "name": "Sample Bank Holiday",
+    "nameEn": "Sample Bank Holiday",
     "type": "public",
     "isPublic": false,
     "isBank": true,
@@ -39,7 +41,7 @@
   {
     "id": "sample-2026-12-25",
     "date": "2026-12-25",
-    "name": "Christmas Day",
+    "nameEn": "Christmas Day",
     "type": "public",
     "isPublic": true,
     "isBank": true,
@@ -48,7 +50,7 @@
   {
     "id": "sample-2027-01-15",
     "date": "2027-01-15",
-    "name": "Tamil Thai Pongal Day",
+    "nameEn": "Tamil Thai Pongal Day",
     "type": "public",
     "isPublic": true,
     "isBank": true,
@@ -57,7 +59,7 @@
   {
     "id": "sample-2027-01-22",
     "date": "2027-01-22",
-    "name": "Duruthu Full Moon Poya",
+    "nameEn": "Duruthu Full Moon Poya",
     "type": "poya",
     "isPublic": true,
     "isBank": true,

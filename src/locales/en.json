@@ -2,6 +2,7 @@
   "tabs": {
     "calendar": "Calendar",
     "upcoming": "Upcoming",
+    "nakath": "Nakath",
     "reminders": "Reminders",
     "settings": "Settings"
   },
@@ -21,7 +22,14 @@
   "day": {
     "backToCalendar": "Back to calendar",
     "about": "About",
-    "invalidDate": "This date doesn't exist"
+    "invalidDate": "This date doesn't exist",
+    "openNakath": "Open nakath",
+    "myNote": "My note",
+    "noNote": "No note yet",
+    "addNote": "Add note",
+    "editNote": "Edit note",
+    "setReminder": "Set reminder",
+    "reminderSet": "Reminder set · {{time}}"
   },
   "holidayTypes": {
     "public": "Public holiday",
@@ -57,5 +65,97 @@
     "holidayData": "Holiday data",
     "sampleData": "Sample data",
     "version": "Lankadina · Version {{version}}"
+  },
+  "nakath": {
+    "view": "View",
+    "avurudu": "Avurudu",
+    "today": "Today",
+    "newYearTitle": "Sinhala & Tamil New Year {{year}}",
+    "dawnIn": "Dawn of the New Year in",
+    "days_one": "{{count}} day",
+    "days_other": "{{count}} days",
+    "dawnToday": "Today",
+    "share": "Share",
+    "sources": {
+      "sample": "Sample times · not the official list",
+      "official": "Official times · Department of Cultural Affairs"
+    },
+    "allDay": "All day",
+    "until": "Until {{time}}",
+    "face": "Face {{direction}}",
+    "wear": "Wear {{color}}",
+    "remindMe": "Remind me: {{name}}",
+    "noAvurudu": "Avurudu times are not available yet",
+    "rahuKalaya": "Rahu kalaya",
+    "rahuKalayaOn": "Rahu kalaya · {{weekday}}",
+    "timeRange": "{{start}} – {{end}}",
+    "now": "Now",
+    "notNow": "Not now",
+    "rahuKalayaAdvice": "Avoid starting new work during this time",
+    "maruDirection": "Maru direction",
+    "kalaHorawaNow": "Kala horawa now",
+    "notAvailable": "Not available",
+    "yourYear": "Your year · Aya-waya",
+    "setLagnaPrompt": "Set your lagna to see your income and expenses for the year.",
+    "setLagna": "Set lagna",
+    "changeLagna": "Change lagna",
+    "lagnaYear": "{{lagna}} lagna · {{year}}",
+    "aya": "Income (aya)",
+    "waya": "Expenses (waya)",
+    "noAyaWaya": "Aya-waya for this year is not available yet"
+  },
+  "lagnaPicker": {
+    "title": "Your lagna",
+    "close": "Close"
+  },
+  "directions": {
+    "north": "north",
+    "north-east": "north-east",
+    "east": "east",
+    "south-east": "south-east",
+    "south": "south",
+    "south-west": "south-west",
+    "west": "west",
+    "north-west": "north-west"
+  },
+  "nakathColors": {
+    "white": "white",
+    "red": "red",
+    "green": "green",
+    "blue": "blue",
+    "yellow": "yellow",
+    "gold": "gold",
+    "black": "black",
+    "purple": "purple"
+  },
+  "planets": {
+    "sun": "Sun",
+    "moon": "Moon",
+    "mars": "Mars",
+    "mercury": "Mercury",
+    "jupiter": "Jupiter",
+    "venus": "Venus",
+    "saturn": "Saturn"
+  },
+  "lagnas": {
+    "mesha": "Mesha",
+    "vrushabha": "Vrushabha",
+    "mithuna": "Mithuna",
+    "kataka": "Kataka",
+    "simha": "Simha",
+    "kanya": "Kanya",
+    "thula": "Thula",
+    "vrushchika": "Vrushchika",
+    "dhanu": "Dhanu",
+    "makara": "Makara",
+    "kumbha": "Kumbha",
+    "meena": "Meena"
+  },
+  "noteEditor": {
+    "title": "Note for {{date}}",
+    "label": "Note",
+    "placeholder": "Write a note",
+    "save": "Save",
+    "cancel": "Cancel"
   }
 }

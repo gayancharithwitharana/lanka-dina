@@ -9,3 +9,10 @@ jest.mock('expo-sqlite/kv-store', () => {
     },
   };
 });
+
+jest.mock('@/db/client', () => {
+  const Database = require('better-sqlite3');
+  const { drizzle } = require('drizzle-orm/better-sqlite3');
+  const schema = require('@/db/schema');
+  return { db: drizzle(new Database(':memory:'), { schema }) };
+});

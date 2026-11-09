@@ -1,0 +1,28 @@
+appId: host.exp.Exponent
+name: Day detail saves a note and a reminder
+---
+- runFlow:
+    file: subflows/open-route.yaml
+    env:
+      ROUTE: day/2026-11-08
+- extendedWaitUntil:
+    visible: Add note
+    timeout: 30000
+- tapOn: Add note
+- inputText: Light the oil lamps
+- tapOn: Save
+- assertVisible: Light the oil lamps
+- tapOn: Set reminder
+- assertVisible:
+    text: Set reminder
+    checked: true
+- takeScreenshot: day-note
+- tapOn: Set reminder
+- assertVisible:
+    text: Set reminder
+    checked: false
+- tapOn: Edit note
+- eraseText: 40
+- tapOn: Save
+- assertVisible: No note yet
+- runFlow: subflows/assert-no-errors.yaml

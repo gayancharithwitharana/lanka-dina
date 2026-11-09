@@ -3,6 +3,7 @@ import { SymbolView } from 'expo-symbols';
 import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
 
+import { DayActions } from '@/components/day/day-actions';
 import { DayNakathCards } from '@/components/nakath/day-nakath-cards';
 import { ScreenScrollView } from '@/components/screen-scroll-view';
 import { Text } from '@/components/text';
@@ -69,6 +70,8 @@ function DayDetail({ isoDate }: { isoDate: string }) {
             </View>
           ),
       )}
+
+      <DayActions isoDate={isoDate} holidayId={holidays[0]?.id ?? null} />
     </>
   );
 }

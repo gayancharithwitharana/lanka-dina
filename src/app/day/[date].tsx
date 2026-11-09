@@ -71,7 +71,7 @@ function DayDetail({ isoDate }: { isoDate: string }) {
           ),
       )}
 
-      <DayActions isoDate={isoDate} holidayId={holidays[0]?.id ?? null} />
+      <DayActions isoDate={isoDate} />
     </>
   );
 }

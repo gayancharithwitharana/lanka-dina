@@ -1,0 +1,13 @@
+appId: host.exp.Exponent
+name: Reminders shows automatic toggles
+---
+- runFlow:
+    file: subflows/open-route.yaml
+    env:
+      ROUTE: reminders
+- extendedWaitUntil:
+    visible: Every Poya day
+    timeout: 30000
+- assertVisible: Long weekends
+- takeScreenshot: reminders
+- runFlow: subflows/assert-no-errors.yaml

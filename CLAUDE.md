@@ -62,7 +62,7 @@ Bottom tabs (5): Calendar, Upcoming, Nakath, Reminders, Settings. Day detail is 
 - Screen tests use `renderRouter` from `expo-router/testing-library` with the real `src/app` routes; the tabs layout is swapped for `<Slot />` because native tabs render every tab at once
 - `__tests__/project-rules.test.ts` enforces: no hardcoded colors or English UI text in `src/`, matching light/dark tokens, and Sinhala/Tamil keys that exist in English
 - Every bug fix comes with a test that fails without the fix
-- End-to-end: `npm run e2e` runs the Maestro flows in `.maestro/` on the booted iOS simulator through Expo Go. Metro must be running on port 8081. Each flow starts with `subflows/open-route.yaml` (fresh launch, then deep link) and ends with `subflows/assert-no-errors.yaml`. Screenshots land in `.maestro/output/` (gitignored)
+- End-to-end: `npm run e2e` runs the Maestro flows in `.maestro/` on the booted iOS simulator through Expo Go. Metro must be running on port 8081. Each flow starts with `subflows/open-route.yaml` (fresh launch, then deep link) and ends with `subflows/assert-no-errors.yaml`. Run `subflows/allow-notifications.yaml` after any step that can trigger the notification permission prompt. Match times with `.` before AM/PM (iOS formats them with a narrow no-break space). Screenshots land in `.maestro/output/` (gitignored)
 
 ## Rules
 

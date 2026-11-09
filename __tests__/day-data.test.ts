@@ -1,4 +1,9 @@
-import { DEFAULT_REMINDER_TIME, getDayReminderTime, setDayReminder } from '@/data/day-reminders';
+import {
+  DEFAULT_REMINDER_TIME,
+  deleteDayReminder,
+  getDayReminderTime,
+  saveDayReminder,
+} from '@/data/day-reminders';
 import { getNakathReminderIds, getLatestAvurudu, setNakathReminder } from '@/data/nakath';
 import { getNote, saveNote } from '@/data/notes';
 
@@ -20,12 +25,12 @@ describe('notes', () => {
 });
 
 describe('day reminders', () => {
-  it('sets one reminder per day at the default time and removes it', () => {
-    setDayReminder('2026-11-08', 'sample-2026-11-08', true);
-    setDayReminder('2026-11-08', 'sample-2026-11-08', true);
-    expect(getDayReminderTime('2026-11-08')).toBe(DEFAULT_REMINDER_TIME);
+  it('keeps one reminder per day and replaces its time', () => {
+    saveDayReminder('2026-11-08', DEFAULT_REMINDER_TIME, 'sample-2026-11-08');
+    saveDayReminder('2026-11-08', '18:30', 'sample-2026-11-08');
+    expect(getDayReminderTime('2026-11-08')).toBe('18:30');
 
-    setDayReminder('2026-11-08', null, false);
+    deleteDayReminder('2026-11-08');
     expect(getDayReminderTime('2026-11-08')).toBeNull();
   });
 
@@ -33,8 +38,8 @@ describe('day reminders', () => {
     const dawn = getLatestAvurudu('en')!.items[2];
     setNakathReminder(dawn, true);
 
-    setDayReminder('2027-04-14', null, true);
-    setDayReminder('2027-04-14', null, false);
+    saveDayReminder('2027-04-14', DEFAULT_REMINDER_TIME, null);
+    deleteDayReminder('2027-04-14');
 
     expect(getNakathReminderIds().has(dawn.id)).toBe(true);
     setNakathReminder(dawn, false);

@@ -12,11 +12,11 @@ export function getDayReminderTime(isoDate: string): string | null {
   return db.select().from(reminders).where(dayReminderOn(isoDate)).get()?.time ?? null;
 }
 
-export function setDayReminder(isoDate: string, holidayId: string | null, enabled: boolean): void {
-  db.delete(reminders).where(dayReminderOn(isoDate)).run();
-  if (!enabled) return;
+export function saveDayReminder(isoDate: string, time: string, holidayId: string | null): void {
+  deleteDayReminder(isoDate);
+  db.insert(reminders).values({ date: isoDate, time, kind: 'custom', holidayId }).run();
+}
 
-  db.insert(reminders)
-    .values({ date: isoDate, time: DEFAULT_REMINDER_TIME, kind: 'custom', holidayId })
-    .run();
+export function deleteDayReminder(isoDate: string): void {
+  db.delete(reminders).where(dayReminderOn(isoDate)).run();
 }

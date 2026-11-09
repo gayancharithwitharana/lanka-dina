@@ -76,6 +76,32 @@ describe('Day detail screen', () => {
     expect(screen.getByText('Rahu kalaya · Saturday')).toBeOnTheScreen();
   });
 
+  it('adds a note and shows it on the day', async () => {
+    const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+    await renderRouter(APP_DIRECTORY, { initialUrl: '/day/2026-11-08' });
+    expect(screen.getByText('No note yet')).toBeOnTheScreen();
+
+    await user.press(screen.getByRole('button', { name: 'Add note' }));
+    await user.type(screen.getByLabelText('Note'), 'Light the oil lamps');
+    await user.press(screen.getByRole('button', { name: 'Save' }));
+
+    expect(screen.getByText('Light the oil lamps')).toBeOnTheScreen();
+    expect(screen.getByRole('button', { name: 'Edit note' })).toBeOnTheScreen();
+  });
+
+  it('sets and removes a reminder for the day', async () => {
+    const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+    await renderRouter(APP_DIRECTORY, { initialUrl: '/day/2026-12-25' });
+    const reminder = () => screen.getByRole('switch', { name: 'Set reminder' });
+
+    await user.press(reminder());
+    expect(reminder()).toBeChecked();
+    expect(screen.getByText('Reminder set · 8:00 AM')).toBeOnTheScreen();
+
+    await user.press(reminder());
+    expect(reminder()).not.toBeChecked();
+  });
+
   it('lists every holiday on a shared date', async () => {
     await renderRouter(APP_DIRECTORY, { initialUrl: '/day/2026-12-23' });
 

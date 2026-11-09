@@ -23,7 +23,13 @@
     "backToCalendar": "Back to calendar",
     "about": "About",
     "invalidDate": "This date doesn't exist",
-    "openNakath": "Open nakath"
+    "openNakath": "Open nakath",
+    "myNote": "My note",
+    "noNote": "No note yet",
+    "addNote": "Add note",
+    "editNote": "Edit note",
+    "setReminder": "Set reminder",
+    "reminderSet": "Reminder set · {{time}}"
   },
   "holidayTypes": {
     "public": "Public holiday",
@@ -144,5 +150,12 @@
     "makara": "Makara",
     "kumbha": "Kumbha",
     "meena": "Meena"
+  },
+  "noteEditor": {
+    "title": "Note for {{date}}",
+    "label": "Note",
+    "placeholder": "Write a note",
+    "save": "Save",
+    "cancel": "Cancel"
   }
 }

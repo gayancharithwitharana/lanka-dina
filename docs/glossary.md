@@ -104,7 +104,7 @@ Not in this glossary:
 | English | Sinhala | Tamil | Source | Sinhala status | Tamil status |
 | --- | --- | --- | --- | --- | --- |
 | Calendar | දින දර්ශනය | நாட்காட்டி | Native review | Reviewed | Draft |
-| Upcoming | ඉදිරි දින | வரவிருப்பவை | Native review | Reviewed | Draft |
+| Upcoming | ඉදිරි දින | வருபவை | Native review | Reviewed | Draft |
 | Reminder | මතක් කිරීම | நினைவூட்டல் | Native review | Reviewed | Draft |
 | Settings | සැකසුම් | அமைப்புகள் | Native review | Reviewed | Draft |
 | Note | සටහන | குறிப்பு | Native review | Reviewed | Draft |

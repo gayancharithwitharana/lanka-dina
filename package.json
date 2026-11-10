@@ -66,7 +66,9 @@
     "typecheck": "tsc --noEmit",
     "db:generate": "drizzle-kit generate",
     "check": "npm run typecheck && npm run lint && npm test",
-    "e2e": "rm -rf .maestro/output && maestro test .maestro --test-output-dir .maestro/output"
+    "e2e": "rm -rf .maestro/output && maestro test .maestro --test-output-dir .maestro/output",
+    "screenshots:si": "maestro test .maestro/review/translations.yaml --test-output-dir .maestro/output/si -e PREFIX=si -e LANGUAGE=සිංහල -e LIGHT=ආලෝකමත් -e DARK=අඳුරු -e SYSTEM='දුරකථනය අනුව' -e CLOSE=වසන්න -e CANCEL='අවලංගු කරන්න' -e SAVE=සුරකින්න -e DELETE='මතක් කිරීම මකන්න'",
+    "screenshots:ta": "maestro test .maestro/review/translations.yaml --test-output-dir .maestro/output/ta -e PREFIX=ta -e LANGUAGE=தமிழ் -e LIGHT=வெளிர் -e DARK=இருண்ட -e SYSTEM=தானியங்கு -e CLOSE=மூடு -e CANCEL=ரத்துசெய் -e SAVE=சேமி -e DELETE='நினைவூட்டலை நீக்கு'"
   },
   "private": true,
   "jest": {

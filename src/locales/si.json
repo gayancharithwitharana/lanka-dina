@@ -28,8 +28,8 @@
     "noNote": "තවම සටහනක් නැත",
     "addNote": "සටහනක් එක් කරන්න",
     "editNote": "සටහන වෙනස් කරන්න",
-    "setReminder": "මතක් කිරීමක් සකසන්න",
-    "reminderSet": "මතක් කිරීම සකසා ඇත · {{time}}"
+    "setReminder": "මතක් කරන්න",
+    "reminderSet": "මතක් කිරීම · {{time}}"
   },
   "holidayTypes": {
     "public": "රජයේ නිවාඩු දිනය",

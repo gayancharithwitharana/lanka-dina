@@ -1,0 +1,29 @@
+appId: host.exp.Exponent
+name: Screenshots every screen in one language for translation review
+---
+- runFlow:
+    file: ../subflows/open-route.yaml
+    env:
+      ROUTE: settings
+- extendedWaitUntil:
+    visible: English
+    timeout: 30000
+- tapOn: ${LANGUAGE}
+- tapOn: ${LIGHT}
+- runFlow:
+    file: screenshot-all.yaml
+    env:
+      PREFIX: ${PREFIX}-light
+- openLink: exp://127.0.0.1:8081/--/settings
+- tapOn: ${DARK}
+- runFlow:
+    file: screenshot-all.yaml
+    env:
+      PREFIX: ${PREFIX}-dark
+- openLink: exp://127.0.0.1:8081/--/settings
+- tapOn: ${SYSTEM}
+- tapOn: English
+- extendedWaitUntil:
+    visible: Appearance
+    timeout: 10000
+- runFlow: ../subflows/assert-no-errors.yaml

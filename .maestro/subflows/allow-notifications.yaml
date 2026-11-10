@@ -1,0 +1,7 @@
+appId: host.exp.Exponent
+---
+- runFlow:
+    when:
+      visible: Allow
+    commands:
+      - tapOn: Allow

@@ -13,16 +13,27 @@ describe('settings storage', () => {
       weekStartsOn: 0,
       appearance: 'system',
       lagna: null,
+      poyaReminders: true,
+      longWeekendReminders: false,
     });
   });
 
   it('loads what was saved', () => {
-    saveSettings({ language: 'si', weekStartsOn: 1, appearance: 'dark', lagna: 'simha' });
+    saveSettings({
+      language: 'si',
+      weekStartsOn: 1,
+      appearance: 'dark',
+      lagna: 'simha',
+      poyaReminders: false,
+      longWeekendReminders: true,
+    });
     expect(loadSettings()).toEqual({
       language: 'si',
       weekStartsOn: 1,
       appearance: 'dark',
       lagna: 'simha',
+      poyaReminders: false,
+      longWeekendReminders: true,
     });
   });
 
@@ -33,6 +44,8 @@ describe('settings storage', () => {
       weekStartsOn: 0,
       appearance: 'system',
       lagna: null,
+      poyaReminders: true,
+      longWeekendReminders: false,
     });
   });
 
@@ -43,19 +56,29 @@ describe('settings storage', () => {
       weekStartsOn: 0,
       appearance: 'system',
       lagna: null,
+      poyaReminders: true,
+      longWeekendReminders: false,
     });
   });
 
   it('ignores saved values that are not valid choices', () => {
     Storage.setItemSync(
       'settings',
-      JSON.stringify({ language: 'fr', weekStartsOn: 5, appearance: 'dark', lagna: 'pluto' }),
+      JSON.stringify({
+        language: 'fr',
+        weekStartsOn: 5,
+        appearance: 'dark',
+        lagna: 'pluto',
+        poyaReminders: 'yes',
+      }),
     );
     expect(loadSettings()).toEqual({
       language: 'en',
       weekStartsOn: 0,
       appearance: 'dark',
       lagna: null,
+      poyaReminders: true,
+      longWeekendReminders: false,
     });
   });
 
@@ -66,6 +89,8 @@ describe('settings storage', () => {
       weekStartsOn: 0,
       appearance: 'system',
       lagna: null,
+      poyaReminders: true,
+      longWeekendReminders: false,
     });
   });
 });

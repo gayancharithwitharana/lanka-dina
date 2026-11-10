@@ -5,17 +5,12 @@ import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
 
 import { Text } from '@/components/text';
-import { getDayReminderTime, setDayReminder } from '@/data/day-reminders';
+import { getDayReminderTime } from '@/data/day-reminders';
 import { getNote } from '@/data/notes';
 import { useThemeColors } from '@/hooks/use-theme-colors';
 import { formatClockTime } from '@/utils/nakath-time';
 
-type DayActionsProps = {
-  isoDate: string;
-  holidayId: string | null;
-};
-
-export function DayActions({ isoDate, holidayId }: DayActionsProps) {
+export function DayActions({ isoDate }: { isoDate: string }) {
   const { t, i18n } = useTranslation();
   const colors = useThemeColors();
   const [note, setNote] = useState(() => getNote(isoDate));
@@ -24,13 +19,13 @@ export function DayActions({ isoDate, holidayId }: DayActionsProps) {
   useFocusEffect(
     useCallback(() => {
       setNote(getNote(isoDate));
+      setReminderTime(getDayReminderTime(isoDate));
     }, [isoDate]),
   );
 
-  function toggleReminder() {
-    setDayReminder(isoDate, holidayId, reminderTime === null);
-    setReminderTime(getDayReminderTime(isoDate));
-  }
+  const reminderLabel = reminderTime
+    ? t('day.reminderSet', { time: formatClockTime(reminderTime, i18n.language) })
+    : t('day.setReminder');
 
   return (
     <>
@@ -47,10 +42,9 @@ export function DayActions({ isoDate, holidayId }: DayActionsProps) {
 
       <View className="flex-row gap-3 px-5 pt-6">
         <Pressable
-          accessibilityRole="switch"
-          accessibilityLabel={t('day.setReminder')}
-          accessibilityState={{ checked: reminderTime !== null }}
-          onPress={toggleReminder}
+          accessibilityRole="button"
+          accessibilityLabel={reminderLabel}
+          onPress={() => router.push({ pathname: '/reminder/[date]', params: { date: isoDate } })}
           className="h-[50px] flex-1 flex-row items-center justify-center gap-2 rounded-button bg-inverse active:opacity-80"
         >
           <SymbolView
@@ -58,11 +52,7 @@ export function DayActions({ isoDate, holidayId }: DayActionsProps) {
             size={18}
             tintColor={colors['on-inverse']}
           />
-          <Text className="text-[15px] font-semibold text-on-inverse">
-            {reminderTime
-              ? t('day.reminderSet', { time: formatClockTime(reminderTime, i18n.language) })
-              : t('day.setReminder')}
-          </Text>
+          <Text className="text-[15px] font-semibold text-on-inverse">{reminderLabel}</Text>
         </Pressable>
         <Pressable
           accessibilityRole="button"

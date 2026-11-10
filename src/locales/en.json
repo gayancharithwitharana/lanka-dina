@@ -157,5 +157,36 @@
     "placeholder": "Write a note",
     "save": "Save",
     "cancel": "Cancel"
+  },
+  "notifications": {
+    "poyaTitle": "{{name}} tomorrow",
+    "poyaBody": "Poya day begins tomorrow",
+    "longWeekendTitle": "Long weekend in 2 weeks",
+    "longWeekendBody": "{{start}} – {{end}} · {{names}}",
+    "dayTitle": "Reminder for {{date}}",
+    "nakathSoonTitle": "{{name}} in {{minutes}} minutes",
+    "nakathTodayTitle": "{{name}} today",
+    "nakathBody": "Nakath time {{time}}",
+    "channelName": "Reminders"
+  },
+  "reminders": {
+    "newReminder": "New reminder",
+    "automatic": "Automatic",
+    "everyPoya": "Every Poya day",
+    "everyPoyaDetail": "Evening before, {{time}}",
+    "longWeekends": "Long weekends",
+    "longWeekendsDetail": "2 weeks ahead, {{time}}",
+    "scheduled": "Scheduled",
+    "noReminders": "No reminders yet. Set one from a day or a nakath.",
+    "reminderFor": "Reminder for {{date}}",
+    "when": "{{date}} · {{time}}"
+  },
+  "reminderEditor": {
+    "title": "Reminder",
+    "date": "Date",
+    "time": "Time",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete reminder"
   }
 }

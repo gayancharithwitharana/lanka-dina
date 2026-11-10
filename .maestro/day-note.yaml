@@ -13,14 +13,17 @@ name: Day detail saves a note and a reminder
 - tapOn: Save
 - assertVisible: Light the oil lamps
 - tapOn: Set reminder
-- assertVisible:
-    text: Set reminder
-    checked: true
+- extendedWaitUntil:
+    visible: Time
+    timeout: 10000
+- takeScreenshot: reminder-editor
+- tapOn: Save
+- runFlow: subflows/allow-notifications.yaml
+- assertVisible: Reminder set · 8:00.AM
 - takeScreenshot: day-note
-- tapOn: Set reminder
-- assertVisible:
-    text: Set reminder
-    checked: false
+- tapOn: Reminder set · 8:00.AM
+- tapOn: Delete reminder
+- assertVisible: Set reminder
 - tapOn: Edit note
 - eraseText: 40
 - tapOn: Save

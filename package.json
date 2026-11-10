@@ -15,6 +15,7 @@
     "expo-glass-effect": "~58.0.5",
     "expo-image": "~58.0.18",
     "expo-linking": "~58.0.16",
+    "expo-notifications": "~58.1.8",
     "expo-router": "~58.0.30",
     "expo-splash-screen": "~58.0.13",
     "expo-sqlite": "~58.0.15",
@@ -71,7 +72,7 @@
   "jest": {
     "preset": "jest-expo",
     "setupFiles": [
-      "<rootDir>/jest/setup.ts"
+      "<rootDir>/jest/setup.tsx"
     ],
     "setupFilesAfterEnv": [
       "<rootDir>/jest/setup-database.ts"

@@ -12,6 +12,8 @@ export type Settings = {
   weekStartsOn: WeekStart;
   appearance: Appearance;
   lagna: Lagna | null;
+  poyaReminders: boolean;
+  longWeekendReminders: boolean;
 };
 
 const SETTINGS_KEY = 'settings';
@@ -21,11 +23,14 @@ const defaultSettings: Settings = {
   weekStartsOn: 0,
   appearance: 'system',
   lagna: null,
+  poyaReminders: true,
+  longWeekendReminders: false,
 };
 
 const languages: Language[] = ['en', 'si', 'ta'];
 const weekStarts: WeekStart[] = [0, 1];
 const appearances: Appearance[] = ['system', 'light', 'dark'];
+const booleans = [true, false];
 
 export function loadSettings(): Settings {
   const savedSettings = readSavedSettings();
@@ -34,6 +39,16 @@ export function loadSettings(): Settings {
     weekStartsOn: pickAllowed(savedSettings.weekStartsOn, weekStarts, defaultSettings.weekStartsOn),
     appearance: pickAllowed(savedSettings.appearance, appearances, defaultSettings.appearance),
     lagna: pickAllowed<Lagna | null>(savedSettings.lagna, [...lagnas], defaultSettings.lagna),
+    poyaReminders: pickAllowed(
+      savedSettings.poyaReminders,
+      booleans,
+      defaultSettings.poyaReminders,
+    ),
+    longWeekendReminders: pickAllowed(
+      savedSettings.longWeekendReminders,
+      booleans,
+      defaultSettings.longWeekendReminders,
+    ),
   };
 }
 

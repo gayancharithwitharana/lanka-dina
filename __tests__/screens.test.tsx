@@ -1,7 +1,7 @@
-import { Slot } from 'expo-router';
+import { router, Slot } from 'expo-router';
 import Storage from 'expo-sqlite/kv-store';
 import { renderRouter, screen } from 'expo-router/testing-library';
-import { act, userEvent } from '@testing-library/react-native';
+import { act, fireEvent, userEvent } from '@testing-library/react-native';
 import { Share } from 'react-native';
 
 const APP_DIRECTORY = {
@@ -89,17 +89,17 @@ describe('Day detail screen', () => {
     expect(screen.getByRole('button', { name: 'Edit note' })).toBeOnTheScreen();
   });
 
-  it('sets and removes a reminder for the day', async () => {
+  it('sets a reminder for the day at 8:00 AM and deletes it', async () => {
     const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
     await renderRouter(APP_DIRECTORY, { initialUrl: '/day/2026-12-25' });
-    const reminder = () => screen.getByRole('switch', { name: 'Set reminder' });
 
-    await user.press(reminder());
-    expect(reminder()).toBeChecked();
-    expect(screen.getByText('Reminder set · 8:00 AM')).toBeOnTheScreen();
+    await user.press(screen.getByRole('button', { name: 'Set reminder' }));
+    await user.press(screen.getByRole('button', { name: 'Save' }));
+    expect(screen.getByRole('button', { name: 'Reminder set · 8:00 AM' })).toBeOnTheScreen();
 
-    await user.press(reminder());
-    expect(reminder()).not.toBeChecked();
+    await user.press(screen.getByRole('button', { name: 'Reminder set · 8:00 AM' }));
+    await user.press(screen.getByRole('button', { name: 'Delete reminder' }));
+    expect(screen.getByRole('button', { name: 'Set reminder' })).toBeOnTheScreen();
   });
 
   it('lists every holiday on a shared date', async () => {
@@ -223,5 +223,49 @@ describe('Nakath screen', () => {
     expect(screen.getByText('Simha lagna · 2027')).toBeOnTheScreen();
     expect(screen.getByText('Income (aya)')).toBeOnTheScreen();
     expect(JSON.parse(Storage.getItemSync('settings')!)).toMatchObject({ lagna: 'simha' });
+  });
+});
+
+describe('Reminders screen', () => {
+  it('turns automatic reminders on and off', async () => {
+    await renderRouter(APP_DIRECTORY, { initialUrl: '/reminders' });
+
+    expect(screen.getByRole('switch', { name: 'Every Poya day' })).toBeChecked();
+    expect(screen.getByText('Evening before, 7:00 PM')).toBeOnTheScreen();
+
+    await act(() =>
+      fireEvent(screen.getByRole('switch', { name: 'Long weekends' }), 'valueChange', true),
+    );
+
+    expect(screen.getByRole('switch', { name: 'Long weekends' })).toBeChecked();
+    expect(JSON.parse(Storage.getItemSync('settings')!)).toMatchObject({
+      longWeekendReminders: true,
+    });
+  });
+
+  it('lists reminders set on days and nakath, soonest first', async () => {
+    const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+    await renderRouter(APP_DIRECTORY, { initialUrl: '/nakath' });
+    await user.press(screen.getByRole('switch', { name: 'Remind me: Lighting the hearth' }));
+
+    await act(() => router.push('/day/2026-11-24'));
+    await user.press(screen.getByRole('button', { name: 'Set reminder' }));
+    await user.press(screen.getByRole('button', { name: 'Save' }));
+    await act(() => router.navigate('/reminders'));
+
+    expect(screen.getByText('Il Full Moon Poya')).toBeOnTheScreen();
+    expect(screen.getByText('Tue, Nov 24 · 8:00 AM')).toBeOnTheScreen();
+    expect(screen.getByText('Lighting the hearth')).toBeOnTheScreen();
+    expect(screen.getByText('Wed, Apr 14 · 10:15 AM')).toBeOnTheScreen();
+  });
+
+  it('creates a reminder from the + button', async () => {
+    const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+    await renderRouter(APP_DIRECTORY, { initialUrl: '/reminders' });
+
+    await user.press(screen.getByRole('button', { name: 'New reminder' }));
+    await user.press(screen.getByRole('button', { name: 'Save' }));
+
+    expect(screen.getByText('Reminder for Sat, Nov 7')).toBeOnTheScreen();
   });
 });

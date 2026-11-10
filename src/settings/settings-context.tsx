@@ -2,6 +2,7 @@ import { colorScheme } from 'nativewind';
 import { createContext, useContext, useState, type ReactNode } from 'react';
 
 import i18n from '@/i18n';
+import { syncNotifications } from '@/notifications/sync-notifications';
 import { loadSettings, saveSettings, type Settings } from '@/settings/settings-storage';
 
 type SettingsContextValue = Settings & {
@@ -19,6 +20,7 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     saveSettings(updatedSettings);
     if (changes.language) {
       i18n.changeLanguage(changes.language);
+      syncNotifications();
     }
     if (changes.appearance) {
       colorScheme.set(changes.appearance);

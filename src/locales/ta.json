@@ -1,1 +1,188 @@
-{}
+{
+  "tabs": {
+    "calendar": "நாட்காட்டி",
+    "upcoming": "வரவிருப்பவை",
+    "nakath": "சுப நேரங்கள்",
+    "reminders": "நினைவூட்டல்கள்",
+    "settings": "அமைப்புகள்"
+  },
+  "calendar": {
+    "previousMonth": "முந்தைய மாதம்",
+    "nextMonth": "அடுத்த மாதம்",
+    "publicHoliday": "பொது விடுமுறை",
+    "poyaDay": "போயா தினம்",
+    "thisMonth": "இந்த மாதம்",
+    "noHolidaysThisMonth": "இந்த மாதம் விடுமுறைகள் இல்லை"
+  },
+  "holidayKinds": {
+    "public": "பொது",
+    "bank": "வங்கி",
+    "mercantile": "வர்த்தக"
+  },
+  "day": {
+    "backToCalendar": "நாட்காட்டிக்குத் திரும்பு",
+    "about": "விவரம்",
+    "invalidDate": "இந்தத் தேதி இல்லை",
+    "openNakath": "சுப நேரங்களைப் பார்",
+    "myNote": "எனது குறிப்பு",
+    "noNote": "இன்னும் குறிப்பு இல்லை",
+    "addNote": "குறிப்பைச் சேர்",
+    "editNote": "குறிப்பைத் திருத்து",
+    "setReminder": "நினைவூட்டலை அமை",
+    "reminderSet": "நினைவூட்டல் அமைக்கப்பட்டது · {{time}}"
+  },
+  "holidayTypes": {
+    "public": "பொது விடுமுறை",
+    "bank": "வங்கி விடுமுறை",
+    "mercantile": "வர்த்தக விடுமுறை"
+  },
+  "upcoming": {
+    "filterLabel": "வடிகட்டி",
+    "filters": {
+      "all": "அனைத்தும்",
+      "poya": "போயா",
+      "public": "விடுமுறைகள்"
+    },
+    "today": "இன்று",
+    "tomorrow": "நாளை",
+    "inDays_one": "{{count}} நாளில்",
+    "inDays_other": "{{count}} நாட்களில்",
+    "noUpcomingHolidays": "வரவிருக்கும் விடுமுறைகள் இல்லை"
+  },
+  "settings": {
+    "language": "மொழி",
+    "weekStartsOn": "வாரம் தொடங்கும் நாள்",
+    "appearance": "தோற்றம்",
+    "appearanceOptions": {
+      "system": "தொலைபேசியின்படி",
+      "light": "வெளிர்",
+      "dark": "இருண்ட"
+    },
+    "app": "செயலி",
+    "notifications": "அறிவிப்புகள்",
+    "removeAds": "விளம்பரங்களை அகற்று",
+    "comingSoon": "விரைவில்",
+    "holidayData": "விடுமுறைத் தரவு",
+    "sampleData": "மாதிரித் தரவு",
+    "version": "Lankadina · பதிப்பு {{version}}"
+  },
+  "nakath": {
+    "view": "காட்சி",
+    "avurudu": "புத்தாண்டு",
+    "today": "இன்று",
+    "newYearTitle": "சிங்கள தமிழ் புத்தாண்டு {{year}}",
+    "dawnIn": "புத்தாண்டு பிறப்புக்கு இன்னும்",
+    "days_one": "{{count}} நாள்",
+    "days_other": "{{count}} நாட்கள்",
+    "dawnToday": "இன்று",
+    "share": "பகிர்",
+    "sources": {
+      "sample": "மாதிரி நேரங்கள் · அதிகாரப்பூர்வ பட்டியல் அல்ல",
+      "official": "அதிகாரப்பூர்வ நேரங்கள் · கலாசார அலுவல்கள் திணைக்களம்"
+    },
+    "allDay": "நாள் முழுவதும்",
+    "until": "{{time}} வரை",
+    "face": "{{direction}} திசை நோக்கி",
+    "wear": "{{color}} நிற ஆடை",
+    "remindMe": "நினைவூட்டு: {{name}}",
+    "noAvurudu": "புத்தாண்டு சுப நேரங்கள் இன்னும் கிடைக்கவில்லை",
+    "rahuKalaya": "ராகு காலம்",
+    "rahuKalayaOn": "ராகு காலம் · {{weekday}}",
+    "timeRange": "{{start}} – {{end}}",
+    "now": "இப்போது",
+    "notNow": "இப்போது இல்லை",
+    "rahuKalayaAdvice": "இந்த நேரத்தில் புதிய வேலைகளைத் தொடங்க வேண்டாம்",
+    "notAvailable": "கிடைக்கவில்லை",
+    "setLagnaPrompt": "இந்த ஆண்டின் வருமானம், செலவைப் பார்க்க உங்கள் லக்னத்தை அமைக்கவும்.",
+    "setLagna": "லக்னத்தை அமை",
+    "changeLagna": "லக்னத்தை மாற்று",
+    "lagnaYear": "{{lagna}} லக்னம் · {{year}}",
+    "aya": "வருமானம்",
+    "waya": "செலவு"
+  },
+  "lagnaPicker": {
+    "title": "உங்கள் லக்னம்",
+    "close": "மூடு"
+  },
+  "directions": {
+    "north": "வடக்கு",
+    "north-east": "வடகிழக்கு",
+    "east": "கிழக்கு",
+    "south-east": "தென்கிழக்கு",
+    "south": "தெற்கு",
+    "south-west": "தென்மேற்கு",
+    "west": "மேற்கு",
+    "north-west": "வடமேற்கு"
+  },
+  "nakathColors": {
+    "white": "வெள்ளை",
+    "red": "சிவப்பு",
+    "green": "பச்சை",
+    "blue": "நீலம்",
+    "yellow": "மஞ்சள்",
+    "gold": "பொன்னிறம்",
+    "black": "கருப்பு",
+    "purple": "ஊதா"
+  },
+  "planets": {
+    "sun": "சூரியன்",
+    "moon": "சந்திரன்",
+    "mars": "செவ்வாய்",
+    "mercury": "புதன்",
+    "jupiter": "குரு",
+    "venus": "சுக்கிரன்",
+    "saturn": "சனி"
+  },
+  "lagnas": {
+    "mesha": "மேஷம்",
+    "vrushabha": "ரிஷபம்",
+    "mithuna": "மிதுனம்",
+    "kataka": "கடகம்",
+    "simha": "சிம்மம்",
+    "kanya": "கன்னி",
+    "thula": "துலாம்",
+    "vrushchika": "விருச்சிகம்",
+    "dhanu": "தனுசு",
+    "makara": "மகரம்",
+    "kumbha": "கும்பம்",
+    "meena": "மீனம்"
+  },
+  "noteEditor": {
+    "title": "{{date}} குறிப்பு",
+    "label": "குறிப்பு",
+    "placeholder": "குறிப்பை எழுதுங்கள்",
+    "save": "சேமி",
+    "cancel": "ரத்துசெய்"
+  },
+  "notifications": {
+    "poyaTitle": "நாளை {{name}}",
+    "poyaBody": "போயா தினம் நாளை தொடங்குகிறது",
+    "longWeekendTitle": "2 வாரங்களில் நீண்ட வார இறுதி",
+    "longWeekendBody": "{{start}} – {{end}} · {{names}}",
+    "dayTitle": "{{date}} நினைவூட்டல்",
+    "nakathSoonTitle": "{{minutes}} நிமிடங்களில் {{name}}",
+    "nakathTodayTitle": "இன்று {{name}}",
+    "nakathBody": "சுப நேரம் {{time}}",
+    "channelName": "நினைவூட்டல்கள்"
+  },
+  "reminders": {
+    "newReminder": "புதிய நினைவூட்டல்",
+    "automatic": "தானியங்கி",
+    "everyPoya": "ஒவ்வொரு போயா தினமும்",
+    "everyPoyaDetail": "முந்தைய நாள் மாலை, {{time}}",
+    "longWeekends": "நீண்ட வார இறுதிகள்",
+    "longWeekendsDetail": "2 வாரங்களுக்கு முன், {{time}}",
+    "scheduled": "திட்டமிடப்பட்டவை",
+    "noReminders": "இன்னும் நினைவூட்டல்கள் இல்லை. ஒரு நாள் அல்லது சுப நேரத்திலிருந்து அமைக்கவும்.",
+    "reminderFor": "{{date}} நினைவூட்டல்",
+    "when": "{{date}} · {{time}}"
+  },
+  "reminderEditor": {
+    "title": "நினைவூட்டல்",
+    "date": "தேதி",
+    "time": "நேரம்",
+    "save": "சேமி",
+    "cancel": "ரத்துசெய்",
+    "delete": "நினைவூட்டலை நீக்கு"
+  }
+}

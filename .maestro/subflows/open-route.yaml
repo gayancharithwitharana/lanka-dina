@@ -9,6 +9,6 @@ appId: host.exp.Exponent
       - tapOn: Continue
 - runFlow: allow-notifications.yaml
 - extendedWaitUntil:
-    visible: Calendar
+    visible: Calendar|දින දර්ශනය|நாட்காட்டி
     timeout: 60000
 - openLink: exp://127.0.0.1:8081/--/${ROUTE}

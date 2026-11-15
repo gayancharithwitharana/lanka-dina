@@ -1,0 +1,46 @@
+appId: host.exp.Exponent
+---
+- openLink: exp://127.0.0.1:8081/--/settings
+- waitForAnimationToEnd
+- takeScreenshot: ${PREFIX}-settings
+- tapOn:
+    point: 15%,94%
+- waitForAnimationToEnd
+- takeScreenshot: ${PREFIX}-calendar
+- openLink: exp://127.0.0.1:8081/--/upcoming
+- waitForAnimationToEnd
+- takeScreenshot: ${PREFIX}-upcoming
+- openLink: exp://127.0.0.1:8081/--/nakath?view=avurudu
+- waitForAnimationToEnd
+- takeScreenshot: ${PREFIX}-nakath-avurudu
+- openLink: exp://127.0.0.1:8081/--/nakath?view=today
+- waitForAnimationToEnd
+- takeScreenshot: ${PREFIX}-nakath-today
+- openLink: exp://127.0.0.1:8081/--/reminders
+- waitForAnimationToEnd
+- takeScreenshot: ${PREFIX}-reminders
+- openLink: exp://127.0.0.1:8081/--/day/2026-12-23
+- waitForAnimationToEnd
+- takeScreenshot: ${PREFIX}-day-poya
+- openLink: exp://127.0.0.1:8081/--/day/2026-11-24
+- waitForAnimationToEnd
+- takeScreenshot: ${PREFIX}-day-maru
+- openLink: exp://127.0.0.1:8081/--/lagna
+- waitForAnimationToEnd
+- takeScreenshot: ${PREFIX}-lagna
+- tapOn: ${CLOSE}
+- openLink: exp://127.0.0.1:8081/--/reminder/2026-12-23
+- waitForAnimationToEnd
+- takeScreenshot: ${PREFIX}-reminder-editor
+- tapOn: ${SAVE}
+- openLink: exp://127.0.0.1:8081/--/day/2026-12-23
+- waitForAnimationToEnd
+- takeScreenshot: ${PREFIX}-day-reminder-set
+- openLink: exp://127.0.0.1:8081/--/reminder/2026-12-23
+- waitForAnimationToEnd
+- tapOn: ${DELETE}
+- waitForAnimationToEnd
+- openLink: exp://127.0.0.1:8081/--/note/2026-12-23
+- waitForAnimationToEnd
+- takeScreenshot: ${PREFIX}-note-editor
+- tapOn: ${CANCEL}

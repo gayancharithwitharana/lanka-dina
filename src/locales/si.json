@@ -1,1 +1,192 @@
-{}
+{
+  "tabs": {
+    "calendar": "දින දර්ශනය",
+    "upcoming": "ඉදිරි දින",
+    "nakath": "නැකත්",
+    "reminders": "මතක් කිරීම්",
+    "settings": "සැකසුම්"
+  },
+  "calendar": {
+    "previousMonth": "පෙර මාසය",
+    "nextMonth": "ඊළඟ මාසය",
+    "publicHoliday": "රජයේ නිවාඩු දිනය",
+    "poyaDay": "පෝය දිනය",
+    "thisMonth": "මෙම මාසය",
+    "noHolidaysThisMonth": "මෙම මාසයේ නිවාඩු දින නැත"
+  },
+  "holidayKinds": {
+    "public": "රජයේ",
+    "bank": "බැංකු",
+    "mercantile": "වෙළඳ"
+  },
+  "day": {
+    "backToCalendar": "දින දර්ශනයට ආපසු",
+    "about": "විස්තරය",
+    "invalidDate": "මෙම දිනය නොපවතී",
+    "openNakath": "නැකත් බලන්න",
+    "myNote": "මගේ සටහන",
+    "noNote": "තවම සටහනක් නැත",
+    "addNote": "සටහනක් එක් කරන්න",
+    "editNote": "සටහන වෙනස් කරන්න",
+    "setReminder": "මතක් කරන්න",
+    "reminderSet": "මතක් කිරීම · {{time}}"
+  },
+  "holidayTypes": {
+    "public": "රජයේ නිවාඩු දිනය",
+    "bank": "බැංකු නිවාඩු දිනය",
+    "mercantile": "වෙළඳ නිවාඩු දිනය"
+  },
+  "upcoming": {
+    "filterLabel": "පෙරහන",
+    "filters": {
+      "all": "සියල්ල",
+      "poya": "පෝය",
+      "public": "නිවාඩු දින"
+    },
+    "today": "අද",
+    "tomorrow": "හෙට",
+    "inDays_one": "දින {{count}} කින්",
+    "inDays_other": "දින {{count}} කින්",
+    "noUpcomingHolidays": "ඉදිරි නිවාඩු දින නැත"
+  },
+  "settings": {
+    "language": "භාෂාව",
+    "weekStartsOn": "සතිය ආරම්භ වන දිනය",
+    "appearance": "පෙනුම",
+    "appearanceOptions": {
+      "system": "දුරකථනය අනුව",
+      "light": "ආලෝකමත්",
+      "dark": "අඳුරු"
+    },
+    "app": "යෙදුම",
+    "notifications": "දැනුම්දීම්",
+    "removeAds": "දැන්වීම් ඉවත් කරන්න",
+    "comingSoon": "ළඟදීම",
+    "holidayData": "නිවාඩු දින දත්ත",
+    "sampleData": "නියැදි දත්ත",
+    "version": "Lankadina · අනුවාදය {{version}}"
+  },
+  "nakath": {
+    "view": "දර්ශනය",
+    "avurudu": "අවුරුදු",
+    "today": "අද",
+    "newYearTitle": "සිංහල හා දෙමළ අලුත් අවුරුද්ද {{year}}",
+    "dawnIn": "අලුත් අවුරුදු උදාවට තව",
+    "days_one": "දින {{count}}",
+    "days_other": "දින {{count}}",
+    "dawnToday": "අද",
+    "share": "බෙදාගන්න",
+    "sources": {
+      "sample": "නියැදි වේලාවන් · නිල ලැයිස්තුව නොවේ",
+      "official": "නිල නැකත් · සංස්කෘතික කටයුතු දෙපාර්තමේන්තුව"
+    },
+    "allDay": "දවස පුරා",
+    "until": "{{time}} දක්වා",
+    "face": "{{direction}} දිශාවට මුහුණලා",
+    "wear": "{{color}} පැහැති ඇඳුම්",
+    "remindMe": "මතක් කරන්න: {{name}}",
+    "noAvurudu": "අවුරුදු නැකත් තවම නොමැත",
+    "rahuKalaya": "රාහු කාලය",
+    "rahuKalayaOn": "රාහු කාලය · {{weekday}}",
+    "timeRange": "{{start}} – {{end}}",
+    "now": "දැන්",
+    "notNow": "දැන් නොවේ",
+    "rahuKalayaAdvice": "මෙම කාලයේ අලුත් වැඩ ආරම්භ නොකරන්න",
+    "maruDirection": "මරු දිශාව",
+    "kalaHorawaNow": "දැන් කාල හෝරාව",
+    "notAvailable": "නොමැත",
+    "yourYear": "ඔබේ වසර · අය වැය",
+    "setLagnaPrompt": "වසරේ ආදායම් සහ වියදම් බැලීමට ඔබේ ලග්නය සකසන්න.",
+    "setLagna": "ලග්නය සකසන්න",
+    "changeLagna": "ලග්නය වෙනස් කරන්න",
+    "lagnaYear": "{{lagna}} ලග්නය · {{year}}",
+    "aya": "ආදායම (අය)",
+    "waya": "වියදම (වැය)",
+    "noAyaWaya": "මෙම වසරේ අය වැය තවම නොමැත"
+  },
+  "lagnaPicker": {
+    "title": "ඔබේ ලග්නය",
+    "close": "වසන්න"
+  },
+  "directions": {
+    "north": "උතුර",
+    "north-east": "ඊසාන",
+    "east": "නැගෙනහිර",
+    "south-east": "ගිනිකොන",
+    "south": "දකුණ",
+    "south-west": "නිරිත",
+    "west": "බටහිර",
+    "north-west": "වයඹ"
+  },
+  "nakathColors": {
+    "white": "සුදු",
+    "red": "රතු",
+    "green": "කොළ",
+    "blue": "නිල්",
+    "yellow": "කහ",
+    "gold": "රන්වන්",
+    "black": "කළු",
+    "purple": "දම්"
+  },
+  "planets": {
+    "sun": "රවි",
+    "moon": "චන්ද්‍ර",
+    "mars": "කුජ",
+    "mercury": "බුධ",
+    "jupiter": "ගුරු",
+    "venus": "සිකුරු",
+    "saturn": "ශනි"
+  },
+  "lagnas": {
+    "mesha": "මේෂ",
+    "vrushabha": "වෘෂභ",
+    "mithuna": "මිථුන",
+    "kataka": "කටක",
+    "simha": "සිංහ",
+    "kanya": "කන්‍යා",
+    "thula": "තුලා",
+    "vrushchika": "වෘශ්චික",
+    "dhanu": "ධනු",
+    "makara": "මකර",
+    "kumbha": "කුම්භ",
+    "meena": "මීන"
+  },
+  "noteEditor": {
+    "title": "{{date}} සඳහා සටහන",
+    "label": "සටහන",
+    "placeholder": "සටහනක් ලියන්න",
+    "save": "සුරකින්න",
+    "cancel": "අවලංගු කරන්න"
+  },
+  "notifications": {
+    "poyaTitle": "හෙට {{name}}",
+    "poyaBody": "පෝය දිනය හෙට ආරම්භ වේ",
+    "longWeekendTitle": "සති 2 කින් දිග සති අන්තයක්",
+    "longWeekendBody": "{{start}} – {{end}} · {{names}}",
+    "dayTitle": "{{date}} සඳහා මතක් කිරීම",
+    "nakathSoonTitle": "මිනිත්තු {{minutes}} කින් {{name}}",
+    "nakathTodayTitle": "අද {{name}}",
+    "nakathBody": "නැකත් වේලාව {{time}}",
+    "channelName": "මතක් කිරීම්"
+  },
+  "reminders": {
+    "newReminder": "නව මතක් කිරීමක්",
+    "automatic": "ස්වයංක්‍රීය",
+    "everyPoya": "සෑම පෝය දිනයකම",
+    "everyPoyaDetail": "පෙර දින සවස, {{time}}",
+    "longWeekends": "දිග සති අන්ත",
+    "longWeekendsDetail": "සති 2 කට පෙර, {{time}}",
+    "scheduled": "සකසා ඇති",
+    "noReminders": "තවම මතක් කිරීම් නැත. දිනයකින් හෝ නැකතකින් එකක් සකසන්න.",
+    "reminderFor": "{{date}} සඳහා මතක් කිරීම",
+    "when": "{{date}} · {{time}}"
+  },
+  "reminderEditor": {
+    "title": "මතක් කිරීම",
+    "date": "දිනය",
+    "time": "වේලාව",
+    "save": "සුරකින්න",
+    "cancel": "අවලංගු කරන්න",
+    "delete": "මතක් කිරීම මකන්න"
+  }
+}

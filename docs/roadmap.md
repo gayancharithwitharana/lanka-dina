@@ -4,9 +4,9 @@ Everything up to the AdMob banner runs in Expo Go. The development build waits u
 
 ## Next steps
 
-Done: fonts, SQLite with Drizzle, the Nakath tab (Avurudu and Today), day detail notes and reminders, and the Reminders screen with local notifications.
+Done: fonts, SQLite with Drizzle, the Nakath tab (Avurudu and Today), day detail notes and reminders, the Reminders screen with local notifications, and Sinhala and Tamil translations (the app starts in the phone's language).
 
-1. **Translations.** Fill `src/locales/si.json` and `src/locales/ta.json`, including nakath, lagna and direction names.
+1. **Tamil review.** A native speaker reviews the Tamil terms in `docs/glossary.md` and the app screenshots (`npm run screenshots:ta`). Add sourced Tamil terms for Maru direction, kala horawa and aya-waya.
 2. **Real data.** Holidays from the official gazette; Avurudu nakath from the Department of Cultural Affairs; verified Maru directions, aya-waya and kala horawa rules. Replace `sample-holidays` and `sample-nakath`.
 3. **Nakath share image.** `react-native-view-shot` and `expo-sharing`, before April.
 4. **Development build.** Decide the Android package name first, because it can't change after publishing. Then add AdMob banners (Calendar, Upcoming, Nakath) with Google's test ad IDs.

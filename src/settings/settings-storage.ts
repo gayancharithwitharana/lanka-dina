@@ -1,3 +1,4 @@
+import { getLocales } from 'expo-localization';
 import Storage from 'expo-sqlite/kv-store';
 
 import { lagnas, type Lagna } from '@/constants/lagnas';
@@ -35,7 +36,7 @@ const booleans = [true, false];
 export function loadSettings(): Settings {
   const savedSettings = readSavedSettings();
   return {
-    language: pickAllowed(savedSettings.language, languages, defaultSettings.language),
+    language: pickAllowed(savedSettings.language, languages, getDeviceLanguage()),
     weekStartsOn: pickAllowed(savedSettings.weekStartsOn, weekStarts, defaultSettings.weekStartsOn),
     appearance: pickAllowed(savedSettings.appearance, appearances, defaultSettings.appearance),
     lagna: pickAllowed<Lagna | null>(savedSettings.lagna, [...lagnas], defaultSettings.lagna),
@@ -50,6 +51,13 @@ export function loadSettings(): Settings {
       defaultSettings.longWeekendReminders,
     ),
   };
+}
+
+function getDeviceLanguage(): Language {
+  const preferredLanguage = getLocales()
+    .map((locale) => locale.languageCode)
+    .find((code) => languages.includes(code as Language));
+  return (preferredLanguage as Language | undefined) ?? defaultSettings.language;
 }
 
 function readSavedSettings(): Record<string, unknown> {

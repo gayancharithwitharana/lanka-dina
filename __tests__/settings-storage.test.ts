@@ -1,12 +1,36 @@
+import { getLocales, type Locale } from 'expo-localization';
 import Storage from 'expo-sqlite/kv-store';
 
 import { loadSettings, saveSettings } from '@/settings/settings-storage';
 
+function setDeviceLanguages(...languageCodes: string[]) {
+  const locales = languageCodes.map((languageCode) => ({ languageCode }) as Locale);
+  jest.mocked(getLocales).mockReturnValue(locales as [Locale, ...Locale[]]);
+}
+
 beforeEach(() => {
   (Storage as unknown as { clear: () => void }).clear();
+  setDeviceLanguages('en');
 });
 
 describe('settings storage', () => {
+  it.each([
+    [['si'], 'si'],
+    [['ta'], 'ta'],
+    [['fr'], 'en'],
+    [['fr', 'ta', 'si'], 'ta'],
+    [['en', 'si'], 'en'],
+  ])('starts with the phone language %j as %s', (deviceLanguages, language) => {
+    setDeviceLanguages(...deviceLanguages);
+    expect(loadSettings().language).toBe(language);
+  });
+
+  it('keeps the chosen language over the phone language', () => {
+    saveSettings({ ...loadSettings(), language: 'en' });
+    setDeviceLanguages('si');
+    expect(loadSettings().language).toBe('en');
+  });
+
   it('returns defaults when nothing is saved', () => {
     expect(loadSettings()).toEqual({
       language: 'en',

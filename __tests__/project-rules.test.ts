@@ -29,11 +29,27 @@ const sourceDirectory = path.join(__dirname, '..', 'src');
 const componentFiles = listSourceFiles(sourceDirectory);
 const englishKeys = flattenKeys(en);
 
+const tamilKeysAwaitingSourcedTerms = [
+  'nakath.maruDirection',
+  'nakath.kalaHorawaNow',
+  'nakath.yourYear',
+  'nakath.noAyaWaya',
+];
+
 describe('translations', () => {
   it('has no empty English strings', () => {
     for (const [key, value] of Object.entries(englishKeys)) {
       expect({ key, value: value.trim() }).not.toEqual({ key, value: '' });
     }
+  });
+
+  it.each([
+    ['si', si, []],
+    ['ta', ta, tamilKeysAwaitingSourcedTerms],
+  ])('%s translates every English key', (_, translations, awaitingKeys) => {
+    const translatedKeys = flattenKeys(translations as Translations);
+    const missingKeys = Object.keys(englishKeys).filter((key) => !(key in translatedKeys));
+    expect(missingKeys).toEqual(awaitingKeys);
   });
 
   it.each([

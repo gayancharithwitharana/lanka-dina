@@ -16,7 +16,7 @@ Reference mockups: the `design/*.dc.html` files (HTML mockups, 390×844). Match 
 - react-native-google-mobile-ads: AdMob banner. Use Google's TEST ad unit IDs only until release
 - i18n: English (default), Sinhala, Tamil. Store all UI strings in `src/locales/{en,si,ta}.json`; missing Sinhala/Tamil keys fall back to English
 - Later: react-native-view-shot + expo-sharing for the nakath share image; TanStack Query once remote data is fetched
-- No backend. Holiday and nakath data ship as bundled JSON; later fetched from a remote JSON file for updates
+- No backend. Holiday and nakath data live in `data/`, ship bundled with the app, and update from GitHub Pages without an app release (see docs/DATA_SOURCES.md)
 
 ## Design tokens
 
@@ -36,10 +36,10 @@ Bottom tabs (5): Calendar, Upcoming, Nakath, Reminders, Settings. Day detail is 
 ## Screens
 
 1. Calendar (month view): month/year header with prev/next; 7-column grid, week starts Sunday (setting); dots under holiday (accent) and Poya (amber) dates; legend; "This month" list of holiday cards. AdMob banner above tab bar.
-2. Day detail: large date, holiday name (Poya in amber), type pills (Public/Bank/Mercantile), Poya timing card (begins/ends), Rahu kalaya + Maru direction cards for that weekday (tap opens Nakath), About text, My note. Buttons: Set reminder, Add note. No ad.
+2. Day detail: large date, holiday name (Poya in amber), type pills (Public/Bank/Mercantile), Rahu kalaya + Maru direction cards for that weekday (tap opens Nakath), About text, My note. Buttons: Set reminder, Add note. No ad.
 3. Upcoming: filter chips (All / Poya / Holidays), list grouped by month with "In N days" countdown. AdMob banner above tab bar.
 4. Nakath: segmented control Avurudu / Today. AdMob banner above tab bar.
-   - Avurudu: countdown card to the New Year dawn with a Share button and source line ("Official times · Department of Cultural Affairs"); timeline of nakath (new moon sighting, bath for the old year, dawn of the New Year, punya kalaya, lighting the hearth, work/transactions/first meal, anointing oil, leaving for work). Each row: date, time, name, direction/color detail, and a bell toggle that schedules a reminder.
+   - Avurudu: countdown card to the New Year dawn with a Share button and source line from the year's data (linked when it has a URL); timeline of that year's nakath, entirely from the data (the items and their count change between years). Each row: date, time, name, direction/color detail, and a bell toggle that schedules a reminder.
    - Today: Rahu kalaya card with time range and "Now / Not now" status; Maru direction; current kala horawa; aya-waya card ("Set lagna" prompt, then the user's income/expense numbers for the year).
 5. Reminders: automatic toggles (Every Poya day — evening before 7:00 PM; Long weekends — 2 weeks ahead), scheduled reminders list, + button to add. No ad.
 6. Settings: language segmented control (English / සිංහල / தமிழ்), week starts on (Sunday/Monday), Notifications, Remove ads (coming soon), Holiday data updated date, Privacy policy. No ad.
@@ -67,8 +67,11 @@ Bottom tabs (5): Calendar, Upcoming, Nakath, Reminders, Settings. Day detail is 
 
 ## Rules
 
+@docs/DATA_SOURCES.md
+
+
 - Holiday data must come from the official gazette; never invent dates
-- Avurudu nakath must come from the Department of Cultural Affairs official list; never invent times, directions or colors. Show the source in the app
+- Avurudu nakath must come from the Ministry of Buddhasasana, Religious and Cultural Affairs official list; never invent times, directions or colors. Show the source in the app
 - Do not copy content from third-party astrology sites
 - Until the sources are decided, the app uses sample data from files named `sample-holidays` (and `sample-nakath` for nakath). Replace them before release
 - Keep the app fully usable offline

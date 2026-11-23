@@ -7,9 +7,7 @@ import { db } from '@/db/client';
 import {
   ayaWaya,
   dataSources,
-  maru,
   nakath as nakathTable,
-  rahuKalaya,
   reminders,
   type NakathRow,
 } from '@/db/schema';
@@ -32,8 +30,6 @@ export type AvuruduNakath = {
   countdownKey?: string;
   source?: DataSource;
 };
-
-export type TimeRange = { start: string; end: string };
 
 export function getLatestAvuruduYear(): number | null {
   const [{ latestYear }] = db
@@ -92,15 +88,6 @@ function toNakath(row: NakathRow, language: string): Nakath {
     ...(row.color ? { color: row.color } : {}),
     ...(notes ? { notes } : {}),
   };
-}
-
-export function getRahuKalaya(weekday: number): TimeRange | null {
-  const row = db.select().from(rahuKalaya).where(eq(rahuKalaya.weekday, weekday)).get();
-  return row ? { start: row.start, end: row.end } : null;
-}
-
-export function getMaruDirection(weekday: number): string | null {
-  return db.select().from(maru).where(eq(maru.weekday, weekday)).get()?.direction ?? null;
 }
 
 export function getAyaWaya(year: number, lagna: Lagna): { aya: number; waya: number } | null {

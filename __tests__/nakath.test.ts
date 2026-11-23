@@ -2,14 +2,10 @@ import { lagnas } from '@/constants/lagnas';
 import {
   getAyaWaya,
   getLatestAvurudu,
-  getMaruDirection,
   getNakathReminderIds,
-  getRahuKalaya,
   setNakathReminder,
 } from '@/data/nakath';
 import { bundledDataFiles, type NakathFile } from '@/data/data-files';
-import { bundledTraditional } from '@/db/prepare-database';
-import { toMinutes } from '@/utils/nakath-time';
 
 const bundledNakath = bundledDataFiles.filter(
   (file): file is NakathFile => file.dataset === 'nakath',
@@ -42,13 +38,6 @@ describe('nakath data file', () => {
       if (endsAt) expect(endsAt > startsAt).toBe(true);
     }
   });
-
-  it('has a Rahu kalaya that ends after it starts for every weekday', () => {
-    expect(bundledTraditional.rahuKalaya.map((row) => row.weekday)).toEqual([0, 1, 2, 3, 4, 5, 6]);
-    for (const { start, end } of bundledTraditional.rahuKalaya) {
-      expect(toMinutes(end)).toBeGreaterThan(toMinutes(start));
-    }
-  });
 });
 
 describe('getLatestAvurudu', () => {
@@ -64,17 +53,6 @@ describe('getLatestAvurudu', () => {
 
   it('falls back to English names when a translation is missing', () => {
     expect(getLatestAvurudu('si')?.items[0].name).toBe('New moon sighting');
-  });
-});
-
-describe('weekday tables', () => {
-  it('finds the Rahu kalaya for a weekday', () => {
-    expect(getRahuKalaya(2)).toEqual({ start: '15:00', end: '16:30' });
-  });
-
-  it('returns null for a weekday without a Maru direction', () => {
-    expect(getMaruDirection(2)).toBe('west');
-    expect(getMaruDirection(0)).toBeNull();
   });
 });
 

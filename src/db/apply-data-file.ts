@@ -1,22 +1,29 @@
 import { and, eq, inArray, like } from 'drizzle-orm';
 
-import type { DataFile, HolidayFile, NakathFile } from '@/data/data-files';
+import type { DataFile, HolidayFile, NakathFile, TraditionalFile } from '@/data/data-files';
 import { db } from '@/db/client';
-import { dataSources, holidays, nakath, reminders } from '@/db/schema';
+import { dataSources, holidays, nakath, reminders, traditionalRules } from '@/db/schema';
 
 type Transaction = Parameters<Parameters<typeof db.transaction>[0]>[0];
+
+const TIMELESS_YEAR = 0;
+
+function yearOf(file: DataFile): number {
+  return file.dataset === 'traditional' ? TIMELESS_YEAR : file.year;
+}
 
 export function applyDataFile(file: DataFile): boolean {
   const stored = db
     .select({ version: dataSources.version })
     .from(dataSources)
-    .where(and(eq(dataSources.dataset, file.dataset), eq(dataSources.year, file.year)))
+    .where(and(eq(dataSources.dataset, file.dataset), eq(dataSources.year, yearOf(file))))
     .get();
   if (stored && stored.version >= file.version) return false;
 
   db.transaction((tx) => {
     if (file.dataset === 'holidays') replaceHolidays(tx, file);
-    else replaceNakath(tx, file);
+    else if (file.dataset === 'nakath') replaceNakath(tx, file);
+    else replaceTraditionalRules(tx, file);
     saveDataSource(tx, file);
   });
   return true;
@@ -70,10 +77,19 @@ function replaceNakath(tx: Transaction, file: NakathFile): void {
   }
 }
 
+function replaceTraditionalRules(tx: Transaction, file: TraditionalFile): void {
+  const { location, rahuKalayaParts, dayRulers, horawaOrder, maru } = file;
+  const row = { id: 1, rules: { location, rahuKalayaParts, dayRulers, horawaOrder, maru } };
+  tx.insert(traditionalRules)
+    .values(row)
+    .onConflictDoUpdate({ target: traditionalRules.id, set: row })
+    .run();
+}
+
 function saveDataSource(tx: Transaction, file: DataFile): void {
   const row = {
     dataset: file.dataset,
-    year: file.year,
+    year: yearOf(file),
     version: file.version,
     sourceEn: file.source.en,
     sourceSi: file.source.si ?? null,

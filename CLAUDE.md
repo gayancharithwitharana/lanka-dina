@@ -48,9 +48,9 @@ Bottom tabs (5): Calendar, Upcoming, Nakath, Reminders, Settings. Day detail is 
 
 - holidays(id, date TEXT ISO, name_en, name_si, name_ta, type: 'poya'|'public', is_public, is_bank, is_mercantile, about_en, about_si, about_ta)
 - nakath(id, year, sort_order, key, name_en, name_si, name_ta, starts_at, ends_at NULL, direction NULL, color NULL, notes_en, notes_si, notes_ta)
-- rahu_kalaya(weekday 0–6, start, end) and maru(weekday 0–6, direction): static tables
+- traditional_rules(id 1, rules JSON): Rahu kalaya parts, day rulers, horawa order, Maru directions and the location (Colombo) from `data/*traditional.json`; Rahu kalaya and kala horawa are calculated from that day's sunrise and sunset (`suncalc`)
 - aya_waya(year, lagna, aya, waya)
-- data_sources(dataset: 'holidays'|'nakath', year, version, source_en, source_si, source_ta, source_url, retrieved_at, countdown_key): one row per data file in `data/`; `applyDataFile` replaces that dataset-year when a file has a higher version
+- data_sources(dataset: 'holidays'|'nakath'|'traditional', year (0 for traditional), version, source_en, source_si, source_ta, source_url, retrieved_at, countdown_key): one row per data file in `data/`; `applyDataFile` replaces that dataset-year when a file has a higher version
 - notes(id, date, text, updated_at)
 - reminders(id, holiday_id NULL, nakath_id NULL, date, time, kind: 'auto'|'custom', enabled)
 - settings: language, week_start, lagna (store wherever settings currently live)

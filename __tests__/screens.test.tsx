@@ -59,10 +59,10 @@ describe('Day detail screen', () => {
     expect(screen.getByText('This month')).toBeOnTheScreen();
   });
 
-  it('shows the Rahu kalaya and Maru direction for the weekday', async () => {
+  it("shows the Rahu kalaya from that day's sunrise and sunset, and the Maru direction", async () => {
     await renderRouter(APP_DIRECTORY, { initialUrl: '/day/2026-11-24' });
 
-    expect(screen.getByText('3:00 PM – 4:30 PM')).toBeOnTheScreen();
+    expect(screen.getByText('2:53 PM – 4:22 PM')).toBeOnTheScreen();
     expect(screen.getByText('West')).toBeOnTheScreen();
   });
 
@@ -216,8 +216,9 @@ describe('Nakath screen', () => {
     await user.press(screen.getByRole('radio', { name: 'Today' }));
 
     expect(screen.getByText('Rahu kalaya · Saturday')).toBeOnTheScreen();
-    expect(screen.getByText('9:00 AM – 10:30 AM')).toBeOnTheScreen();
+    expect(screen.getByText('8:56 AM – 10:25 AM')).toBeOnTheScreen();
     expect(screen.getByText('Now')).toBeOnTheScreen();
+    expect(screen.getByText('Calculated from Colombo sunrise and sunset')).toBeOnTheScreen();
     expect(screen.getByText('Not available')).toBeOnTheScreen();
     expect(screen.getByText('Sun')).toBeOnTheScreen();
   });

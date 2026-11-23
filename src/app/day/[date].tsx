@@ -59,7 +59,7 @@ function DayDetail({ isoDate }: { isoDate: string }) {
         </View>
       ))}
 
-      <DayNakathCards weekday={day.getDay()} />
+      <DayNakathCards date={day} />
 
       {holidays.map(
         (holiday) =>

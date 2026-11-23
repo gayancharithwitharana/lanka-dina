@@ -89,6 +89,7 @@
     "now": "Now",
     "notNow": "Not now",
     "rahuKalayaAdvice": "Avoid starting new work during this time",
+    "calculatedFrom": "Calculated from {{place}} sunrise and sunset",
     "maruDirection": "Maru direction",
     "kalaHorawaNow": "Kala horawa now",
     "notAvailable": "Not available",

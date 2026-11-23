@@ -89,6 +89,7 @@
     "now": "දැන්",
     "notNow": "දැන් නොවේ",
     "rahuKalayaAdvice": "මෙම කාලයේ අලුත් වැඩ ආරම්භ නොකරන්න",
+    "calculatedFrom": "{{place}} හිරු උදාව සහ බැසයාම අනුව ගණනය කළා",
     "maruDirection": "මරු දිශාව",
     "kalaHorawaNow": "දැන් කාල හෝරාව",
     "notAvailable": "නොමැත",

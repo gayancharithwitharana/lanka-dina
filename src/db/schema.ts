@@ -1,5 +1,7 @@
 import { integer, primaryKey, sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core';
 
+import type { TraditionalRules } from '@/data/traditional-rules';
+
 export const holidays = sqliteTable('holidays', {
   id: text('id').primaryKey(),
   date: text('date').notNull(),
@@ -43,15 +45,9 @@ export const nakath = sqliteTable('nakath', {
   notesTa: text('notes_ta'),
 });
 
-export const rahuKalaya = sqliteTable('rahu_kalaya', {
-  weekday: integer('weekday').primaryKey(),
-  start: text('start').notNull(),
-  end: text('end').notNull(),
-});
-
-export const maru = sqliteTable('maru', {
-  weekday: integer('weekday').primaryKey(),
-  direction: text('direction').notNull(),
+export const traditionalRules = sqliteTable('traditional_rules', {
+  id: integer('id').primaryKey(),
+  rules: text('rules', { mode: 'json' }).$type<TraditionalRules>().notNull(),
 });
 
 export const ayaWaya = sqliteTable(
@@ -68,7 +64,7 @@ export const ayaWaya = sqliteTable(
 export const dataSources = sqliteTable(
   'data_sources',
   {
-    dataset: text('dataset', { enum: ['holidays', 'nakath'] }).notNull(),
+    dataset: text('dataset', { enum: ['holidays', 'nakath', 'traditional'] }).notNull(),
     year: integer('year').notNull(),
     version: integer('version').notNull(),
     sourceEn: text('source_en').notNull(),
@@ -95,7 +91,5 @@ export type HolidayRow = typeof holidays.$inferSelect;
 export type NewHolidayRow = typeof holidays.$inferInsert;
 export type NakathRow = typeof nakath.$inferSelect;
 export type NewNakathRow = typeof nakath.$inferInsert;
-export type RahuKalayaRow = typeof rahuKalaya.$inferSelect;
-export type MaruRow = typeof maru.$inferSelect;
 export type AyaWayaRow = typeof ayaWaya.$inferSelect;
 export type DataSourceRow = typeof dataSources.$inferSelect;

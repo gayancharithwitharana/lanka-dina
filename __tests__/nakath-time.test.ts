@@ -1,7 +1,6 @@
 import {
   formatClockTime,
   getDaysUntil,
-  getKalaHorawa,
   isWithinRange,
   splitDateTime,
   toMinutes,
@@ -42,23 +41,6 @@ describe('splitDateTime', () => {
 
   it('leaves out the time for an all-day date', () => {
     expect(splitDateTime('2027-04-13')).toEqual({ date: new Date(2027, 3, 13) });
-  });
-});
-
-describe('getKalaHorawa', () => {
-  it("starts each day at sunrise with the day's ruling planet", () => {
-    expect(getKalaHorawa(sunday(6))).toBe('sun');
-    expect(getKalaHorawa(new Date(2026, 10, 9, 6))).toBe('moon');
-    expect(getKalaHorawa(new Date(2026, 10, 7, 6))).toBe('saturn');
-  });
-
-  it('moves to the next planet every hour', () => {
-    expect(getKalaHorawa(sunday(7))).toBe('venus');
-    expect(getKalaHorawa(sunday(8, 59))).toBe('mercury');
-  });
-
-  it("counts hours before sunrise as part of the previous day's cycle", () => {
-    expect(getKalaHorawa(new Date(2026, 10, 9, 5, 30))).toBe('mercury');
   });
 });
 

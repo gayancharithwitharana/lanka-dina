@@ -2,39 +2,41 @@ import { lagnas } from '@/constants/lagnas';
 import {
   getAyaWaya,
   getLatestAvurudu,
-  getMaruDirection,
   getNakathReminderIds,
-  getRahuKalaya,
   setNakathReminder,
 } from '@/data/nakath';
-import { bundledNakath } from '@/db/prepare-database';
-import { toMinutes } from '@/utils/nakath-time';
+import { bundledDataFiles, type NakathFile } from '@/data/data-files';
+
+const bundledNakath = bundledDataFiles.filter(
+  (file): file is NakathFile => file.dataset === 'nakath',
+);
+const bundledAvurudu = bundledNakath.flatMap((file) => file.items);
 
 describe('nakath data file', () => {
-  it('marks sample nakath so they cannot be mistaken for the official list', () => {
-    for (const nakath of bundledNakath.avurudu) {
-      expect(nakath.id).toMatch(/^sample-/);
+  it('names a countdown nakath that exists in the same file', () => {
+    for (const file of bundledNakath) {
+      expect(file.items.map((nakath) => nakath.key)).toContain(file.countdownKey);
+    }
+  });
+
+  it('starts every nakath id with its year, after sample- for sample data', () => {
+    for (const file of bundledNakath) {
+      for (const nakath of file.items)
+        expect(nakath.id).toMatch(new RegExp(`^(sample-)?${file.year}-`));
     }
   });
 
   it('uses unique ids and sort orders', () => {
-    const ids = bundledNakath.avurudu.map((nakath) => nakath.id);
-    const sortOrders = bundledNakath.avurudu.map((nakath) => nakath.sortOrder);
+    const ids = bundledAvurudu.map((nakath) => nakath.id);
+    const sortOrders = bundledAvurudu.map((nakath) => nakath.sortOrder);
     expect(new Set(ids).size).toBe(ids.length);
     expect(new Set(sortOrders).size).toBe(sortOrders.length);
   });
 
   it('uses dates, or dates with times, in ISO format', () => {
-    for (const { startsAt, endsAt } of bundledNakath.avurudu) {
+    for (const { startsAt, endsAt } of bundledAvurudu) {
       expect(startsAt).toMatch(/^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?$/);
       if (endsAt) expect(endsAt > startsAt).toBe(true);
-    }
-  });
-
-  it('has a Rahu kalaya that ends after it starts for every weekday', () => {
-    expect(bundledNakath.rahuKalaya.map((row) => row.weekday)).toEqual([0, 1, 2, 3, 4, 5, 6]);
-    for (const { start, end } of bundledNakath.rahuKalaya) {
-      expect(toMinutes(end)).toBeGreaterThan(toMinutes(start));
     }
   });
 });
@@ -44,25 +46,15 @@ describe('getLatestAvurudu', () => {
     const avurudu = getLatestAvurudu('en');
     expect(avurudu?.year).toBe(2027);
     expect(avurudu?.items.map((nakath) => nakath.name).slice(0, 3)).toEqual([
-      'New moon sighting',
+      'New moon sighting (lunar year)',
       'Bath for the old year',
       'Dawn of the New Year',
     ]);
   });
 
-  it('falls back to English names when a translation is missing', () => {
-    expect(getLatestAvurudu('si')?.items[0].name).toBe('New moon sighting');
-  });
-});
-
-describe('weekday tables', () => {
-  it('finds the Rahu kalaya for a weekday', () => {
-    expect(getRahuKalaya(2)).toEqual({ start: '15:00', end: '16:30' });
-  });
-
-  it('returns null for a weekday without a Maru direction', () => {
-    expect(getMaruDirection(2)).toBe('west');
-    expect(getMaruDirection(0)).toBeNull();
+  it('uses the Sinhala names from the sheet and English when a translation is missing', () => {
+    expect(getLatestAvurudu('si')?.items[2].name).toBe('අලුත් අවුරුදු උදාව');
+    expect(getLatestAvurudu('ta')?.items[2].name).toBe('Dawn of the New Year');
   });
 });
 

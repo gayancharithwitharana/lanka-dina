@@ -4,6 +4,7 @@ import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
 
+import { DataScope } from '@/components/data-scope';
 import { AutomaticReminderRow } from '@/components/reminders/automatic-reminder-row';
 import { ScheduledReminderRow } from '@/components/reminders/scheduled-reminder-row';
 import { ScreenScrollView } from '@/components/screen-scroll-view';
@@ -33,6 +34,14 @@ function loadScheduledReminders(today: string, language: string): ScheduledRemin
 }
 
 export default function RemindersScreen() {
+  return (
+    <DataScope>
+      <RemindersContent />
+    </DataScope>
+  );
+}
+
+function RemindersContent() {
   const { t, i18n } = useTranslation();
   const colors = useThemeColors();
   const today = toIsoDate(useToday());

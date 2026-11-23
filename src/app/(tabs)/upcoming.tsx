@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 
+import { DataScope } from '@/components/data-scope';
 import { HolidayCard } from '@/components/holiday-card';
 import { ScreenScrollView } from '@/components/screen-scroll-view';
 import { Text } from '@/components/text';
@@ -16,6 +17,14 @@ type MonthGroup = {
 };
 
 export default function UpcomingScreen() {
+  return (
+    <DataScope>
+      <UpcomingContent />
+    </DataScope>
+  );
+}
+
+function UpcomingContent() {
   const { t, i18n } = useTranslation();
   const [selectedFilter, setSelectedFilter] = useState<HolidayFilter>('all');
   const today = useToday();

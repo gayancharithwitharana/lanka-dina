@@ -5,9 +5,12 @@ import { SymbolView } from 'expo-symbols';
 import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
 
+import { DataScope } from '@/components/data-scope';
 import { ScreenScrollView } from '@/components/screen-scroll-view';
+import { DataSourceRow } from '@/components/settings/data-source-row';
 import { SegmentedControl } from '@/components/segmented-control';
 import { Text } from '@/components/text';
+import { getDataSources } from '@/data/data-sources';
 import { useThemeColors } from '@/hooks/use-theme-colors';
 import { useSettings } from '@/settings/settings-context';
 import type { Appearance, Language } from '@/settings/settings-storage';
@@ -24,8 +27,17 @@ const weekStartValues: WeekStart[] = [0, 1];
 const appearanceValues: Appearance[] = ['system', 'light', 'dark'];
 
 export default function SettingsScreen() {
+  return (
+    <DataScope>
+      <SettingsContent />
+    </DataScope>
+  );
+}
+
+function SettingsContent() {
   const { t, i18n } = useTranslation();
   const { language, weekStartsOn, appearance, updateSettings } = useSettings();
+  const holidaySources = getDataSources('holidays', i18n.language);
 
   const weekStartOptions = weekStartValues.map((weekday) => ({
     value: weekday,
@@ -77,9 +89,18 @@ export default function SettingsScreen() {
             onPress={() => router.navigate('/reminders')}
           />
           <SettingsRow label={t('settings.removeAds')} value={t('settings.comingSoon')} />
-          <SettingsRow label={t('settings.holidayData')} value={t('settings.sampleData')} />
         </View>
       </SettingsSection>
+
+      {holidaySources.length > 0 && (
+        <SettingsSection title={t('settings.holidayData')}>
+          <View>
+            {holidaySources.map((source) => (
+              <DataSourceRow key={source.year} source={source} />
+            ))}
+          </View>
+        </SettingsSection>
+      )}
 
       <View className="flex-1" />
       <Text className="pt-6 text-center text-xs text-text-muted">

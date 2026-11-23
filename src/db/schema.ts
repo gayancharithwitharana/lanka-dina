@@ -1,5 +1,7 @@
 import { integer, primaryKey, sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core';
 
+import type { TraditionalRules } from '@/data/traditional-rules';
+
 export const holidays = sqliteTable('holidays', {
   id: text('id').primaryKey(),
   date: text('date').notNull(),
@@ -10,8 +12,6 @@ export const holidays = sqliteTable('holidays', {
   isPublic: integer('is_public', { mode: 'boolean' }).notNull(),
   isBank: integer('is_bank', { mode: 'boolean' }).notNull(),
   isMercantile: integer('is_mercantile', { mode: 'boolean' }).notNull(),
-  poyaStart: text('poya_start'),
-  poyaEnd: text('poya_end'),
   aboutEn: text('about_en'),
   aboutSi: text('about_si'),
   aboutTa: text('about_ta'),
@@ -45,15 +45,9 @@ export const nakath = sqliteTable('nakath', {
   notesTa: text('notes_ta'),
 });
 
-export const rahuKalaya = sqliteTable('rahu_kalaya', {
-  weekday: integer('weekday').primaryKey(),
-  start: text('start').notNull(),
-  end: text('end').notNull(),
-});
-
-export const maru = sqliteTable('maru', {
-  weekday: integer('weekday').primaryKey(),
-  direction: text('direction').notNull(),
+export const traditionalRules = sqliteTable('traditional_rules', {
+  id: integer('id').primaryKey(),
+  rules: text('rules', { mode: 'json' }).$type<TraditionalRules>().notNull(),
 });
 
 export const ayaWaya = sqliteTable(
@@ -65,6 +59,22 @@ export const ayaWaya = sqliteTable(
     waya: integer('waya').notNull(),
   },
   (table) => [primaryKey({ columns: [table.year, table.lagna] })],
+);
+
+export const dataSources = sqliteTable(
+  'data_sources',
+  {
+    dataset: text('dataset', { enum: ['holidays', 'nakath', 'traditional'] }).notNull(),
+    year: integer('year').notNull(),
+    version: integer('version').notNull(),
+    sourceEn: text('source_en').notNull(),
+    sourceSi: text('source_si'),
+    sourceTa: text('source_ta'),
+    sourceUrl: text('source_url'),
+    retrievedAt: text('retrieved_at').notNull(),
+    countdownKey: text('countdown_key'),
+  },
+  (table) => [primaryKey({ columns: [table.dataset, table.year] })],
 );
 
 export const reminders = sqliteTable('reminders', {
@@ -81,6 +91,5 @@ export type HolidayRow = typeof holidays.$inferSelect;
 export type NewHolidayRow = typeof holidays.$inferInsert;
 export type NakathRow = typeof nakath.$inferSelect;
 export type NewNakathRow = typeof nakath.$inferInsert;
-export type RahuKalayaRow = typeof rahuKalaya.$inferSelect;
-export type MaruRow = typeof maru.$inferSelect;
 export type AyaWayaRow = typeof ayaWaya.$inferSelect;
+export type DataSourceRow = typeof dataSources.$inferSelect;

@@ -63,7 +63,8 @@
     "removeAds": "දැන්වීම් ඉවත් කරන්න",
     "comingSoon": "ළඟදීම",
     "holidayData": "නිවාඩු දින දත්ත",
-    "sampleData": "නියැදි දත්ත",
+    "dataSource": "{{year}} · {{source}}",
+    "updatedOn": "යාවත්කාලීන කළේ {{date}}",
     "version": "Lankadina · අනුවාදය {{version}}"
   },
   "nakath": {
@@ -71,15 +72,11 @@
     "avurudu": "අවුරුදු",
     "today": "අද",
     "newYearTitle": "සිංහල හා දෙමළ අලුත් අවුරුද්ද {{year}}",
-    "dawnIn": "අලුත් අවුරුදු උදාවට තව",
+    "countdownTo": "{{name}} දක්වා තව",
     "days_one": "දින {{count}}",
     "days_other": "දින {{count}}",
     "dawnToday": "අද",
     "share": "බෙදාගන්න",
-    "sources": {
-      "sample": "නියැදි වේලාවන් · නිල ලැයිස්තුව නොවේ",
-      "official": "නිල නැකත් · සංස්කෘතික කටයුතු දෙපාර්තමේන්තුව"
-    },
     "allDay": "දවස පුරා",
     "until": "{{time}} දක්වා",
     "face": "{{direction}} දිශාවට මුහුණලා",
@@ -92,6 +89,7 @@
     "now": "දැන්",
     "notNow": "දැන් නොවේ",
     "rahuKalayaAdvice": "මෙම කාලයේ අලුත් වැඩ ආරම්භ නොකරන්න",
+    "calculatedFrom": "{{place}} හිරු උදාව සහ බැසයාම අනුව ගණනය කළා",
     "maruDirection": "මරු දිශාව",
     "kalaHorawaNow": "දැන් කාල හෝරාව",
     "notAvailable": "නොමැත",

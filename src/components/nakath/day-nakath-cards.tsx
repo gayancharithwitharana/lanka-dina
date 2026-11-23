@@ -4,17 +4,17 @@ import { Pressable, View } from 'react-native';
 
 import { useNakathFormat } from '@/components/nakath/use-nakath-format';
 import { Text } from '@/components/text';
-import { getMaruDirection, getRahuKalaya } from '@/data/nakath';
+import { getMaruDirection, getRahuKalaya } from '@/data/traditional';
 
 function openTodayNakath() {
   router.navigate({ pathname: '/nakath', params: { view: 'today' } });
 }
 
-export function DayNakathCards({ weekday }: { weekday: number }) {
+export function DayNakathCards({ date }: { date: Date }) {
   const { t } = useTranslation();
   const { formatRange, formatDirection } = useNakathFormat();
-  const rahuKalaya = getRahuKalaya(weekday);
-  const maruDirection = getMaruDirection(weekday);
+  const rahuKalaya = getRahuKalaya(date);
+  const maruDirection = getMaruDirection(date.getDay());
 
   return (
     <View className="flex-row gap-3 px-5 pt-6">

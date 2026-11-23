@@ -1,0 +1,31 @@
+{
+  "dataset": "holidays",
+  "year": 2027,
+  "version": 1,
+  "source": {
+    "en": "Sample data · not the official list",
+    "si": "නියැදි දත්ත · නිල ලැයිස්තුව නොවේ",
+    "ta": "மாதிரித் தரவு · அதிகாரப்பூர்வ பட்டியல் அல்ல"
+  },
+  "retrievedAt": "2026-11-22",
+  "items": [
+    {
+      "id": "sample-2027-tamil-thai-pongal-day",
+      "date": "2027-01-15",
+      "nameEn": "Tamil Thai Pongal Day",
+      "type": "public",
+      "isPublic": true,
+      "isBank": true,
+      "isMercantile": true
+    },
+    {
+      "id": "sample-2027-duruthu-full-moon-poya",
+      "date": "2027-01-22",
+      "nameEn": "Duruthu Full Moon Poya",
+      "type": "poya",
+      "isPublic": true,
+      "isBank": true,
+      "isMercantile": true
+    }
+  ]
+}

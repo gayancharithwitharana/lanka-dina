@@ -6,7 +6,7 @@ name: Nakath shows Avurudu times and today's Rahu kalaya
     env:
       ROUTE: nakath
 - extendedWaitUntil:
-    visible: Lighting the hearth
+    visible: Lighting the hearth and cooking
     timeout: 30000
 - takeScreenshot: nakath-avurudu
 - tapOn: Today

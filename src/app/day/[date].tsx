@@ -3,6 +3,7 @@ import { SymbolView } from 'expo-symbols';
 import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
 
+import { DataScope } from '@/components/data-scope';
 import { DayActions } from '@/components/day/day-actions';
 import { DayNakathCards } from '@/components/nakath/day-nakath-cards';
 import { ScreenScrollView } from '@/components/screen-scroll-view';
@@ -12,6 +13,14 @@ import { useThemeColors } from '@/hooks/use-theme-colors';
 import { isValidIsoDate, parseIsoDate } from '@/utils/calendar';
 
 export default function DayDetailScreen() {
+  return (
+    <DataScope>
+      <DayDetailContent />
+    </DataScope>
+  );
+}
+
+function DayDetailContent() {
   const { date } = useLocalSearchParams();
   const { t } = useTranslation();
 
@@ -59,7 +68,7 @@ function DayDetail({ isoDate }: { isoDate: string }) {
         </View>
       ))}
 
-      <DayNakathCards weekday={day.getDay()} />
+      <DayNakathCards date={day} />
 
       {holidays.map(
         (holiday) =>

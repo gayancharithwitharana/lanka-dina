@@ -4,6 +4,9 @@ import { renderRouter, screen } from 'expo-router/testing-library';
 import { act, fireEvent, userEvent } from '@testing-library/react-native';
 import { Share } from 'react-native';
 
+import { notifyDataUpdated } from '@/data/data-updates';
+import { applyDataFile } from '@/db/apply-data-file';
+
 const APP_DIRECTORY = {
   appDir: 'src/app',
   overrides: { '(tabs)/_layout': () => <Slot /> },
@@ -59,10 +62,10 @@ describe('Day detail screen', () => {
     expect(screen.getByText('This month')).toBeOnTheScreen();
   });
 
-  it('shows the Rahu kalaya and Maru direction for the weekday', async () => {
+  it("shows the Rahu kalaya from that day's sunrise and sunset, and the Maru direction", async () => {
     await renderRouter(APP_DIRECTORY, { initialUrl: '/day/2026-11-24' });
 
-    expect(screen.getByText('3:00 PM – 4:30 PM')).toBeOnTheScreen();
+    expect(screen.getByText('2:53 PM – 4:22 PM')).toBeOnTheScreen();
     expect(screen.getByText('West')).toBeOnTheScreen();
   });
 
@@ -151,6 +154,32 @@ describe('Upcoming screen at midnight', () => {
 });
 
 describe('Settings screen', () => {
+  it('lists the source of each holiday year', async () => {
+    await renderRouter(APP_DIRECTORY, { initialUrl: '/settings' });
+
+    expect(screen.getByText('2026 · Sample data · not the official list')).toBeOnTheScreen();
+    expect(screen.getByText('2027 · Sample data · not the official list')).toBeOnTheScreen();
+    expect(screen.getAllByText('Updated Nov 22, 2026')).toHaveLength(2);
+  });
+
+  it('shows a newly downloaded holiday year without reopening the screen', async () => {
+    await renderRouter(APP_DIRECTORY, { initialUrl: '/settings' });
+
+    await act(async () => {
+      applyDataFile({
+        dataset: 'holidays',
+        year: 2028,
+        version: 1,
+        source: { en: 'Holidays gazette 2028' },
+        retrievedAt: '2027-11-01',
+        items: [],
+      });
+      notifyDataUpdated();
+    });
+
+    expect(screen.getByText('2028 · Holidays gazette 2028')).toBeOnTheScreen();
+  });
+
   it('saves the chosen week start', async () => {
     const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
     await renderRouter(APP_DIRECTORY, { initialUrl: '/settings' });
@@ -163,20 +192,28 @@ describe('Settings screen', () => {
 });
 
 describe('Nakath screen', () => {
-  it('counts down to the dawn of the New Year and lists the nakath', async () => {
+  it('counts down to the nakath the data names and lists the nakath', async () => {
     await renderRouter(APP_DIRECTORY, { initialUrl: '/nakath' });
 
     expect(screen.getByText('Sinhala & Tamil New Year 2027')).toBeOnTheScreen();
+    expect(screen.getByText('Dawn of the New Year in')).toBeOnTheScreen();
     expect(screen.getByText('158 days')).toBeOnTheScreen();
-    expect(screen.getByText('Lighting the hearth')).toBeOnTheScreen();
-    expect(screen.getAllByText('Face south · Wear red')).toHaveLength(2);
-    expect(screen.getByText('Sample times · not the official list')).toBeOnTheScreen();
+    expect(screen.getByText('Lighting the hearth and cooking')).toBeOnTheScreen();
+    expect(
+      screen.getByText('Face north · Wear green · Milk rice with mung and a kavili'),
+    ).toBeOnTheScreen();
+    expect(
+      screen.getByRole('link', {
+        name: 'Department of Cultural Affairs · Ministry of Buddhasasana, Religious and Cultural Affairs',
+      }),
+    ).toBeOnTheScreen();
   });
 
   it('turns a nakath reminder on and off with its bell', async () => {
     const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
     await renderRouter(APP_DIRECTORY, { initialUrl: '/nakath' });
-    const bell = () => screen.getByRole('switch', { name: 'Remind me: Lighting the hearth' });
+    const bell = () =>
+      screen.getByRole('switch', { name: 'Remind me: Lighting the hearth and cooking' });
 
     await user.press(bell());
     expect(bell()).toBeChecked();
@@ -196,8 +233,12 @@ describe('Nakath screen', () => {
 
     const { message } = share.mock.calls[0][0] as { message: string };
     expect(message).toContain('Sinhala & Tamil New Year 2027');
-    expect(message).toContain('Apr 14 10:15 AM · Lighting the hearth · Face south · Wear red');
-    expect(message).toContain('Sample times · not the official list');
+    expect(message).toContain(
+      'Apr 14 6:18 PM · Lighting the hearth and cooking · Face north · Wear green',
+    );
+    expect(message).toContain(
+      'Department of Cultural Affairs · Ministry of Buddhasasana, Religious and Cultural Affairs',
+    );
   });
 
   it("shows today's Rahu kalaya, Maru direction and kala horawa", async () => {
@@ -207,8 +248,9 @@ describe('Nakath screen', () => {
     await user.press(screen.getByRole('radio', { name: 'Today' }));
 
     expect(screen.getByText('Rahu kalaya · Saturday')).toBeOnTheScreen();
-    expect(screen.getByText('9:00 AM – 10:30 AM')).toBeOnTheScreen();
+    expect(screen.getByText('8:56 AM – 10:25 AM')).toBeOnTheScreen();
     expect(screen.getByText('Now')).toBeOnTheScreen();
+    expect(screen.getByText('Calculated from Colombo sunrise and sunset')).toBeOnTheScreen();
     expect(screen.getByText('Not available')).toBeOnTheScreen();
     expect(screen.getByText('Sun')).toBeOnTheScreen();
   });
@@ -246,7 +288,9 @@ describe('Reminders screen', () => {
   it('lists reminders set on days and nakath, soonest first', async () => {
     const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
     await renderRouter(APP_DIRECTORY, { initialUrl: '/nakath' });
-    await user.press(screen.getByRole('switch', { name: 'Remind me: Lighting the hearth' }));
+    await user.press(
+      screen.getByRole('switch', { name: 'Remind me: Lighting the hearth and cooking' }),
+    );
 
     await act(() => router.push('/day/2026-11-24'));
     await user.press(screen.getByRole('button', { name: 'Set reminder' }));
@@ -255,8 +299,8 @@ describe('Reminders screen', () => {
 
     expect(screen.getByText('Il Full Moon Poya')).toBeOnTheScreen();
     expect(screen.getByText('Tue, Nov 24 · 8:00 AM')).toBeOnTheScreen();
-    expect(screen.getByText('Lighting the hearth')).toBeOnTheScreen();
-    expect(screen.getByText('Wed, Apr 14 · 10:15 AM')).toBeOnTheScreen();
+    expect(screen.getByText('Lighting the hearth and cooking')).toBeOnTheScreen();
+    expect(screen.getByText('Wed, Apr 14 · 6:18 PM')).toBeOnTheScreen();
   });
 
   it('creates a reminder from the + button', async () => {

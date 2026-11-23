@@ -5,19 +5,27 @@ import { Pressable, View } from 'react-native';
 
 import { useNakathFormat } from '@/components/nakath/use-nakath-format';
 import { Text } from '@/components/text';
-import { getAyaWaya, getLatestAvuruduYear, getMaruDirection, getRahuKalaya } from '@/data/nakath';
+import { getAyaWaya, getLatestAvuruduYear } from '@/data/nakath';
+import {
+  getCalculationPlace,
+  getKalaHorawa,
+  getMaruDirection,
+  getRahuKalaya,
+} from '@/data/traditional';
 import { useNow } from '@/hooks/use-now';
 import { useSettings } from '@/settings/settings-context';
 import { getWeekdayName } from '@/utils/calendar';
-import { getKalaHorawa, isWithinRange } from '@/utils/nakath-time';
+import { isWithinRange } from '@/utils/nakath-time';
 
 export function TodayView() {
   const { t, i18n } = useTranslation();
   const now = useNow();
   const { formatRange, formatDirection } = useNakathFormat();
   const weekday = now.getDay();
-  const rahuKalaya = getRahuKalaya(weekday);
+  const rahuKalaya = getRahuKalaya(now);
   const maruDirection = getMaruDirection(weekday);
+  const kalaHorawa = getKalaHorawa(now);
+  const place = getCalculationPlace(i18n.language);
   const isRahuKalayaNow =
     rahuKalaya !== null && isWithinRange(now, rahuKalaya.start, rahuKalaya.end);
 
@@ -40,6 +48,9 @@ export function TodayView() {
           {rahuKalaya ? formatRange(rahuKalaya.start, rahuKalaya.end) : t('nakath.notAvailable')}
         </Text>
         <Text className="text-[13px] text-text-secondary">{t('nakath.rahuKalayaAdvice')}</Text>
+        {place && (
+          <Text className="text-xs text-text-muted">{t('nakath.calculatedFrom', { place })}</Text>
+        )}
       </Card>
 
       <View className="flex-row gap-3">
@@ -47,7 +58,10 @@ export function TodayView() {
           label={t('nakath.maruDirection')}
           value={maruDirection ? formatDirection(maruDirection) : t('nakath.notAvailable')}
         />
-        <SmallCard label={t('nakath.kalaHorawaNow')} value={t(`planets.${getKalaHorawa(now)}`)} />
+        <SmallCard
+          label={t('nakath.kalaHorawaNow')}
+          value={kalaHorawa ? t(`planets.${kalaHorawa}`) : t('nakath.notAvailable')}
+        />
       </View>
 
       <AyaWayaCard />

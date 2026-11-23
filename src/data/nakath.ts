@@ -1,17 +1,17 @@
 import { and, asc, eq, max } from 'drizzle-orm';
 
 import type { Lagna } from '@/constants/lagnas';
-import sampleNakath from '@/data/sample-nakath.json';
+import { getDataSource, type DataSource } from '@/data/data-sources';
 import { pickTranslation } from '@/data/translations';
 import { db } from '@/db/client';
 import {
   ayaWaya,
-  maru,
+  dataSources,
   nakath as nakathTable,
-  rahuKalaya,
   reminders,
   type NakathRow,
 } from '@/db/schema';
+import { getDaysUntil } from '@/utils/nakath-time';
 
 export type Nakath = {
   id: string;
@@ -27,17 +27,9 @@ export type Nakath = {
 export type AvuruduNakath = {
   year: number;
   items: Nakath[];
+  countdownKey?: string;
+  source?: DataSource;
 };
-
-export type TimeRange = { start: string; end: string };
-
-export type NakathSource = 'sample' | 'official';
-
-export const NEW_YEAR_DAWN_KEY = 'new-year-dawn';
-
-export function getNakathSource(): NakathSource {
-  return sampleNakath.source === 'official' ? 'official' : 'sample';
-}
 
 export function getLatestAvuruduYear(): number | null {
   const [{ latestYear }] = db
@@ -58,7 +50,30 @@ export function getLatestAvurudu(language: string): AvuruduNakath | null {
     .orderBy(asc(nakathTable.sortOrder))
     .all()
     .map((row) => toNakath(row, language));
-  return { year: latestYear, items };
+  const countdownKey = db
+    .select({ countdownKey: dataSources.countdownKey })
+    .from(dataSources)
+    .where(and(eq(dataSources.dataset, 'nakath'), eq(dataSources.year, latestYear)))
+    .get()?.countdownKey;
+  const source = getDataSource('nakath', latestYear, language);
+  return {
+    year: latestYear,
+    items,
+    ...(countdownKey ? { countdownKey } : {}),
+    ...(source ? { source } : {}),
+  };
+}
+
+export function getCountdownNakath(
+  { items, countdownKey }: AvuruduNakath,
+  today: Date,
+): Nakath | null {
+  const named = items.find((nakath) => nakath.key === countdownKey);
+  if (named) return named;
+  const upcoming = items
+    .filter((nakath) => getDaysUntil(today, nakath.startsAt) >= 0)
+    .sort((first, second) => first.startsAt.localeCompare(second.startsAt));
+  return upcoming[0] ?? null;
 }
 
 function toNakath(row: NakathRow, language: string): Nakath {
@@ -73,15 +88,6 @@ function toNakath(row: NakathRow, language: string): Nakath {
     ...(row.color ? { color: row.color } : {}),
     ...(notes ? { notes } : {}),
   };
-}
-
-export function getRahuKalaya(weekday: number): TimeRange | null {
-  const row = db.select().from(rahuKalaya).where(eq(rahuKalaya.weekday, weekday)).get();
-  return row ? { start: row.start, end: row.end } : null;
-}
-
-export function getMaruDirection(weekday: number): string | null {
-  return db.select().from(maru).where(eq(maru.weekday, weekday)).get()?.direction ?? null;
 }
 
 export function getAyaWaya(year: number, lagna: Lagna): { aya: number; waya: number } | null {

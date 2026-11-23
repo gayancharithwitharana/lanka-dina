@@ -1,0 +1,55 @@
+{
+  "dataset": "traditional",
+  "version": 1,
+  "source": {
+    "en": "Traditional rules · sample, needs a cited reference",
+    "si": "සම්ප්‍රදායික නීති · නියැදි, මූලාශ්‍රයක් අවශ්‍යයි",
+    "ta": "பாரம்பரிய விதிகள் · மாதிரி, ஆதாரம் தேவை"
+  },
+  "retrievedAt": "2026-11-23",
+  "location": {
+    "name": {
+      "en": "Colombo",
+      "si": "කොළඹ",
+      "ta": "கொழும்பு"
+    },
+    "latitude": 6.9271,
+    "longitude": 79.8612
+  },
+  "rahuKalayaParts": [
+    8,
+    2,
+    7,
+    5,
+    6,
+    4,
+    3
+  ],
+  "dayRulers": [
+    "sun",
+    "moon",
+    "mars",
+    "mercury",
+    "jupiter",
+    "venus",
+    "saturn"
+  ],
+  "horawaOrder": [
+    "sun",
+    "venus",
+    "mercury",
+    "moon",
+    "saturn",
+    "jupiter",
+    "mars"
+  ],
+  "maru": [
+    null,
+    null,
+    "west",
+    null,
+    null,
+    "south-east",
+    null
+  ]
+}

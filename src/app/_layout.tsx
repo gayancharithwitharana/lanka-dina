@@ -10,6 +10,8 @@ import * as SystemUI from 'expo-system-ui';
 import { useEffect, useState } from 'react';
 import { AppState, useColorScheme } from 'react-native';
 
+import { notifyDataUpdated } from '@/data/data-updates';
+import { updateRemoteData } from '@/data/remote-data';
 import { prepareDatabase } from '@/db/prepare-database';
 import { fontFamilyDefinitions } from '@/fonts';
 import { useThemeColors } from '@/hooks/use-theme-colors';
@@ -49,11 +51,23 @@ function useDatabase(): boolean {
     prepareDatabase().then(() => {
       setReady(true);
       syncNotifications();
+      refreshRemoteData();
     }, setError);
   }, []);
 
   if (error) throw error;
   return ready;
+}
+
+function refreshRemoteData() {
+  updateRemoteData().then(
+    (changed) => {
+      if (!changed) return;
+      notifyDataUpdated();
+      syncNotifications();
+    },
+    () => {},
+  );
 }
 
 function ThemedNavigation() {
@@ -63,7 +77,9 @@ function ThemedNavigation() {
 
   useEffect(() => {
     const subscription = AppState.addEventListener('change', (state) => {
-      if (state === 'active') syncNotifications();
+      if (state !== 'active') return;
+      syncNotifications();
+      refreshRemoteData();
     });
     return () => subscription.remove();
   }, []);

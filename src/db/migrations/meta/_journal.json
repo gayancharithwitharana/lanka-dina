@@ -15,6 +15,20 @@
       "when": 1794061898627,
       "tag": "0001_nakath",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1795357161276,
+      "tag": "0002_data_sources",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1795393849140,
+      "tag": "0003_traditional_rules",
+      "breakpoints": true
     }
   ]
 }

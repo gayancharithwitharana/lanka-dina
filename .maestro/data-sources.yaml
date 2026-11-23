@@ -13,6 +13,6 @@ name: Settings and Nakath show where the data comes from
 - extendedWaitUntil:
     visible: Dawn of the New Year in
     timeout: 30000
-- assertVisible: Sample data · not the official list
+- assertVisible: Department of Cultural Affairs · Ministry of Buddhasasana, Religious and Cultural Affairs
 - takeScreenshot: nakath-data-source
 - runFlow: subflows/assert-no-errors.yaml

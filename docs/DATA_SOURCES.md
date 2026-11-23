@@ -45,10 +45,19 @@ No government body publishes these. They are traditional rules or yearly tables.
 ## Updates without an app release
 
 - GitHub Pages publishes `data/` together with `manifest.json`, which lists every file and its version, at https://gayancharithwitharana.github.io/lanka-dina/. The `Publish data` workflow runs on every push to `main` that changes `data/`: it validates every file, builds the site with `scripts/build-data-site.mjs` and deploys it. Repository settings → Pages → Source must be "GitHub Actions".
-- The app bundles the same files as version 0. On launch and when it returns to the foreground (at most once an hour), it fetches the manifest and downloads only files with a higher version.
+- The app bundles the same files, each with its own version. On launch and when it returns to the foreground (at most once an hour), it fetches the manifest and downloads only files with a higher version than the phone has.
 - A downloaded file replaces its whole dataset-year in SQLite in one transaction, so removed holidays disappear. Offline or on any error, the app keeps what it has.
 - After an update, notifications are rescheduled. A custom reminder linked to a removed or moved holiday keeps its date and loses the link. A nakath bell reminder is deleted along with its nakath.
 - Every data PR runs the app's validation in CI before it can be published (`__tests__/data-folder.test.ts`: each file matches the schema in `src/data/data-file-schema.ts`, is named after its dataset and year, and is bundled with the app). The phone validates downloaded files with the same schema and skips any that don't match.
+
+## How to change data
+
+1. Edit the file in `data/` (on GitHub's website or locally), for example add an amended holiday to `holidays-2027.json`.
+2. Increase its `version` by 1, and set `retrievedAt` to the day you read the source. Update `source` and `sourceUrl` if the source changed.
+3. Open a PR. CI checks the file; merge when it passes.
+4. The `Publish data` workflow deploys it. Phones pick it up the next time the app opens (at most an hour later if it's already open), and reschedule their reminders.
+
+A new year is a new file, for example `holidays-2028.json` at version 1. Import it in `src/data/data-files.ts` in the same PR (CI checks this). Phones already installed download it; the next app release also bundles it.
 
 ## Showing sources in the app
 

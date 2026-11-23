@@ -1,6 +1,6 @@
 import sampleHolidays2026 from '../../data/sample-holidays-2026.json';
 import sampleHolidays2027 from '../../data/sample-holidays-2027.json';
-import sampleNakath2027 from '../../data/sample-nakath-2027.json';
+import nakath2027 from '../../data/nakath-2027.json';
 import sampleTraditional from '../../data/sample-traditional.json';
 import type { TraditionalRules } from '@/data/traditional-rules';
 import type { NewHolidayRow, NewNakathRow } from '@/db/schema';
@@ -34,6 +34,6 @@ export type DataFile = HolidayFile | NakathFile | TraditionalFile;
 export const bundledDataFiles = [
   sampleHolidays2026,
   sampleHolidays2027,
-  sampleNakath2027,
+  nakath2027,
   sampleTraditional,
 ] as DataFile[];

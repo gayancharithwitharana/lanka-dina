@@ -198,15 +198,22 @@ describe('Nakath screen', () => {
     expect(screen.getByText('Sinhala & Tamil New Year 2027')).toBeOnTheScreen();
     expect(screen.getByText('Dawn of the New Year in')).toBeOnTheScreen();
     expect(screen.getByText('158 days')).toBeOnTheScreen();
-    expect(screen.getByText('Lighting the hearth')).toBeOnTheScreen();
-    expect(screen.getAllByText('Face south · Wear red')).toHaveLength(2);
-    expect(screen.getByText('Sample data · not the official list')).toBeOnTheScreen();
+    expect(screen.getByText('Lighting the hearth and cooking')).toBeOnTheScreen();
+    expect(
+      screen.getByText('Face north · Wear green · Milk rice with mung and a kavili'),
+    ).toBeOnTheScreen();
+    expect(
+      screen.getByRole('link', {
+        name: 'Department of Cultural Affairs · Ministry of Buddhasasana, Religious and Cultural Affairs',
+      }),
+    ).toBeOnTheScreen();
   });
 
   it('turns a nakath reminder on and off with its bell', async () => {
     const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
     await renderRouter(APP_DIRECTORY, { initialUrl: '/nakath' });
-    const bell = () => screen.getByRole('switch', { name: 'Remind me: Lighting the hearth' });
+    const bell = () =>
+      screen.getByRole('switch', { name: 'Remind me: Lighting the hearth and cooking' });
 
     await user.press(bell());
     expect(bell()).toBeChecked();
@@ -226,8 +233,12 @@ describe('Nakath screen', () => {
 
     const { message } = share.mock.calls[0][0] as { message: string };
     expect(message).toContain('Sinhala & Tamil New Year 2027');
-    expect(message).toContain('Apr 14 10:15 AM · Lighting the hearth · Face south · Wear red');
-    expect(message).toContain('Sample data · not the official list');
+    expect(message).toContain(
+      'Apr 14 6:18 PM · Lighting the hearth and cooking · Face north · Wear green',
+    );
+    expect(message).toContain(
+      'Department of Cultural Affairs · Ministry of Buddhasasana, Religious and Cultural Affairs',
+    );
   });
 
   it("shows today's Rahu kalaya, Maru direction and kala horawa", async () => {
@@ -277,7 +288,9 @@ describe('Reminders screen', () => {
   it('lists reminders set on days and nakath, soonest first', async () => {
     const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
     await renderRouter(APP_DIRECTORY, { initialUrl: '/nakath' });
-    await user.press(screen.getByRole('switch', { name: 'Remind me: Lighting the hearth' }));
+    await user.press(
+      screen.getByRole('switch', { name: 'Remind me: Lighting the hearth and cooking' }),
+    );
 
     await act(() => router.push('/day/2026-11-24'));
     await user.press(screen.getByRole('button', { name: 'Set reminder' }));
@@ -286,8 +299,8 @@ describe('Reminders screen', () => {
 
     expect(screen.getByText('Il Full Moon Poya')).toBeOnTheScreen();
     expect(screen.getByText('Tue, Nov 24 · 8:00 AM')).toBeOnTheScreen();
-    expect(screen.getByText('Lighting the hearth')).toBeOnTheScreen();
-    expect(screen.getByText('Wed, Apr 14 · 10:15 AM')).toBeOnTheScreen();
+    expect(screen.getByText('Lighting the hearth and cooking')).toBeOnTheScreen();
+    expect(screen.getByText('Wed, Apr 14 · 6:18 PM')).toBeOnTheScreen();
   });
 
   it('creates a reminder from the + button', async () => {

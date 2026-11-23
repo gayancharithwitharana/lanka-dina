@@ -19,9 +19,10 @@ describe('nakath data file', () => {
     }
   });
 
-  it('marks sample nakath so they cannot be mistaken for the official list', () => {
-    for (const nakath of bundledAvurudu) {
-      expect(nakath.id).toMatch(/^sample-/);
+  it('starts every nakath id with its year, after sample- for sample data', () => {
+    for (const file of bundledNakath) {
+      for (const nakath of file.items)
+        expect(nakath.id).toMatch(new RegExp(`^(sample-)?${file.year}-`));
     }
   });
 
@@ -45,14 +46,15 @@ describe('getLatestAvurudu', () => {
     const avurudu = getLatestAvurudu('en');
     expect(avurudu?.year).toBe(2027);
     expect(avurudu?.items.map((nakath) => nakath.name).slice(0, 3)).toEqual([
-      'New moon sighting',
+      'New moon sighting (lunar year)',
       'Bath for the old year',
       'Dawn of the New Year',
     ]);
   });
 
-  it('falls back to English names when a translation is missing', () => {
-    expect(getLatestAvurudu('si')?.items[0].name).toBe('New moon sighting');
+  it('uses the Sinhala names from the sheet and English when a translation is missing', () => {
+    expect(getLatestAvurudu('si')?.items[2].name).toBe('අලුත් අවුරුදු උදාව');
+    expect(getLatestAvurudu('ta')?.items[2].name).toBe('Dawn of the New Year');
   });
 });
 

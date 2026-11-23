@@ -1,0 +1,117 @@
+{
+  "dataset": "nakath",
+  "year": 2027,
+  "version": 2,
+  "source": {
+    "en": "Department of Cultural Affairs · Ministry of Buddhasasana, Religious and Cultural Affairs",
+    "si": "සංස්කෘතික කටයුතු දෙපාර්තමේන්තුව · බුද්ධශාසන, ආගමික හා සංස්කෘතික කටයුතු අමාත්‍යාංශය"
+  },
+  "sourceUrl": "https://www.gazette.lk/dl/News/2027-Sinhala-New-Year-Nakath-Litha.pdf",
+  "retrievedAt": "2026-11-23",
+  "countdownKey": "new-year-dawn",
+  "items": [
+    {
+      "id": "2027-new-moon-lunar",
+      "key": "new-moon-lunar",
+      "sortOrder": 1,
+      "nameEn": "New moon sighting (lunar year)",
+      "nameSi": "නව සඳ බැලීම (චන්ද්‍ර වර්ෂය)",
+      "startsAt": "2027-04-09"
+    },
+    {
+      "id": "2027-old-year-bath",
+      "key": "old-year-bath",
+      "sortOrder": 2,
+      "nameEn": "Bath for the old year",
+      "nameSi": "පරණ අවුරුද්ද සඳහා ස්නානය",
+      "startsAt": "2027-04-12",
+      "notesEn": "Bathe with nanu of divul leaves",
+      "notesSi": "දිවුල්පත් යුෂ මිශ්‍ර නානු ගා ස්නානය"
+    },
+    {
+      "id": "2027-new-year-dawn",
+      "key": "new-year-dawn",
+      "sortOrder": 3,
+      "nameEn": "Dawn of the New Year",
+      "nameSi": "අලුත් අවුරුදු උදාව",
+      "startsAt": "2027-04-14T15:29"
+    },
+    {
+      "id": "2027-punya-kalaya",
+      "key": "punya-kalaya",
+      "sortOrder": 4,
+      "nameEn": "Punya kalaya",
+      "nameSi": "පුණ්‍ය කාලය",
+      "startsAt": "2027-04-14T09:05",
+      "endsAt": "2027-04-14T21:53",
+      "notesEn": "Set work aside for religious observances",
+      "notesSi": "සියලු වැඩ අත්හැර ආගමික වතාවත්වල යෙදීම"
+    },
+    {
+      "id": "2027-lighting-the-hearth",
+      "key": "lighting-the-hearth",
+      "sortOrder": 5,
+      "nameEn": "Lighting the hearth and cooking",
+      "nameSi": "ආහාර පිසීම",
+      "startsAt": "2027-04-14T18:18",
+      "direction": "north",
+      "color": "green",
+      "notesEn": "Milk rice with mung and a kavili",
+      "notesSi": "මුං මිශ්‍ර කිරිබතක් ද කැවිලි වර්ගයක් ද පිළියෙළ කිරීම"
+    },
+    {
+      "id": "2027-work-and-first-meal",
+      "key": "work-and-first-meal",
+      "sortOrder": 6,
+      "nameEn": "Work, transactions, first meal",
+      "nameSi": "වැඩ ඇල්ලීම, ගනුදෙනු කිරීම හා ආහාර අනුභවය",
+      "startsAt": "2027-04-14T20:18",
+      "direction": "north",
+      "color": "green"
+    },
+    {
+      "id": "2027-anointing-oil",
+      "key": "anointing-oil",
+      "sortOrder": 7,
+      "nameEn": "Anointing oil",
+      "nameSi": "හිසතෙල් ගෑම",
+      "startsAt": "2027-04-17T07:04",
+      "direction": "north",
+      "color": "blue",
+      "notesEn": "Nuga leaves on the head, karanda leaves under the feet",
+      "notesSi": "හිසට නුගපත් ද පයට කරඳපත් ද තබා"
+    },
+    {
+      "id": "2027-leaving-for-work",
+      "key": "leaving-for-work",
+      "sortOrder": 8,
+      "nameEn": "Leaving for work",
+      "nameSi": "රැකීරක්ෂා සඳහා පිටත්ව යෑම",
+      "startsAt": "2027-04-21T06:15",
+      "direction": "south",
+      "color": "green",
+      "notesEn": "After a meal of milk rice with mung",
+      "notesSi": "මුංඇට මිශ්‍ර කිරිබතක් අනුභව කර"
+    },
+    {
+      "id": "2027-planting",
+      "key": "planting",
+      "sortOrder": 9,
+      "nameEn": "Planting",
+      "nameSi": "පැළ සිටුවීම",
+      "startsAt": "2027-04-22T11:38",
+      "direction": "north",
+      "color": "yellow",
+      "notesEn": "Yellow or gold clothes",
+      "notesSi": "කහ හෝ රන්වන් පැහැති වස්ත්‍රාභරණ"
+    },
+    {
+      "id": "2027-new-moon-solar",
+      "key": "new-moon-solar",
+      "sortOrder": 10,
+      "nameEn": "New moon sighting (solar year)",
+      "nameSi": "නව සඳ බැලීම (සූර්‍ය වර්ෂය)",
+      "startsAt": "2027-05-07"
+    }
+  ]
+}

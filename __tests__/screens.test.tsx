@@ -4,6 +4,9 @@ import { renderRouter, screen } from 'expo-router/testing-library';
 import { act, fireEvent, userEvent } from '@testing-library/react-native';
 import { Share } from 'react-native';
 
+import { notifyDataUpdated } from '@/data/data-updates';
+import { applyDataFile } from '@/db/apply-data-file';
+
 const APP_DIRECTORY = {
   appDir: 'src/app',
   overrides: { '(tabs)/_layout': () => <Slot /> },
@@ -157,6 +160,24 @@ describe('Settings screen', () => {
     expect(screen.getByText('2026 · Sample data · not the official list')).toBeOnTheScreen();
     expect(screen.getByText('2027 · Sample data · not the official list')).toBeOnTheScreen();
     expect(screen.getAllByText('Updated Nov 22, 2026')).toHaveLength(2);
+  });
+
+  it('shows a newly downloaded holiday year without reopening the screen', async () => {
+    await renderRouter(APP_DIRECTORY, { initialUrl: '/settings' });
+
+    await act(async () => {
+      applyDataFile({
+        dataset: 'holidays',
+        year: 2028,
+        version: 1,
+        source: { en: 'Holidays gazette 2028' },
+        retrievedAt: '2027-11-01',
+        items: [],
+      });
+      notifyDataUpdated();
+    });
+
+    expect(screen.getByText('2028 · Holidays gazette 2028')).toBeOnTheScreen();
   });
 
   it('saves the chosen week start', async () => {

@@ -2,6 +2,7 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 
+import { DataScope } from '@/components/data-scope';
 import { AvuruduView } from '@/components/nakath/avurudu-view';
 import { TodayView } from '@/components/nakath/today-view';
 import { ScreenScrollView } from '@/components/screen-scroll-view';
@@ -17,6 +18,14 @@ function isNakathView(value: unknown): value is NakathView {
 }
 
 export default function NakathScreen() {
+  return (
+    <DataScope>
+      <NakathContent />
+    </DataScope>
+  );
+}
+
+function NakathContent() {
   const { t } = useTranslation();
   const { view } = useLocalSearchParams();
   const selectedView: NakathView = isNakathView(view) ? view : 'avurudu';

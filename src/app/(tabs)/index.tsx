@@ -5,6 +5,7 @@ import { HolidayLegend } from '@/components/calendar/holiday-legend';
 import { MonthGrid } from '@/components/calendar/month-grid';
 import { MonthHeader } from '@/components/calendar/month-header';
 import { MonthHolidayList } from '@/components/calendar/month-holiday-list';
+import { DataScope } from '@/components/data-scope';
 import { ScreenScrollView } from '@/components/screen-scroll-view';
 import { getHolidaysInMonth } from '@/data/holidays';
 import { useToday } from '@/hooks/use-today';
@@ -12,6 +13,14 @@ import { useSettings } from '@/settings/settings-context';
 import { getMonthName, shiftMonth, type YearMonth } from '@/utils/calendar';
 
 export default function CalendarScreen() {
+  return (
+    <DataScope>
+      <CalendarContent />
+    </DataScope>
+  );
+}
+
+function CalendarContent() {
   const { i18n } = useTranslation();
   const locale = i18n.language;
   const { weekStartsOn } = useSettings();

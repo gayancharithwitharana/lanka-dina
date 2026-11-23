@@ -47,3 +47,6 @@ example
 
 # Personal Claude Code settings
 .claude/settings.local.json
+
+# Published data site
+_site/

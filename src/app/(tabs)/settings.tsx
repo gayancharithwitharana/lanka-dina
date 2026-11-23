@@ -5,6 +5,7 @@ import { SymbolView } from 'expo-symbols';
 import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
 
+import { DataScope } from '@/components/data-scope';
 import { ScreenScrollView } from '@/components/screen-scroll-view';
 import { DataSourceRow } from '@/components/settings/data-source-row';
 import { SegmentedControl } from '@/components/segmented-control';
@@ -26,6 +27,14 @@ const weekStartValues: WeekStart[] = [0, 1];
 const appearanceValues: Appearance[] = ['system', 'light', 'dark'];
 
 export default function SettingsScreen() {
+  return (
+    <DataScope>
+      <SettingsContent />
+    </DataScope>
+  );
+}
+
+function SettingsContent() {
   const { t, i18n } = useTranslation();
   const { language, weekStartsOn, appearance, updateSettings } = useSettings();
   const holidaySources = getDataSources('holidays', i18n.language);

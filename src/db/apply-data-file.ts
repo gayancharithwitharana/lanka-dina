@@ -6,19 +6,23 @@ import { dataSources, holidays, nakath, reminders, traditionalRules } from '@/db
 
 type Transaction = Parameters<Parameters<typeof db.transaction>[0]>[0];
 
-const TIMELESS_YEAR = 0;
+export const TIMELESS_YEAR = 0;
 
-function yearOf(file: DataFile): number {
+export function yearOf(file: DataFile): number {
   return file.dataset === 'traditional' ? TIMELESS_YEAR : file.year;
 }
 
-export function applyDataFile(file: DataFile): boolean {
+export function getStoredVersion(dataset: DataFile['dataset'], year: number): number {
   const stored = db
     .select({ version: dataSources.version })
     .from(dataSources)
-    .where(and(eq(dataSources.dataset, file.dataset), eq(dataSources.year, yearOf(file))))
+    .where(and(eq(dataSources.dataset, dataset), eq(dataSources.year, year)))
     .get();
-  if (stored && stored.version >= file.version) return false;
+  return stored?.version ?? 0;
+}
+
+export function applyDataFile(file: DataFile): boolean {
+  if (getStoredVersion(file.dataset, yearOf(file)) >= file.version) return false;
 
   db.transaction((tx) => {
     if (file.dataset === 'holidays') replaceHolidays(tx, file);

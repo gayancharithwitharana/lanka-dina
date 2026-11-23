@@ -1,0 +1,18 @@
+appId: host.exp.Exponent
+name: Settings and Nakath show where the data comes from
+---
+- runFlow:
+    file: subflows/open-route.yaml
+    env:
+      ROUTE: settings
+- scrollUntilVisible:
+    element: 2027 · Sample data · not the official list.*
+- assertVisible: 2026 · Sample data · not the official list.*Updated Nov 22, 2026
+- takeScreenshot: settings-data-sources
+- openLink: exp://127.0.0.1:8081/--/nakath?view=avurudu
+- extendedWaitUntil:
+    visible: Dawn of the New Year in
+    timeout: 30000
+- assertVisible: Sample data · not the official list
+- takeScreenshot: nakath-data-source
+- runFlow: subflows/assert-no-errors.yaml

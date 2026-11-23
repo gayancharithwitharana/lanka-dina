@@ -63,7 +63,8 @@
     "removeAds": "Remove ads",
     "comingSoon": "Coming soon",
     "holidayData": "Holiday data",
-    "sampleData": "Sample data",
+    "dataSource": "{{year}} · {{source}}",
+    "updatedOn": "Updated {{date}}",
     "version": "Lankadina · Version {{version}}"
   },
   "nakath": {
@@ -71,15 +72,11 @@
     "avurudu": "Avurudu",
     "today": "Today",
     "newYearTitle": "Sinhala & Tamil New Year {{year}}",
-    "dawnIn": "Dawn of the New Year in",
+    "countdownTo": "{{name}} in",
     "days_one": "{{count}} day",
     "days_other": "{{count}} days",
     "dawnToday": "Today",
     "share": "Share",
-    "sources": {
-      "sample": "Sample times · not the official list",
-      "official": "Official times · Department of Cultural Affairs"
-    },
     "allDay": "All day",
     "until": "Until {{time}}",
     "face": "Face {{direction}}",

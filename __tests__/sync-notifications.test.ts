@@ -30,10 +30,10 @@ describe('syncNotifications', () => {
 
     expect(mocked.cancelAllScheduledNotificationsAsync).toHaveBeenCalled();
     expect(scheduledIds()).toEqual([
-      'poya-sample-2026-11-24',
-      'poya-sample-2026-12-23',
+      'poya-sample-2026-il-full-moon-poya',
+      'poya-sample-2026-unduvap-full-moon-poya',
       'day-2026-12-25',
-      'poya-sample-2027-01-22',
+      'poya-sample-2027-duruthu-full-moon-poya',
     ]);
   });
 

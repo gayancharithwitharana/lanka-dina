@@ -63,7 +63,8 @@
     "removeAds": "விளம்பரங்களை அகற்று",
     "comingSoon": "விரைவில்",
     "holidayData": "விடுமுறைத் தரவு",
-    "sampleData": "மாதிரித் தரவு",
+    "dataSource": "{{year}} · {{source}}",
+    "updatedOn": "{{date}} அன்று புதுப்பிக்கப்பட்டது",
     "version": "Lankadina · பதிப்பு {{version}}"
   },
   "nakath": {
@@ -71,15 +72,11 @@
     "avurudu": "புத்தாண்டு",
     "today": "இன்று",
     "newYearTitle": "சிங்கள தமிழ் புத்தாண்டு {{year}}",
-    "dawnIn": "புத்தாண்டு பிறப்புக்கு இன்னும்",
+    "countdownTo": "{{name}} வரை இன்னும்",
     "days_one": "{{count}} நாள்",
     "days_other": "{{count}} நாட்கள்",
     "dawnToday": "இன்று",
     "share": "பகிர்",
-    "sources": {
-      "sample": "மாதிரி நேரங்கள் · அதிகாரப்பூர்வ பட்டியல் அல்ல",
-      "official": "அதிகாரப்பூர்வ நேரங்கள் · கலாசார அலுவல்கள் திணைக்களம்"
-    },
     "allDay": "முழு நாள்",
     "until": "{{time}} வரை",
     "face": "{{direction}} திசை நோக்கி",

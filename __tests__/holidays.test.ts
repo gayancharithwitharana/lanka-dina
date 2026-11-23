@@ -6,10 +6,14 @@ import {
   getHolidaysInMonth,
   type HolidayType,
 } from '@/data/holidays';
-import { bundledHolidays, upsertHolidays } from '@/db/prepare-database';
+import { bundledDataFiles, type HolidayFile } from '@/data/data-files';
 import { parseIsoDate, toIsoDate } from '@/utils/calendar';
 
 const holidayTypes: HolidayType[] = ['public', 'poya'];
+const holidayFiles = bundledDataFiles.filter(
+  (file): file is HolidayFile => file.dataset === 'holidays',
+);
+const bundledHolidays = holidayFiles.flatMap((file) => file.items);
 
 describe('holiday data file', () => {
   it('has unique ids', () => {
@@ -34,6 +38,12 @@ describe('holiday data file', () => {
     for (const holiday of bundledHolidays) {
       expect(holiday.nameEn.trim()).not.toBe('');
       expect(holiday.isPublic || holiday.isBank || holiday.isMercantile).toBe(true);
+    }
+  });
+
+  it('keeps every holiday in the year of its file', () => {
+    for (const file of holidayFiles) {
+      for (const holiday of file.items) expect(holiday.date.startsWith(`${file.year}-`)).toBe(true);
     }
   });
 
@@ -103,31 +113,5 @@ describe('holiday translations', () => {
   it('falls back to English when a translation is missing', () => {
     expect(getHolidaysByDate('2026-11-24', 'si')[0].name).toBe('Il Full Moon Poya');
     expect(getHolidaysByDate('2026-11-24', 'fr')[0].name).toBe('Il Full Moon Poya');
-  });
-});
-
-describe('upsertHolidays', () => {
-  const testHoliday = {
-    id: 'test-2027-01-01',
-    date: '2027-01-01',
-    nameEn: 'Test Holiday',
-    type: 'public' as const,
-    isPublic: true,
-    isBank: false,
-    isMercantile: false,
-  };
-
-  it('inserts new holidays and updates existing ones without duplicates', () => {
-    upsertHolidays([testHoliday]);
-    upsertHolidays([{ ...testHoliday, nameEn: 'Renamed Holiday', isBank: true }]);
-
-    const holidays = getHolidaysByDate('2027-01-01', 'en');
-    expect(holidays).toHaveLength(1);
-    expect(holidays[0]).toMatchObject({ name: 'Renamed Holiday', isBank: true });
-  });
-
-  it('keeps the bundled sample holidays after seeding again', () => {
-    upsertHolidays(bundledHolidays);
-    expect(getHolidaysByDate('2026-12-23', 'en')).toHaveLength(2);
   });
 });

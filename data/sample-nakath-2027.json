@@ -1,9 +1,17 @@
 {
-  "source": "sample",
-  "avurudu": [
+  "dataset": "nakath",
+  "year": 2027,
+  "version": 1,
+  "source": {
+    "en": "Sample data · not the official list",
+    "si": "නියැදි දත්ත · නිල ලැයිස්තුව නොවේ",
+    "ta": "மாதிரித் தரவு · அதிகாரப்பூர்வ பட்டியல் அல்ல"
+  },
+  "retrievedAt": "2026-11-22",
+  "countdownKey": "new-year-dawn",
+  "items": [
     {
       "id": "sample-2027-new-moon",
-      "year": 2027,
       "sortOrder": 1,
       "key": "new-moon",
       "nameEn": "New moon sighting",
@@ -12,7 +20,6 @@
     },
     {
       "id": "sample-2027-old-year-bath",
-      "year": 2027,
       "sortOrder": 2,
       "key": "old-year-bath",
       "nameEn": "Bath for the old year",
@@ -21,7 +28,6 @@
     },
     {
       "id": "sample-2027-new-year-dawn",
-      "year": 2027,
       "sortOrder": 3,
       "key": "new-year-dawn",
       "nameEn": "Dawn of the New Year",
@@ -30,7 +36,6 @@
     },
     {
       "id": "sample-2027-punya-kalaya",
-      "year": 2027,
       "sortOrder": 4,
       "key": "punya-kalaya",
       "nameEn": "Punya kalaya",
@@ -40,7 +45,6 @@
     },
     {
       "id": "sample-2027-hearth",
-      "year": 2027,
       "sortOrder": 5,
       "key": "hearth",
       "nameEn": "Lighting the hearth",
@@ -50,7 +54,6 @@
     },
     {
       "id": "sample-2027-first-meal",
-      "year": 2027,
       "sortOrder": 6,
       "key": "first-meal",
       "nameEn": "Work, transactions, first meal",
@@ -60,7 +63,6 @@
     },
     {
       "id": "sample-2027-anointing-oil",
-      "year": 2027,
       "sortOrder": 7,
       "key": "anointing-oil",
       "nameEn": "Anointing oil",
@@ -69,39 +71,11 @@
     },
     {
       "id": "sample-2027-leaving-for-work",
-      "year": 2027,
       "sortOrder": 8,
       "key": "leaving-for-work",
       "nameEn": "Leaving for work",
       "startsAt": "2027-04-18T06:30",
       "direction": "south"
     }
-  ],
-  "rahuKalaya": [
-    { "weekday": 0, "start": "16:30", "end": "18:00" },
-    { "weekday": 1, "start": "07:30", "end": "09:00" },
-    { "weekday": 2, "start": "15:00", "end": "16:30" },
-    { "weekday": 3, "start": "12:00", "end": "13:30" },
-    { "weekday": 4, "start": "13:30", "end": "15:00" },
-    { "weekday": 5, "start": "10:30", "end": "12:00" },
-    { "weekday": 6, "start": "09:00", "end": "10:30" }
-  ],
-  "maru": [
-    { "weekday": 2, "direction": "west" },
-    { "weekday": 5, "direction": "south-east" }
-  ],
-  "ayaWaya": [
-    { "year": 2027, "lagna": "mesha", "aya": 8, "waya": 11 },
-    { "year": 2027, "lagna": "vrushabha", "aya": 2, "waya": 14 },
-    { "year": 2027, "lagna": "mithuna", "aya": 5, "waya": 5 },
-    { "year": 2027, "lagna": "kataka", "aya": 14, "waya": 2 },
-    { "year": 2027, "lagna": "simha", "aya": 11, "waya": 11 },
-    { "year": 2027, "lagna": "kanya", "aya": 5, "waya": 5 },
-    { "year": 2027, "lagna": "thula", "aya": 2, "waya": 14 },
-    { "year": 2027, "lagna": "vrushchika", "aya": 8, "waya": 11 },
-    { "year": 2027, "lagna": "dhanu", "aya": 11, "waya": 5 },
-    { "year": 2027, "lagna": "makara", "aya": 14, "waya": 14 },
-    { "year": 2027, "lagna": "kumbha", "aya": 14, "waya": 14 },
-    { "year": 2027, "lagna": "meena", "aya": 11, "waya": 5 }
   ]
 }

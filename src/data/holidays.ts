@@ -36,7 +36,7 @@ function selectHolidays(condition: ReturnType<typeof and>, language: string): Ho
     .select()
     .from(holidaysTable)
     .where(condition)
-    .orderBy(asc(holidaysTable.date), asc(holidaysTable.id))
+    .orderBy(asc(holidaysTable.date), asc(holidaysTable.type), asc(holidaysTable.id))
     .all()
     .map((row) => toHoliday(row, language));
 }

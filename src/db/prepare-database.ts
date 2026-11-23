@@ -1,51 +1,35 @@
 import { migrate } from 'drizzle-orm/expo-sqlite/migrator';
 
-import sampleHolidays from '@/data/sample-holidays.json';
-import sampleNakath from '@/data/sample-nakath.json';
+import { bundledDataFiles } from '@/data/data-files';
+import sampleTraditional from '@/data/sample-traditional.json';
+import { applyDataFile } from '@/db/apply-data-file';
 import { db } from '@/db/client';
 import migrations from '@/db/migrations/migrations';
 import {
   ayaWaya,
-  holidays,
   maru,
-  nakath,
   rahuKalaya,
   type AyaWayaRow,
   type MaruRow,
-  type NewHolidayRow,
-  type NewNakathRow,
   type RahuKalayaRow,
 } from '@/db/schema';
 
-export type NakathData = {
-  avurudu: NewNakathRow[];
+export type TraditionalData = {
   rahuKalaya: RahuKalayaRow[];
   maru: MaruRow[];
   ayaWaya: AyaWayaRow[];
 };
 
-export const bundledHolidays = sampleHolidays as NewHolidayRow[];
-export const bundledNakath = sampleNakath as NakathData;
+export const bundledTraditional = sampleTraditional as TraditionalData;
 
 export async function prepareDatabase(): Promise<void> {
   await migrate(db, migrations);
-  upsertHolidays(bundledHolidays);
-  upsertNakathData(bundledNakath);
+  for (const file of bundledDataFiles) applyDataFile(file);
+  upsertTraditionalData(bundledTraditional);
 }
 
-export function upsertHolidays(rows: NewHolidayRow[]): void {
+export function upsertTraditionalData(data: TraditionalData): void {
   db.transaction((tx) => {
-    for (const row of rows) {
-      tx.insert(holidays).values(row).onConflictDoUpdate({ target: holidays.id, set: row }).run();
-    }
-  });
-}
-
-export function upsertNakathData(data: NakathData): void {
-  db.transaction((tx) => {
-    for (const row of data.avurudu) {
-      tx.insert(nakath).values(row).onConflictDoUpdate({ target: nakath.id, set: row }).run();
-    }
     for (const row of data.rahuKalaya) {
       tx.insert(rahuKalaya)
         .values(row)

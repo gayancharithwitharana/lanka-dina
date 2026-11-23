@@ -46,10 +46,11 @@ Bottom tabs (5): Calendar, Upcoming, Nakath, Reminders, Settings. Day detail is 
 
 ## Data model (SQLite)
 
-- holidays(id, date TEXT ISO, name_en, name_si, name_ta, type: 'poya'|'public', is_public, is_bank, is_mercantile, poya_start, poya_end, about_en, about_si, about_ta)
+- holidays(id, date TEXT ISO, name_en, name_si, name_ta, type: 'poya'|'public', is_public, is_bank, is_mercantile, about_en, about_si, about_ta)
 - nakath(id, year, sort_order, key, name_en, name_si, name_ta, starts_at, ends_at NULL, direction NULL, color NULL, notes_en, notes_si, notes_ta)
 - rahu_kalaya(weekday 0–6, start, end) and maru(weekday 0–6, direction): static tables
 - aya_waya(year, lagna, aya, waya)
+- data_sources(dataset: 'holidays'|'nakath', year, version, source_en, source_si, source_ta, source_url, retrieved_at, countdown_key): one row per data file in `data/`; `applyDataFile` replaces that dataset-year when a file has a higher version
 - notes(id, date, text, updated_at)
 - reminders(id, holiday_id NULL, nakath_id NULL, date, time, kind: 'auto'|'custom', enabled)
 - settings: language, week_start, lagna (store wherever settings currently live)
@@ -62,7 +63,7 @@ Bottom tabs (5): Calendar, Upcoming, Nakath, Reminders, Settings. Day detail is 
 - Screen tests use `renderRouter` from `expo-router/testing-library` with the real `src/app` routes; the tabs layout is swapped for `<Slot />` because native tabs render every tab at once
 - `__tests__/project-rules.test.ts` enforces: no hardcoded colors or English UI text in `src/`, matching light/dark tokens, and Sinhala/Tamil keys that exist in English
 - Every bug fix comes with a test that fails without the fix
-- End-to-end: `npm run e2e` runs the Maestro flows in `.maestro/` on the booted iOS simulator through Expo Go. Metro must be running on port 8081. Each flow starts with `subflows/open-route.yaml` (fresh launch, then deep link) and ends with `subflows/assert-no-errors.yaml`. Run `subflows/allow-notifications.yaml` after any step that can trigger the notification permission prompt. Match times with `.` before AM/PM (iOS formats them with a narrow no-break space). Screenshots land in `.maestro/output/` (gitignored)
+- End-to-end: `npm run e2e` runs the Maestro flows in `.maestro/` on the booted iOS simulator through Expo Go. Metro must be running on port 8081, and Expo Go's floating Tools button must be off (it covers modal Save buttons). Each flow starts with `subflows/open-route.yaml` (fresh launch, switch to English, then deep link) and ends with `subflows/assert-no-errors.yaml`. Run `subflows/allow-notifications.yaml` after any step that can trigger the notification permission prompt. Match times with `.` before AM/PM (iOS formats them with a narrow no-break space). Screenshots land in `.maestro/output/` (gitignored)
 - Translation review: `npm run screenshots:si` and `npm run screenshots:ta` screenshot every screen in that language, light and dark, for checking text overflow (flows in `.maestro/review/`, not part of `npm run e2e`)
 
 ## Rules

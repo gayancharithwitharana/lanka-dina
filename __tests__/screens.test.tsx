@@ -151,6 +151,14 @@ describe('Upcoming screen at midnight', () => {
 });
 
 describe('Settings screen', () => {
+  it('lists the source of each holiday year', async () => {
+    await renderRouter(APP_DIRECTORY, { initialUrl: '/settings' });
+
+    expect(screen.getByText('2026 · Sample data · not the official list')).toBeOnTheScreen();
+    expect(screen.getByText('2027 · Sample data · not the official list')).toBeOnTheScreen();
+    expect(screen.getAllByText('Updated Nov 22, 2026')).toHaveLength(2);
+  });
+
   it('saves the chosen week start', async () => {
     const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
     await renderRouter(APP_DIRECTORY, { initialUrl: '/settings' });
@@ -163,14 +171,15 @@ describe('Settings screen', () => {
 });
 
 describe('Nakath screen', () => {
-  it('counts down to the dawn of the New Year and lists the nakath', async () => {
+  it('counts down to the nakath the data names and lists the nakath', async () => {
     await renderRouter(APP_DIRECTORY, { initialUrl: '/nakath' });
 
     expect(screen.getByText('Sinhala & Tamil New Year 2027')).toBeOnTheScreen();
+    expect(screen.getByText('Dawn of the New Year in')).toBeOnTheScreen();
     expect(screen.getByText('158 days')).toBeOnTheScreen();
     expect(screen.getByText('Lighting the hearth')).toBeOnTheScreen();
     expect(screen.getAllByText('Face south · Wear red')).toHaveLength(2);
-    expect(screen.getByText('Sample times · not the official list')).toBeOnTheScreen();
+    expect(screen.getByText('Sample data · not the official list')).toBeOnTheScreen();
   });
 
   it('turns a nakath reminder on and off with its bell', async () => {
@@ -197,7 +206,7 @@ describe('Nakath screen', () => {
     const { message } = share.mock.calls[0][0] as { message: string };
     expect(message).toContain('Sinhala & Tamil New Year 2027');
     expect(message).toContain('Apr 14 10:15 AM · Lighting the hearth · Face south · Wear red');
-    expect(message).toContain('Sample times · not the official list');
+    expect(message).toContain('Sample data · not the official list');
   });
 
   it("shows today's Rahu kalaya, Maru direction and kala horawa", async () => {

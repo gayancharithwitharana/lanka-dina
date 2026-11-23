@@ -10,8 +10,6 @@ export const holidays = sqliteTable('holidays', {
   isPublic: integer('is_public', { mode: 'boolean' }).notNull(),
   isBank: integer('is_bank', { mode: 'boolean' }).notNull(),
   isMercantile: integer('is_mercantile', { mode: 'boolean' }).notNull(),
-  poyaStart: text('poya_start'),
-  poyaEnd: text('poya_end'),
   aboutEn: text('about_en'),
   aboutSi: text('about_si'),
   aboutTa: text('about_ta'),
@@ -67,6 +65,22 @@ export const ayaWaya = sqliteTable(
   (table) => [primaryKey({ columns: [table.year, table.lagna] })],
 );
 
+export const dataSources = sqliteTable(
+  'data_sources',
+  {
+    dataset: text('dataset', { enum: ['holidays', 'nakath'] }).notNull(),
+    year: integer('year').notNull(),
+    version: integer('version').notNull(),
+    sourceEn: text('source_en').notNull(),
+    sourceSi: text('source_si'),
+    sourceTa: text('source_ta'),
+    sourceUrl: text('source_url'),
+    retrievedAt: text('retrieved_at').notNull(),
+    countdownKey: text('countdown_key'),
+  },
+  (table) => [primaryKey({ columns: [table.dataset, table.year] })],
+);
+
 export const reminders = sqliteTable('reminders', {
   id: integer('id').primaryKey({ autoIncrement: true }),
   holidayId: text('holiday_id').references(() => holidays.id),
@@ -84,3 +98,4 @@ export type NewNakathRow = typeof nakath.$inferInsert;
 export type RahuKalayaRow = typeof rahuKalaya.$inferSelect;
 export type MaruRow = typeof maru.$inferSelect;
 export type AyaWayaRow = typeof ayaWaya.$inferSelect;
+export type DataSourceRow = typeof dataSources.$inferSelect;

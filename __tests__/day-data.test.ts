@@ -26,8 +26,8 @@ describe('notes', () => {
 
 describe('day reminders', () => {
   it('keeps one reminder per day and replaces its time', () => {
-    saveDayReminder('2026-11-08', DEFAULT_REMINDER_TIME, 'sample-2026-11-08');
-    saveDayReminder('2026-11-08', '18:30', 'sample-2026-11-08');
+    saveDayReminder('2026-11-08', DEFAULT_REMINDER_TIME, 'sample-2026-deepavali');
+    saveDayReminder('2026-11-08', '18:30', 'sample-2026-deepavali');
     expect(getDayReminderTime('2026-11-08')).toBe('18:30');
 
     deleteDayReminder('2026-11-08');

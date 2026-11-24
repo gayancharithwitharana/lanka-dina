@@ -2,7 +2,9 @@ import { router, Slot } from 'expo-router';
 import Storage from 'expo-sqlite/kv-store';
 import { renderRouter, screen } from 'expo-router/testing-library';
 import { act, fireEvent, userEvent } from '@testing-library/react-native';
+import * as Sharing from 'expo-sharing';
 import { Share } from 'react-native';
+import { captureRef } from 'react-native-view-shot';
 
 import { notifyDataUpdated } from '@/data/data-updates';
 import { applyDataFile } from '@/db/apply-data-file';
@@ -222,23 +224,82 @@ describe('Nakath screen', () => {
     expect(bell()).not.toBeChecked();
   });
 
-  it('shares the nakath list as text', async () => {
+  it('opens the share preview from the countdown card', async () => {
+    const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+    const router = await renderRouter(APP_DIRECTORY, { initialUrl: '/nakath' });
+
+    await user.press(screen.getByRole('button', { name: 'Share' }));
+
+    expect(router.getPathname()).toBe('/nakath-share');
+  });
+});
+
+describe('Nakath share screen', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  const source =
+    'Department of Cultural Affairs · Ministry of Buddhasasana, Religious and Cultural Affairs';
+
+  it('previews the image with every nakath, the source and the app name', async () => {
+    await renderRouter(APP_DIRECTORY, { initialUrl: '/nakath-share' });
+
+    expect(screen.getByText('Sinhala & Tamil New Year 2027')).toBeOnTheScreen();
+    expect(screen.getAllByText('Dawn of the New Year')).toHaveLength(2);
+    expect(screen.getByText('Apr 14 · 3:29 PM')).toBeOnTheScreen();
+    expect(screen.getByText('Planting')).toBeOnTheScreen();
+    expect(screen.getByText('Face north · Wear yellow · Yellow or gold clothes')).toBeOnTheScreen();
+    expect(screen.getByText(source)).toBeOnTheScreen();
+    expect(screen.getByText('Shared from Lankadina')).toBeOnTheScreen();
+  });
+
+  it('shares the preview as a PNG image', async () => {
+    const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+    await renderRouter(APP_DIRECTORY, { initialUrl: '/nakath-share' });
+
+    await user.press(screen.getByRole('button', { name: 'Share image' }));
+
+    expect(captureRef).toHaveBeenCalledWith(expect.anything(), {
+      format: 'png',
+      result: 'tmpfile',
+    });
+    expect(Sharing.shareAsync).toHaveBeenCalledWith('file:///tmp/nakath.png', {
+      mimeType: 'image/png',
+      UTI: 'public.png',
+      dialogTitle: 'Sinhala & Tamil New Year 2027',
+    });
+  });
+
+  it('shares the list as text', async () => {
     const share = jest
       .spyOn(Share, 'share')
       .mockResolvedValue({ action: 'sharedAction', activityType: undefined });
     const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
-    await renderRouter(APP_DIRECTORY, { initialUrl: '/nakath' });
+    await renderRouter(APP_DIRECTORY, { initialUrl: '/nakath-share' });
 
-    await user.press(screen.getByRole('button', { name: 'Share' }));
+    await user.press(screen.getByRole('button', { name: 'Share as text' }));
 
     const { message } = share.mock.calls[0][0] as { message: string };
     expect(message).toContain('Sinhala & Tamil New Year 2027');
     expect(message).toContain(
       'Apr 14 6:18 PM · Lighting the hearth and cooking · Face north · Wear green',
     );
-    expect(message).toContain(
-      'Department of Cultural Affairs · Ministry of Buddhasasana, Religious and Cultural Affairs',
-    );
+    expect(message).toContain(source);
+  });
+
+  it('falls back to text when the phone cannot share files', async () => {
+    jest.mocked(Sharing.isAvailableAsync).mockResolvedValueOnce(false);
+    const share = jest
+      .spyOn(Share, 'share')
+      .mockResolvedValue({ action: 'sharedAction', activityType: undefined });
+    const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+    await renderRouter(APP_DIRECTORY, { initialUrl: '/nakath-share' });
+
+    await user.press(screen.getByRole('button', { name: 'Share image' }));
+
+    expect(Sharing.shareAsync).not.toHaveBeenCalled();
+    expect(share).toHaveBeenCalled();
   });
 
   it("shows today's Rahu kalaya, Maru direction and kala horawa", async () => {

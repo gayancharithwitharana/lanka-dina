@@ -15,7 +15,7 @@ Reference mockups: the `design/*.dc.html` files (HTML mockups, 390×844). Match 
 - expo-notifications: local reminders
 - react-native-google-mobile-ads: AdMob banner. Use Google's TEST ad unit IDs only until release
 - i18n: English (default), Sinhala, Tamil. Store all UI strings in `src/locales/{en,si,ta}.json`; missing Sinhala/Tamil keys fall back to English
-- Later: react-native-view-shot + expo-sharing for the nakath share image
+- react-native-view-shot + expo-sharing: the nakath share image (`/nakath-share` modal previews the card, captures it as PNG and opens the share sheet; falls back to text when file sharing isn't available)
 - No backend. Holiday and nakath data live in `data/`, ship bundled with the app, and update from GitHub Pages without an app release (see docs/DATA_SOURCES.md). `updateRemoteData` checks `manifest.json` at most hourly on launch and foreground; screens that read data wrap their content in `DataScope`, which remounts it after an update (the React Compiler memoizes data reads)
 
 ## Design tokens
@@ -82,4 +82,3 @@ Bottom tabs (5): Calendar, Upcoming, Nakath, Reminders, Settings. Day detail is 
 
 - Nakath tab and screen (Avurudu + Today), Rahu kalaya/Maru on Day detail
 - Nakath reminders via the bell toggles
-- Share image of the nakath list (WhatsApp etc.); before April

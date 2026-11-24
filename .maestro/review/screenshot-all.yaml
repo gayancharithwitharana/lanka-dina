@@ -25,6 +25,10 @@ appId: host.exp.Exponent
 - openLink: exp://127.0.0.1:8081/--/day/2026-11-24
 - waitForAnimationToEnd
 - takeScreenshot: ${PREFIX}-day-maru
+- openLink: exp://127.0.0.1:8081/--/nakath-share
+- waitForAnimationToEnd
+- takeScreenshot: ${PREFIX}-nakath-share
+- tapOn: ${CLOSE}
 - openLink: exp://127.0.0.1:8081/--/lagna
 - waitForAnimationToEnd
 - takeScreenshot: ${PREFIX}-lagna

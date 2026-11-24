@@ -1,0 +1,37 @@
+appId: host.exp.Exponent
+name: Nakath shares the Avurudu list as an image
+---
+- runFlow:
+    file: subflows/open-route.yaml
+    env:
+      ROUTE: nakath?view=avurudu
+- extendedWaitUntil:
+    visible: Dawn of the New Year in
+    timeout: 30000
+- tapOn: Share
+- extendedWaitUntil:
+    visible: Share nakath
+    timeout: 10000
+- takeScreenshot: nakath-share-preview
+- scrollUntilVisible:
+    element: Share image
+- tapOn: Share image
+- extendedWaitUntil:
+    visible: Save Image
+    timeout: 15000
+- takeScreenshot: nakath-share-sheet
+- tapOn: Save Image
+- runFlow:
+    when:
+      visible: Allow Full Access
+    commands:
+      - tapOn: Allow Full Access
+- runFlow:
+    when:
+      visible: OK
+    commands:
+      - tapOn: OK
+- extendedWaitUntil:
+    visible: Share as text
+    timeout: 10000
+- runFlow: subflows/assert-no-errors.yaml

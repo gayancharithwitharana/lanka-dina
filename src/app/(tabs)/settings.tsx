@@ -3,7 +3,7 @@ import { router } from 'expo-router';
 import type { ReactNode } from 'react';
 import { SymbolView } from 'expo-symbols';
 import { useTranslation } from 'react-i18next';
-import { Pressable, View } from 'react-native';
+import { Linking, Pressable, View } from 'react-native';
 
 import { DataScope } from '@/components/data-scope';
 import { ScreenScrollView } from '@/components/screen-scroll-view';
@@ -11,6 +11,7 @@ import { DataSourceRow } from '@/components/settings/data-source-row';
 import { SegmentedControl } from '@/components/segmented-control';
 import { Text } from '@/components/text';
 import { getDataSources } from '@/data/data-sources';
+import { PRIVACY_POLICY_URL } from '@/data/remote-data';
 import { useThemeColors } from '@/hooks/use-theme-colors';
 import { useSettings } from '@/settings/settings-context';
 import type { Appearance, Language } from '@/settings/settings-storage';
@@ -89,6 +90,11 @@ function SettingsContent() {
             onPress={() => router.navigate('/reminders')}
           />
           <SettingsRow label={t('settings.removeAds')} value={t('settings.comingSoon')} />
+          <SettingsRow
+            label={t('settings.privacyPolicy')}
+            accessibilityRole="link"
+            onPress={() => Linking.openURL(PRIVACY_POLICY_URL)}
+          />
         </View>
       </SettingsSection>
 
@@ -122,16 +128,18 @@ function SettingsSection({ title, children }: { title: string; children: ReactNo
 type SettingsRowProps = {
   label: string;
   value?: string;
+  accessibilityRole?: 'button' | 'link';
   onPress?: () => void;
 };
 
-function SettingsRow({ label, value, onPress }: SettingsRowProps) {
+function SettingsRow({ label, value, accessibilityRole = 'button', onPress }: SettingsRowProps) {
   const colors = useThemeColors();
 
   return (
     <Pressable
       disabled={!onPress}
-      accessibilityRole={onPress ? 'button' : undefined}
+      accessibilityRole={onPress ? accessibilityRole : undefined}
+      accessibilityLabel={onPress ? label : undefined}
       onPress={onPress}
       className="min-h-[52px] flex-row items-center justify-between border-b border-border active:bg-surface"
     >

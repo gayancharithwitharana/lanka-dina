@@ -4,6 +4,7 @@ import { parseDataFile, parseManifest } from '@/data/data-file-schema';
 import { applyDataFile, getStoredVersion } from '@/db/apply-data-file';
 
 export const DATA_URL = 'https://gayancharithwitharana.github.io/lanka-dina/';
+export const PRIVACY_POLICY_URL = `${DATA_URL}privacy.html`;
 
 const LAST_CHECK_KEY = 'remote-data-last-check';
 const CHECK_INTERVAL_MS = 60 * 60 * 1000;

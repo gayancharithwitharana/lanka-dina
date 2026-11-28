@@ -62,6 +62,7 @@
     "notifications": "Notifications",
     "removeAds": "Remove ads",
     "comingSoon": "Coming soon",
+    "privacyPolicy": "Privacy policy",
     "holidayData": "Holiday data",
     "dataSource": "{{year}} · {{source}}",
     "updatedOn": "Updated {{date}}",

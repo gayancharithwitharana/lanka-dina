@@ -9,7 +9,7 @@ Fonts, SQLite with Drizzle, the Nakath tab (Avurudu and Today), day detail notes
 ## Build next
 
 1. **Release prep in the app.**
-   - Privacy policy: add a contact email to `site/privacy.html`, and have the wording checked before release.
+   - Privacy policy: have the wording checked before release, and decide whether to keep the personal contact email in `site/privacy.html` or switch to a dedicated one.
    - Check the "Privacy choices" row with a real consent message (needs the AdMob account; it only shows where a consent choice is required).
    - Real AdMob IDs (see "Real ads" below; needs the AdMob account).
 2. **First Android run.** The app is Android-first and hasn't run on Android yet.

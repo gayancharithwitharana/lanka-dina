@@ -1,50 +1,89 @@
-appId: host.exp.Exponent
+appId: com.gayanwitharana.lankadina
 ---
-- openLink: exp://127.0.0.1:8081/--/settings
+- runFlow:
+    file: ../subflows/open-link.yaml
+    env:
+      LINK: "lankadina://settings"
 - waitForAnimationToEnd
 - takeScreenshot: ${PREFIX}-settings
 - tapOn:
     point: 15%,94%
 - waitForAnimationToEnd
 - takeScreenshot: ${PREFIX}-calendar
-- openLink: exp://127.0.0.1:8081/--/upcoming
+- runFlow:
+    file: ../subflows/open-link.yaml
+    env:
+      LINK: "lankadina://upcoming"
 - waitForAnimationToEnd
 - takeScreenshot: ${PREFIX}-upcoming
-- openLink: exp://127.0.0.1:8081/--/nakath?view=avurudu
+- runFlow:
+    file: ../subflows/open-link.yaml
+    env:
+      LINK: "lankadina://nakath?view=avurudu"
 - waitForAnimationToEnd
 - takeScreenshot: ${PREFIX}-nakath-avurudu
-- openLink: exp://127.0.0.1:8081/--/nakath?view=today
+- runFlow:
+    file: ../subflows/open-link.yaml
+    env:
+      LINK: "lankadina://nakath?view=today"
 - waitForAnimationToEnd
 - takeScreenshot: ${PREFIX}-nakath-today
-- openLink: exp://127.0.0.1:8081/--/reminders
+- runFlow:
+    file: ../subflows/open-link.yaml
+    env:
+      LINK: "lankadina://reminders"
 - waitForAnimationToEnd
 - takeScreenshot: ${PREFIX}-reminders
-- openLink: exp://127.0.0.1:8081/--/day/2026-12-23
+- runFlow:
+    file: ../subflows/open-link.yaml
+    env:
+      LINK: "lankadina://day/2026-12-23"
 - waitForAnimationToEnd
 - takeScreenshot: ${PREFIX}-day-poya
-- openLink: exp://127.0.0.1:8081/--/day/2026-11-24
+- runFlow:
+    file: ../subflows/open-link.yaml
+    env:
+      LINK: "lankadina://day/2026-11-24"
 - waitForAnimationToEnd
 - takeScreenshot: ${PREFIX}-day-maru
-- openLink: exp://127.0.0.1:8081/--/nakath-share
+- runFlow:
+    file: ../subflows/open-link.yaml
+    env:
+      LINK: "lankadina://nakath-share"
 - waitForAnimationToEnd
 - takeScreenshot: ${PREFIX}-nakath-share
 - tapOn: ${CLOSE}
-- openLink: exp://127.0.0.1:8081/--/lagna
+- runFlow:
+    file: ../subflows/open-link.yaml
+    env:
+      LINK: "lankadina://lagna"
 - waitForAnimationToEnd
 - takeScreenshot: ${PREFIX}-lagna
 - tapOn: ${CLOSE}
-- openLink: exp://127.0.0.1:8081/--/reminder/2026-12-23
+- runFlow:
+    file: ../subflows/open-link.yaml
+    env:
+      LINK: "lankadina://reminder/2026-12-23"
 - waitForAnimationToEnd
 - takeScreenshot: ${PREFIX}-reminder-editor
 - tapOn: ${SAVE}
-- openLink: exp://127.0.0.1:8081/--/day/2026-12-23
+- runFlow:
+    file: ../subflows/open-link.yaml
+    env:
+      LINK: "lankadina://day/2026-12-23"
 - waitForAnimationToEnd
 - takeScreenshot: ${PREFIX}-day-reminder-set
-- openLink: exp://127.0.0.1:8081/--/reminder/2026-12-23
+- runFlow:
+    file: ../subflows/open-link.yaml
+    env:
+      LINK: "lankadina://reminder/2026-12-23"
 - waitForAnimationToEnd
 - tapOn: ${DELETE}
 - waitForAnimationToEnd
-- openLink: exp://127.0.0.1:8081/--/note/2026-12-23
+- runFlow:
+    file: ../subflows/open-link.yaml
+    env:
+      LINK: "lankadina://note/2026-12-23"
 - waitForAnimationToEnd
 - takeScreenshot: ${PREFIX}-note-editor
 - tapOn: ${CANCEL}

@@ -1,4 +1,4 @@
-appId: host.exp.Exponent
+appId: com.gayanwitharana.lankadina
 name: Nakath shares the Avurudu list as an image
 ---
 - runFlow:
@@ -17,20 +17,10 @@ name: Nakath shares the Avurudu list as an image
     element: Share image
 - tapOn: Share image
 - extendedWaitUntil:
-    visible: Save Image
+    visible: PNG Image.*
     timeout: 15000
 - takeScreenshot: nakath-share-sheet
-- tapOn: Save Image
-- runFlow:
-    when:
-      visible: Allow Full Access
-    commands:
-      - tapOn: Allow Full Access
-- runFlow:
-    when:
-      visible: OK
-    commands:
-      - tapOn: OK
+- tapOn: Copy
 - extendedWaitUntil:
     visible: Share as text
     timeout: 10000

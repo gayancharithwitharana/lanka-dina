@@ -1,10 +1,8 @@
 # Roadmap
 
-Everything up to the AdMob banner runs in Expo Go. The development build waits until AdMob or release, whichever comes first.
-
 ## Next steps
 
-Done: fonts, SQLite with Drizzle, the Nakath tab (Avurudu and Today), day detail notes and reminders, the Reminders screen with local notifications, Sinhala and Tamil translations (the app starts in the phone's language), data files with sources, Rahu kalaya and kala horawa from sunrise and sunset, updates from GitHub Pages without an app release, the official 2027 Avurudu nakath, and the nakath share image.
+Done: fonts, SQLite with Drizzle, the Nakath tab (Avurudu and Today), day detail notes and reminders, the Reminders screen with local notifications, Sinhala and Tamil translations (the app starts in the phone's language), data files with sources, Rahu kalaya and kala horawa from sunrise and sunset, updates from GitHub Pages without an app release, the official 2027 Avurudu nakath, the nakath share image, and the development build (app ID `com.gayanwitharana.lankadina`, iOS simulator).
 
 1. **Tamil review.** A native speaker reviews the Tamil terms in `docs/glossary.md` and the app screenshots (`npm run screenshots:ta`). Add sourced Tamil terms for Maru direction, kala horawa and aya-waya.
 2. **Remaining data sources (TODO, before release).** Each one is a data change in `data/`, published without an app release (see `docs/DATA_SOURCES.md`):
@@ -12,16 +10,13 @@ Done: fonts, SQLite with Drizzle, the Nakath tab (Avurudu and Today), day detail
    - **Nakath sheet link:** `nakath-2027.json` links to gazette.lk's copy of the Ministry's sheet. Replace it with the Ministry's own URL when one is published, and add Tamil names from the Tamil sheet.
    - **Traditional rules:** cite a reference for the Rahu kalaya parts and horawa order, and complete Maru for all 7 days (`sample-traditional.json`).
    - **Aya-waya:** find a source per year, or hide the card for years without one (`src/data/sample-aya-waya.json` is placeholder).
-3. **Development build.** Decide the Android package name first, because it can't change after publishing. Then add AdMob banners (Calendar, Upcoming, Nakath) with Google's test ad IDs.
+3. **AdMob banners.** `react-native-google-mobile-ads` with Google's test IDs: banners above the tab bar on Calendar, Upcoming and Nakath, with the consent step before ads load. Needs a rebuild of the development build.
 4. **Release prep.** App icon, splash screen, privacy policy, EAS builds, store listing.
 
-## What needs a development build
+## Development build
 
-| Feature | Expo Go |
-| --- | --- |
-| Fonts (`expo-font`) | Works |
-| SQLite and Drizzle | Works |
-| Local notifications | Works (push doesn't, and we don't need it) |
-| AdMob banner | Needs a development build |
+The app runs as its own development build, not in Expo Go. Everything up to AdMob also still works in Expo Go.
 
-Test the reminders on a development build before release, because Expo Go doesn't behave exactly like the shipped app.
+- **Build:** `npm run ios` builds locally and installs on the iOS simulator; free, no accounts. Rebuild only after native changes.
+- **Not done yet:** Android (untested so far), a build on a real phone, and `eas.json` for cloud and store builds (needs an Expo account).
+- **Before release:** test the reminders on a real Android phone. Exact-time reminders need an exact-alarm permission, which Android 14 and later deny by default.

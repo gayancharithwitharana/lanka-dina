@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "lankadina",
+    "name": "Lankadina",
     "slug": "lankadina",
     "version": "1.0.0",
     "orientation": "default",
@@ -8,9 +8,11 @@
     "scheme": "lankadina",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "icon": "./assets/expo.icon"
+      "icon": "./assets/expo.icon",
+      "bundleIdentifier": "com.gayanwitharana.lankadina"
     },
     "android": {
+      "package": "com.gayanwitharana.lankadina",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/android-icon-foreground.png",

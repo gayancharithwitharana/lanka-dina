@@ -42,7 +42,16 @@
       "expo-sqlite",
       "expo-notifications",
       "expo-localization",
-      "expo-sharing"
+      "expo-sharing",
+      [
+        "react-native-google-mobile-ads",
+        {
+          "androidAppId": "ca-app-pub-3940256099942544~3347511713",
+          "iosAppId": "ca-app-pub-3940256099942544~1458002511",
+          "delayAppMeasurementInit": true,
+          "userTrackingUsageDescription": "This lets Lankadina show ads that are more relevant to you."
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,

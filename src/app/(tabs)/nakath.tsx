@@ -2,6 +2,7 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 
+import { AdBanner } from '@/components/ads/ad-banner';
 import { DataScope } from '@/components/data-scope';
 import { AvuruduView } from '@/components/nakath/avurudu-view';
 import { TodayView } from '@/components/nakath/today-view';
@@ -31,7 +32,7 @@ function NakathContent() {
   const selectedView: NakathView = isNakathView(view) ? view : 'avurudu';
 
   return (
-    <ScreenScrollView>
+    <ScreenScrollView footer={<AdBanner />}>
       <View className="gap-3.5 px-5 pb-3 pt-7">
         <Text className="text-[30px] font-bold tracking-[-0.6px] text-text">
           {t('tabs.nakath')}

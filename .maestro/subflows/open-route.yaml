@@ -12,6 +12,11 @@ appId: com.gayanwitharana.lankadina
       - tapOn: Continue
 - runFlow: allow-notifications.yaml
 - extendedWaitUntil:
+    visible: Calendar|දින දර්ශනය|நாட்காட்டி|Our app wants to stay free for you
+    timeout: 60000
+- waitForAnimationToEnd
+- runFlow: allow-ads-consent.yaml
+- extendedWaitUntil:
     visible: Calendar|දින දර්ශනය|நாட்காட்டி
     timeout: 60000
 - runFlow:

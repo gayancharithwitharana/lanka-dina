@@ -4,7 +4,9 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const CONTENT_BOTTOM_SPACING = 24;
 
-export function ScreenScrollView({ children }: { children: ReactNode }) {
+type ScreenScrollViewProps = { children: ReactNode; footer?: ReactNode };
+
+export function ScreenScrollView({ children, footer }: ScreenScrollViewProps) {
   const insets = useSafeAreaInsets();
 
   return (
@@ -16,11 +18,12 @@ export function ScreenScrollView({ children }: { children: ReactNode }) {
           paddingTop: insets.top,
           paddingLeft: insets.left,
           paddingRight: insets.right,
-          paddingBottom: insets.bottom + CONTENT_BOTTOM_SPACING,
+          paddingBottom: (footer ? 0 : insets.bottom) + CONTENT_BOTTOM_SPACING,
         }}
       >
         <View className="w-full max-w-[600px] flex-1 self-center">{children}</View>
       </ScrollView>
+      {footer && <View style={{ paddingBottom: insets.bottom }}>{footer}</View>}
     </View>
   );
 }

@@ -5,6 +5,7 @@ import { HolidayLegend } from '@/components/calendar/holiday-legend';
 import { MonthGrid } from '@/components/calendar/month-grid';
 import { MonthHeader } from '@/components/calendar/month-header';
 import { MonthHolidayList } from '@/components/calendar/month-holiday-list';
+import { AdBanner } from '@/components/ads/ad-banner';
 import { DataScope } from '@/components/data-scope';
 import { ScreenScrollView } from '@/components/screen-scroll-view';
 import { getHolidaysInMonth } from '@/data/holidays';
@@ -32,7 +33,7 @@ function CalendarContent() {
   const holidaysInMonth = getHolidaysInMonth(visibleMonth, locale);
 
   return (
-    <ScreenScrollView>
+    <ScreenScrollView footer={<AdBanner />}>
       <MonthHeader
         year={visibleMonth.year}
         monthName={getMonthName(visibleMonth, locale)}

@@ -10,6 +10,22 @@ jest.mock('expo-sqlite/kv-store', () => {
   };
 });
 
+jest.mock('react-native-google-mobile-ads', () => {
+  const { Text } = require('react-native');
+  return {
+    __esModule: true,
+    default: () => ({ initialize: jest.fn(async () => []) }),
+    AdsConsent: {
+      gatherConsent: jest.fn(async () => ({ canRequestAds: true })),
+      getConsentInfo: jest.fn(async () => ({ canRequestAds: true })),
+    },
+    BannerAd: jest.fn(({ unitId }: { unitId: string }) => <Text>{`Test ad ${unitId}`}</Text>),
+    BannerAdSize: { BANNER: 'BANNER' },
+    TestIds: { BANNER: 'test-banner' },
+    useForeground: jest.fn(),
+  };
+});
+
 jest.mock('react-native-view-shot', () => ({
   captureRef: jest.fn(async () => 'file:///tmp/nakath.png'),
 }));

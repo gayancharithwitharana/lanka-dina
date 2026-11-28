@@ -191,5 +191,8 @@
     "save": "Save",
     "cancel": "Cancel",
     "delete": "Delete reminder"
+  },
+  "ads": {
+    "advertisement": "Advertisement"
   }
 }

@@ -4,18 +4,18 @@ Goal: Lankadina in the Google Play store before Avurudu, Apr 14, 2027.
 
 ## Done
 
-Fonts, SQLite with Drizzle, the Nakath tab (Avurudu and Today), day detail notes and reminders, the Reminders screen with local notifications, Sinhala and Tamil translations (the app starts in the phone's language), data files with sources, Rahu kalaya and kala horawa from sunrise and sunset, updates from GitHub Pages without an app release, the official 2027 Avurudu nakath, the nakath share image, and the development build (app ID `com.gayanwitharana.lankadina`, iOS simulator).
+Fonts, SQLite with Drizzle, the Nakath tab (Avurudu and Today), day detail notes and reminders, the Reminders screen with local notifications, Sinhala and Tamil translations (the app starts in the phone's language), data files with sources, Rahu kalaya and kala horawa from sunrise and sunset, updates from GitHub Pages without an app release, the official 2027 Avurudu nakath, the nakath share image, the development build (app ID `com.gayanwitharana.lankadina`, iOS simulator), and AdMob test banners on Calendar, Upcoming and Nakath with the consent step.
 
 ## Build next
 
-1. **AdMob banners.** `react-native-google-mobile-ads` with Google's test IDs: banners above the tab bar on Calendar, Upcoming and Nakath, with the consent step before ads load. Needs a rebuild of the development build.
-2. **Release prep in the app.**
+1. **Release prep in the app.**
    - App icon and splash screen (both are still the Expo template's).
    - Privacy policy page on the GitHub Pages site, and the "Privacy policy" row in Settings.
-3. **First Android run.** The app is Android-first and hasn't run on Android yet.
+   - Real AdMob IDs: the app IDs in `app.json` and the banner unit in `src/ads/ad-units.ts` (needs the AdMob account).
+2. **First Android run.** The app is Android-first and hasn't run on Android yet.
    - Declare the exact-alarm permission, so reminders fire on time. Android 14 and later deny it by default, so pick the permission approach and test it on a real phone.
-   - Check the share image and the fonts on Android.
-4. **Cloud and store builds.** `eas.json` with development, preview and production profiles. Needs the Expo account.
+   - Check the share image, the fonts and the ad banner on Android.
+3. **Cloud and store builds.** `eas.json` with development, preview and production profiles. Needs the Expo account.
 
 ## Needs you
 
@@ -27,7 +27,7 @@ Fonts, SQLite with Drizzle, the Nakath tab (Avurudu and Today), day detail notes
   | --- | --- | --- |
   | Expo | Free | Cloud builds, a build on a real phone, store builds (`eas login`) |
   | Google Play developer | US$25 once | Publishing on Android |
-  | AdMob | Free | The real app and ad unit IDs, and the consent message for European users |
+  | AdMob | Free | The real app and ad unit IDs. Set up the consent and tracking messages under "Privacy & messaging" |
   | Apple Developer Program | US$99 a year | Only for an iOS release |
 
 - **12 testers for the Play closed test** (see the deadline below).

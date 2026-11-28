@@ -1,0 +1,14 @@
+appId: com.gayanwitharana.lankadina
+---
+- runFlow:
+    when:
+      visible: Our app wants to stay free for you
+    commands:
+      - tapOn: Continue
+      - extendedWaitUntil:
+          visible: Ask App Not to Track
+          timeout: 10000
+          optional: true
+      - tapOn:
+          text: Allow
+          optional: true

@@ -10,6 +10,7 @@ import * as SystemUI from 'expo-system-ui';
 import { useEffect, useState } from 'react';
 import { AppState, useColorScheme } from 'react-native';
 
+import { prepareAds } from '@/ads/ads';
 import { notifyDataUpdated } from '@/data/data-updates';
 import { updateRemoteData } from '@/data/remote-data';
 import { prepareDatabase } from '@/db/prepare-database';
@@ -52,6 +53,7 @@ function useDatabase(): boolean {
       setReady(true);
       syncNotifications();
       refreshRemoteData();
+      prepareAds().catch(() => {});
     }, setError);
   }, []);
 

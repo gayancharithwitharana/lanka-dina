@@ -11,7 +11,7 @@ Fonts, SQLite with Drizzle, the Nakath tab (Avurudu and Today), day detail notes
 1. **Release prep in the app.**
    - App icon and splash screen (both are still the Expo template's).
    - Privacy policy page on the GitHub Pages site, and the "Privacy policy" row in Settings.
-   - Real AdMob IDs: the app IDs in `app.json` and the banner unit in `src/ads/ad-units.ts` (needs the AdMob account).
+   - Real AdMob IDs (see "Real ads" below; needs the AdMob account).
 2. **First Android run.** The app is Android-first and hasn't run on Android yet.
    - Declare the exact-alarm permission, so reminders fire on time. Android 14 and later deny it by default, so pick the permission approach and test it on a real phone.
    - Check the share image, the fonts and the ad banner on Android.
@@ -43,6 +43,29 @@ A new personal Play account must run a closed test with at least 12 testers, opt
 | Mid-February 2027 | Start the closed test with a release build |
 | Early March 2027 | Apply for production access |
 | Before Apr 14, 2027 | Live in the store |
+
+## Real ads
+
+The app shows Google's test ads. Real ads need the steps below. Checked against Google's AdMob help pages on Nov 28, 2026.
+
+**Before the app is live**
+
+1. Create the AdMob account and add the app as unpublished ("useful to set up and test your app before you release").
+2. Create a banner ad unit for Android (and iOS if we ship there).
+3. In "Privacy & messaging", set up the European consent message and the iOS tracking (IDFA) message.
+4. Put the real IDs in the code: the app IDs in `app.json` (needs a rebuild), the banner unit per platform in `src/ads/ad-units.ts` (real IDs in release builds, the test unit in development), and for iOS Google's `skAdNetworkItems` list.
+5. Put `app-ads.txt` at the root of the developer website (`gayanwitharana.com/app-ads.txt`), and list that website in the store listing. Required for new apps since January 2025.
+6. In the Play Console, declare that the app contains ads and fill in the data safety form. The privacy policy must mention ads.
+
+**After the app is live**
+
+1. Link the app in AdMob to its store listing. That starts AdMob's app readiness review, which typically takes 2-3 days. Until it's approved and `app-ads.txt` is verified (up to 24 hours), ad serving is limited.
+2. Add payment details. Identity and address verification start at US$10 of earnings; payouts start at US$100.
+
+**Rules**
+
+- Never tap real ads in our own app; it risks the account being flagged for invalid activity. Test ads are safe to tap.
+- Simulators always get test ads. Register a real phone as a test device before running a build with real IDs on it.
 
 ## Remaining data sources
 

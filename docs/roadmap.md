@@ -4,12 +4,11 @@ Goal: Lankadina in the Google Play store before Avurudu, Apr 14, 2027.
 
 ## Done
 
-Fonts, SQLite with Drizzle, the Nakath tab (Avurudu and Today), day detail notes and reminders, the Reminders screen with local notifications, Sinhala and Tamil translations (the app starts in the phone's language), data files with sources, Rahu kalaya and kala horawa from sunrise and sunset, updates from GitHub Pages without an app release, the official 2027 Avurudu nakath, the nakath share image, the development build (app ID `com.gayanwitharana.lankadina`, iOS simulator), and AdMob test banners on Calendar, Upcoming and Nakath with the consent step.
+Fonts, SQLite with Drizzle, the Nakath tab (Avurudu and Today), day detail notes and reminders, the Reminders screen with local notifications, Sinhala and Tamil translations (the app starts in the phone's language), data files with sources, Rahu kalaya and kala horawa from sunrise and sunset, updates from GitHub Pages without an app release, the official 2027 Avurudu nakath, the nakath share image, the development build (app ID `com.gayanwitharana.lankadina`, iOS simulator), AdMob test banners on Calendar, Upcoming and Nakath with the consent step, and the app icon and splash screen (source SVGs and `render.sh` in `design/icon/`).
 
 ## Build next
 
 1. **Release prep in the app.**
-   - App icon and splash screen (both are still the Expo template's).
    - Privacy policy page on the GitHub Pages site, and the "Privacy policy" row in Settings.
    - Real AdMob IDs (see "Real ads" below; needs the AdMob account).
 2. **First Android run.** The app is Android-first and hasn't run on Android yet.

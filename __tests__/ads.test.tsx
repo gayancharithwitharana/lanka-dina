@@ -1,6 +1,6 @@
-import { Slot } from 'expo-router';
+import { router, Slot } from 'expo-router';
 import { renderRouter, screen } from 'expo-router/testing-library';
-import { act } from '@testing-library/react-native';
+import { act, userEvent } from '@testing-library/react-native';
 import { useEffect } from 'react';
 import { AdsConsent, BannerAd } from 'react-native-google-mobile-ads';
 
@@ -73,5 +73,30 @@ describe('ad banner', () => {
 
     expect(banner()).not.toBeOnTheScreen();
     jest.mocked(BannerAd as unknown as jest.Mock).mockReset();
+  });
+});
+
+describe('privacy choices', () => {
+  const privacyChoices = () => screen.queryByRole('button', { name: 'Privacy choices' });
+  const consent = (canRequestAds: boolean) =>
+    ({ canRequestAds, privacyOptionsRequirementStatus: 'REQUIRED' }) as never;
+
+  it('is hidden where no consent choice is required', async () => {
+    await renderWithAds('/settings');
+
+    expect(privacyChoices()).not.toBeOnTheScreen();
+  });
+
+  it('reopens the consent form and stops ads when the user withdraws consent', async () => {
+    jest.mocked(AdsConsent.gatherConsent).mockResolvedValueOnce(consent(true));
+    jest.mocked(AdsConsent.getConsentInfo).mockResolvedValueOnce(consent(false));
+    const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+    await renderWithAds('/settings');
+
+    await user.press(privacyChoices()!);
+
+    expect(AdsConsent.showPrivacyOptionsForm).toHaveBeenCalled();
+    await act(async () => router.navigate('/'));
+    expect(banner()).not.toBeOnTheScreen();
   });
 });

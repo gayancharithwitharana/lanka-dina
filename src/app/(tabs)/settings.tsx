@@ -5,6 +5,7 @@ import { SymbolView } from 'expo-symbols';
 import { useTranslation } from 'react-i18next';
 import { Linking, Pressable, View } from 'react-native';
 
+import { showPrivacyOptions, usePrivacyOptionsRequired } from '@/ads/ads';
 import { DataScope } from '@/components/data-scope';
 import { ScreenScrollView } from '@/components/screen-scroll-view';
 import { DataSourceRow } from '@/components/settings/data-source-row';
@@ -39,6 +40,7 @@ function SettingsContent() {
   const { t, i18n } = useTranslation();
   const { language, weekStartsOn, appearance, updateSettings } = useSettings();
   const holidaySources = getDataSources('holidays', i18n.language);
+  const privacyOptionsRequired = usePrivacyOptionsRequired();
 
   const weekStartOptions = weekStartValues.map((weekday) => ({
     value: weekday,
@@ -95,6 +97,12 @@ function SettingsContent() {
             accessibilityRole="link"
             onPress={() => Linking.openURL(PRIVACY_POLICY_URL)}
           />
+          {privacyOptionsRequired && (
+            <SettingsRow
+              label={t('settings.privacyChoices')}
+              onPress={() => showPrivacyOptions().catch(() => {})}
+            />
+          )}
         </View>
       </SettingsSection>
 

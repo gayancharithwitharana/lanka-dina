@@ -4,13 +4,13 @@ Goal: Lankadina in the Google Play store before Avurudu, Apr 14, 2027.
 
 ## Done
 
-Fonts, SQLite with Drizzle, the Nakath tab (Avurudu and Today), day detail notes and reminders, the Reminders screen with local notifications, Sinhala and Tamil translations (the app starts in the phone's language), data files with sources, Rahu kalaya and kala horawa from sunrise and sunset, updates from GitHub Pages without an app release, the official 2027 Avurudu nakath, the nakath share image, the development build (app ID `com.gayanwitharana.lankadina`, iOS simulator), AdMob test banners on Calendar, Upcoming and Nakath with the consent step, the app icon and splash screen (source SVGs and `render.sh` in `design/icon/`), and the privacy policy page (`site/privacy.html`, linked from Settings).
+Fonts, SQLite with Drizzle, the Nakath tab (Avurudu and Today), day detail notes and reminders, the Reminders screen with local notifications, Sinhala and Tamil translations (the app starts in the phone's language), data files with sources, Rahu kalaya and kala horawa from sunrise and sunset, updates from GitHub Pages without an app release, the official 2027 Avurudu nakath, the nakath share image, the development build (app ID `com.gayanwitharana.lankadina`, iOS simulator), AdMob test banners on Calendar, Upcoming and Nakath with the consent step, the app icon and splash screen (source SVGs and `render.sh` in `design/icon/`), the privacy policy page (`site/privacy.html`, linked from Settings), and a "Privacy choices" row to change ad consent.
 
 ## Build next
 
 1. **Release prep in the app.**
    - Privacy policy: add a contact email to `site/privacy.html`, and have the wording checked before release.
-   - A "Privacy choices" row in Settings that reopens Google's consent form, so users can change their ad choice.
+   - Check the "Privacy choices" row with a real consent message (needs the AdMob account; it only shows where a consent choice is required).
    - Real AdMob IDs (see "Real ads" below; needs the AdMob account).
 2. **First Android run.** The app is Android-first and hasn't run on Android yet.
    - Declare the exact-alarm permission, so reminders fire on time. Android 14 and later deny it by default, so pick the permission approach and test it on a real phone.

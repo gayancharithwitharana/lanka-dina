@@ -78,7 +78,6 @@ Bottom tabs (5): Calendar, Upcoming, Nakath, Reminders, Settings. Day detail is 
 - Keep the app fully usable offline
 - App ID: `com.gayanwitharana.lankadina` for Android (`package`) and iOS (`bundleIdentifier`). Permanent after publishing; never change it
 
-## Remaining features
+## Remaining work
 
-- Nakath tab and screen (Avurudu + Today), Rahu kalaya/Maru on Day detail
-- Nakath reminders via the bell toggles
+See `docs/roadmap.md`.

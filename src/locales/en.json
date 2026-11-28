@@ -63,6 +63,7 @@
     "removeAds": "Remove ads",
     "comingSoon": "Coming soon",
     "privacyPolicy": "Privacy policy",
+    "privacyChoices": "Privacy choices",
     "holidayData": "Holiday data",
     "dataSource": "{{year}} · {{source}}",
     "updatedOn": "Updated {{date}}",

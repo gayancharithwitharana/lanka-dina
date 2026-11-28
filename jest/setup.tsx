@@ -18,6 +18,11 @@ jest.mock('react-native-google-mobile-ads', () => {
     AdsConsent: {
       gatherConsent: jest.fn(async () => ({ canRequestAds: true })),
       getConsentInfo: jest.fn(async () => ({ canRequestAds: true })),
+      showPrivacyOptionsForm: jest.fn(async () => ({ canRequestAds: true })),
+    },
+    AdsConsentPrivacyOptionsRequirementStatus: {
+      REQUIRED: 'REQUIRED',
+      NOT_REQUIRED: 'NOT_REQUIRED',
     },
     BannerAd: jest.fn(({ unitId }: { unitId: string }) => <Text>{`Test ad ${unitId}`}</Text>),
     BannerAdSize: { BANNER: 'BANNER' },

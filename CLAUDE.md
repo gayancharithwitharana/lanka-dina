@@ -42,7 +42,7 @@ Bottom tabs (5): Calendar, Upcoming, Nakath, Reminders, Settings. Day detail is 
    - Avurudu: countdown card to the New Year dawn with a Share button and source line from the year's data (linked when it has a URL); timeline of that year's nakath, entirely from the data (the items and their count change between years). Each row: date, time, name, direction/color detail, and a bell toggle that schedules a reminder.
    - Today: Rahu kalaya card with time range and "Now / Not now" status; Maru direction; current kala horawa; aya-waya card ("Set lagna" prompt, then the user's income/expense numbers for the year).
 5. Reminders: automatic toggles (Every Poya day — evening before 7:00 PM; Long weekends — 2 weeks ahead), scheduled reminders list, + button to add. No ad.
-6. Settings: language segmented control (English / සිංහල / தமிழ்), week starts on (Sunday/Monday), Notifications, Remove ads (coming soon), Holiday data updated date, Privacy policy. No ad.
+6. Settings: language segmented control (English / සිංහල / தமிழ்), week starts on (Sunday/Monday), Notifications, Remove ads (coming soon), Privacy policy (opens `site/privacy.html` on the GitHub Pages site; keep that page true to what the app does with data), Holiday data updated date. No ad.
 
 ## Data model (SQLite)
 

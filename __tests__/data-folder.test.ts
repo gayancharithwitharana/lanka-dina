@@ -24,7 +24,7 @@ describe('data folder', () => {
     expect(bundledDataFiles).toHaveLength(fileNames.length);
   });
 
-  it('publishes a manifest with each file and its version', () => {
+  it('publishes a manifest with each file and its version, and the privacy policy', () => {
     const siteDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'lankadina-site-'));
     execFileSync('node', [path.join(root, 'scripts/build-data-site.mjs'), siteDirectory], {
       cwd: root,
@@ -40,6 +40,9 @@ describe('data folder', () => {
       );
       expect(entry.version).toBe(published.version);
     }
+    expect(fs.readFileSync(path.join(siteDirectory, 'privacy.html'), 'utf8')).toContain(
+      'Lankadina privacy policy',
+    );
     fs.rmSync(siteDirectory, { recursive: true });
   });
 });

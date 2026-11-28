@@ -3,7 +3,7 @@ import Storage from 'expo-sqlite/kv-store';
 import { renderRouter, screen } from 'expo-router/testing-library';
 import { act, fireEvent, userEvent } from '@testing-library/react-native';
 import * as Sharing from 'expo-sharing';
-import { Share } from 'react-native';
+import { Linking, Share } from 'react-native';
 import { captureRef } from 'react-native-view-shot';
 
 import { notifyDataUpdated } from '@/data/data-updates';
@@ -180,6 +180,18 @@ describe('Settings screen', () => {
     });
 
     expect(screen.getByText('2028 · Holidays gazette 2028')).toBeOnTheScreen();
+  });
+
+  it('opens the privacy policy page', async () => {
+    const openURL = jest.spyOn(Linking, 'openURL').mockResolvedValue();
+    const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+    await renderRouter(APP_DIRECTORY, { initialUrl: '/settings' });
+
+    await user.press(screen.getByRole('link', { name: 'Privacy policy' }));
+
+    expect(openURL).toHaveBeenCalledWith(
+      'https://gayancharithwitharana.github.io/lanka-dina/privacy.html',
+    );
   });
 
   it('saves the chosen week start', async () => {

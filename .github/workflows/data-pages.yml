@@ -3,7 +3,7 @@ name: Publish data
 on:
   push:
     branches: [main]
-    paths: ['data/**', 'scripts/build-data-site.mjs', 'src/data/data-file-schema.ts']
+    paths: ['data/**', 'site/**', 'scripts/build-data-site.mjs', 'src/data/data-file-schema.ts']
   workflow_dispatch:
 
 permissions:

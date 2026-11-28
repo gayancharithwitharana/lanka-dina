@@ -108,6 +108,7 @@ function ThemedNavigation() {
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="day/[date]" />
         <Stack.Screen name="lagna" options={{ presentation: 'modal' }} />
+        <Stack.Screen name="nakath-share" options={{ presentation: 'modal' }} />
         <Stack.Screen name="note/[date]" options={{ presentation: 'modal' }} />
         <Stack.Screen name="reminder/[date]" options={{ presentation: 'modal' }} />
       </Stack>

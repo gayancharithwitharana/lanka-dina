@@ -10,6 +10,15 @@ jest.mock('expo-sqlite/kv-store', () => {
   };
 });
 
+jest.mock('react-native-view-shot', () => ({
+  captureRef: jest.fn(async () => 'file:///tmp/nakath.png'),
+}));
+
+jest.mock('expo-sharing', () => ({
+  isAvailableAsync: jest.fn(async () => true),
+  shareAsync: jest.fn(async () => undefined),
+}));
+
 jest.mock('expo-localization', () => ({
   getLocales: jest.fn(() => [{ languageCode: 'en', languageTag: 'en-US' }]),
 }));

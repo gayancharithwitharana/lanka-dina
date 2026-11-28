@@ -1,10 +1,10 @@
+import { router } from 'expo-router';
 import { SymbolView } from 'expo-symbols';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Linking, Pressable, Share, View } from 'react-native';
+import { Linking, Pressable, View } from 'react-native';
 
 import { NakathRow } from '@/components/nakath/nakath-row';
-import { useNakathFormat } from '@/components/nakath/use-nakath-format';
 import { Text } from '@/components/text';
 import {
   getCountdownNakath,
@@ -51,20 +51,10 @@ function CountdownCard({ avurudu }: { avurudu: AvuruduNakath }) {
   const { t } = useTranslation();
   const colors = useThemeColors();
   const today = useToday();
-  const { formatDate, formatTime, describe } = useNakathFormat();
   const countdown = getCountdownNakath(avurudu, today);
   const daysUntil = countdown ? Math.max(0, getDaysUntil(today, countdown.startsAt)) : null;
   const title = t('nakath.newYearTitle', { year: avurudu.year });
   const { source } = avurudu;
-
-  function shareNakath() {
-    const lines = avurudu.items.map((nakath) =>
-      [`${formatDate(nakath)} ${formatTime(nakath)}`, nakath.name, describe(nakath)]
-        .filter(Boolean)
-        .join(' · '),
-    );
-    Share.share({ message: [title, ...lines, source?.name].filter(Boolean).join('\n') });
-  }
 
   return (
     <View className="gap-1.5 rounded-card border border-poya-border bg-poya-tint p-[18px]">
@@ -80,7 +70,8 @@ function CountdownCard({ avurudu }: { avurudu: AvuruduNakath }) {
             </Text>
             <Pressable
               accessibilityRole="button"
-              onPress={shareNakath}
+              accessibilityLabel={t('nakath.share')}
+              onPress={() => router.navigate('/nakath-share')}
               className="h-11 flex-row items-center gap-1.5 rounded-xl border border-border bg-background px-3.5 active:bg-subtle"
             >
               <SymbolView

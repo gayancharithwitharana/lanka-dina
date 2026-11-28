@@ -1,4 +1,4 @@
-appId: host.exp.Exponent
+appId: com.gayanwitharana.lankadina
 name: Screenshots every screen in one language for translation review
 ---
 - runFlow:
@@ -14,13 +14,19 @@ name: Screenshots every screen in one language for translation review
     file: screenshot-all.yaml
     env:
       PREFIX: ${PREFIX}-light
-- openLink: exp://127.0.0.1:8081/--/settings
+- runFlow:
+    file: ../subflows/open-link.yaml
+    env:
+      LINK: "lankadina://settings"
 - tapOn: ${DARK}
 - runFlow:
     file: screenshot-all.yaml
     env:
       PREFIX: ${PREFIX}-dark
-- openLink: exp://127.0.0.1:8081/--/settings
+- runFlow:
+    file: ../subflows/open-link.yaml
+    env:
+      LINK: "lankadina://settings"
 - tapOn: ${SYSTEM}
 - tapOn: English
 - extendedWaitUntil:

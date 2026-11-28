@@ -1,0 +1,8 @@
+appId: com.gayanwitharana.lankadina
+---
+- openLink: ${LINK}
+- runFlow:
+    when:
+      visible: Open in “Lankadina”\?
+    commands:
+      - tapOn: Open

@@ -1,7 +1,10 @@
-appId: host.exp.Exponent
+appId: com.gayanwitharana.lankadina
 ---
 - stopApp
-- openLink: exp://127.0.0.1:8081
+- runFlow:
+    file: open-link.yaml
+    env:
+      LINK: "exp+lankadina://?__expo_url=http%3A%2F%2F127.0.0.1%3A8081&__expo_disable_fab=1&__expo_disable_auto_launch=1&__expo_disable_onboarding=1"
 - runFlow:
     when:
       visible: Continue
@@ -11,7 +14,13 @@ appId: host.exp.Exponent
 - extendedWaitUntil:
     visible: Calendar|දින දර්ශනය|நாட்காட்டி
     timeout: 60000
-- openLink: exp://127.0.0.1:8081/--/settings
+- runFlow:
+    file: open-link.yaml
+    env:
+      LINK: "lankadina://settings"
 - tapOn: English
 - tapOn: Calendar
-- openLink: exp://127.0.0.1:8081/--/${ROUTE}
+- runFlow:
+    file: open-link.yaml
+    env:
+      LINK: "lankadina://${ROUTE}"

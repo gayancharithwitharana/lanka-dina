@@ -1,0 +1,27 @@
+appId: com.gayanwitharana.lankadina
+name: Nakath shares the Avurudu list as an image
+---
+- runFlow:
+    file: subflows/open-route.yaml
+    env:
+      ROUTE: nakath?view=avurudu
+- extendedWaitUntil:
+    visible: Dawn of the New Year in
+    timeout: 30000
+- tapOn: Share
+- extendedWaitUntil:
+    visible: Share nakath
+    timeout: 10000
+- takeScreenshot: nakath-share-preview
+- scrollUntilVisible:
+    element: Share image
+- tapOn: Share image
+- extendedWaitUntil:
+    visible: PNG Image.*
+    timeout: 15000
+- takeScreenshot: nakath-share-sheet
+- tapOn: Copy
+- extendedWaitUntil:
+    visible: Share as text
+    timeout: 10000
+- runFlow: subflows/assert-no-errors.yaml

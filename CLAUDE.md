@@ -7,7 +7,7 @@ Reference mockups: the `design/*.dc.html` files (HTML mockups, 390×844). Match 
 
 ## Stack
 
-- Expo (default template, TypeScript, Expo Router), development build (not Expo Go)
+- Expo (default template, TypeScript, Expo Router), development build with `expo-dev-client` (not Expo Go). `npm run ios` builds and installs it on the simulator (`expo run:ios`); rebuild only after native changes (a new native library, `app.json`, an SDK upgrade). `npm start` serves JavaScript to the installed build
 - Styling: NativeWind v4 with tailwindcss@^3.4.17. Design tokens live in `tailwind.config.js`; use `className`, not StyleSheet, for new UI
 - expo-sqlite with Drizzle ORM: holidays, nakath + user notes/reminders stored on device. Schema in `src/db/schema.ts`; after changing it run `npm run db:generate` (migrations in `src/db/migrations` ship with the app and run at startup)
 - i18next (react-i18next) for translations
@@ -15,7 +15,7 @@ Reference mockups: the `design/*.dc.html` files (HTML mockups, 390×844). Match 
 - expo-notifications: local reminders
 - react-native-google-mobile-ads: AdMob banner. Use Google's TEST ad unit IDs only until release
 - i18n: English (default), Sinhala, Tamil. Store all UI strings in `src/locales/{en,si,ta}.json`; missing Sinhala/Tamil keys fall back to English
-- Later: react-native-view-shot + expo-sharing for the nakath share image
+- react-native-view-shot + expo-sharing: the nakath share image (`/nakath-share` modal previews the card, captures it as PNG and opens the share sheet; falls back to text when file sharing isn't available)
 - No backend. Holiday and nakath data live in `data/`, ship bundled with the app, and update from GitHub Pages without an app release (see docs/DATA_SOURCES.md). `updateRemoteData` checks `manifest.json` at most hourly on launch and foreground; screens that read data wrap their content in `DataScope`, which remounts it after an update (the React Compiler memoizes data reads)
 
 ## Design tokens
@@ -63,7 +63,7 @@ Bottom tabs (5): Calendar, Upcoming, Nakath, Reminders, Settings. Day detail is 
 - Screen tests use `renderRouter` from `expo-router/testing-library` with the real `src/app` routes; the tabs layout is swapped for `<Slot />` because native tabs render every tab at once
 - `__tests__/project-rules.test.ts` enforces: no hardcoded colors or English UI text in `src/`, matching light/dark tokens, and Sinhala/Tamil keys that exist in English
 - Every bug fix comes with a test that fails without the fix
-- End-to-end: `npm run e2e` runs the Maestro flows in `.maestro/` on the booted iOS simulator through Expo Go. Metro must be running on port 8081, and Expo Go's floating Tools button must be off (it covers modal Save buttons). Each flow starts with `subflows/open-route.yaml` (fresh launch, switch to English, then deep link) and ends with `subflows/assert-no-errors.yaml`. Run `subflows/allow-notifications.yaml` after any step that can trigger the notification permission prompt. Match times with `.` before AM/PM (iOS formats them with a narrow no-break space). Screenshots land in `.maestro/output/` (gitignored)
+- End-to-end: `npm run e2e` runs the Maestro flows in `.maestro/` on the booted iOS simulator against the installed development build (`com.gayanwitharana.lankadina`). Metro must be running on port 8081. Each flow starts with `subflows/open-route.yaml` (fresh launch through the dev-build link, switch to English, then a `lankadina://` deep link). Open every link with `subflows/open-link.yaml`, which confirms iOS's "Open in Lankadina?" dialog and ends with `subflows/assert-no-errors.yaml`. Run `subflows/allow-notifications.yaml` after any step that can trigger the notification permission prompt. Match times with `.` before AM/PM (iOS formats them with a narrow no-break space). Screenshots land in `.maestro/output/` (gitignored)
 - Translation review: `npm run screenshots:si` and `npm run screenshots:ta` screenshot every screen in that language, light and dark, for checking text overflow (flows in `.maestro/review/`, not part of `npm run e2e`)
 
 ## Rules
@@ -76,10 +76,9 @@ Bottom tabs (5): Calendar, Upcoming, Nakath, Reminders, Settings. Day detail is 
 - Do not copy content from third-party astrology sites
 - Until the sources are decided, the app uses sample data from files named `sample-holidays` (and `sample-nakath` for nakath). Replace them before release
 - Keep the app fully usable offline
-- Android package: com.yourname.lankadina (decide before first build; permanent after publishing)
+- App ID: `com.gayanwitharana.lankadina` for Android (`package`) and iOS (`bundleIdentifier`). Permanent after publishing; never change it
 
 ## Remaining features
 
 - Nakath tab and screen (Avurudu + Today), Rahu kalaya/Maru on Day detail
 - Nakath reminders via the bell toggles
-- Share image of the nakath list (WhatsApp etc.); before April
